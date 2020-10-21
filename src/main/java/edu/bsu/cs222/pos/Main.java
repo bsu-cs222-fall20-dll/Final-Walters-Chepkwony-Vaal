@@ -1,5 +1,4 @@
 package edu.bsu.cs222.pos;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

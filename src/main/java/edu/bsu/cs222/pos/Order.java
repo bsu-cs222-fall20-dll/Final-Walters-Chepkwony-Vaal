@@ -1,3 +1,4 @@
+package edu.bsu.cs222.pos;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
