@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Order {
-    private HashMap<String, BigDecimal> itemList = new HashMap<>();
+    private ArrayList<Item> itemList = new ArrayList<>();
 
     public void addItem(Item item) {
+        itemList.add(item);
     }
 
-    public int getsize() {
-        return 1;
+    public int getSize() {
+        return itemList.size();
     }
 
     public ArrayList<Item> getItemList() {
