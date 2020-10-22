@@ -14,8 +14,11 @@ public class TestInventory {
         HashMap<Integer, Item> availableInventoryList = company.getAvailableInventoryList();
         Assertions.assertTrue(availableInventoryList.isEmpty());
     }
-
-
-
+    @Test
+    public void testAddInventory(){
+        Company company = new Company("AnotherName");
+        company.getAvailableInventoryList();
+        Assertions.assertEquals(" ",company.getAvailableInventoryList());
+    }
 
 }
