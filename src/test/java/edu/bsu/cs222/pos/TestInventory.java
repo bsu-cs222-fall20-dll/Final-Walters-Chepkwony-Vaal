@@ -38,11 +38,15 @@ public class TestInventory {
         Assertions.assertEquals("soup",sampleItemFromCompany.getName());
     }
 
-
     @Test
     public void testUpdatedItemCost(){
-        //TODO
+            Company company = new Company("SampleCompany");
+            Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
+            company.addItem(12322,sampleItem);
+            sampleItem.setPrice(BigDecimal.valueOf(5.55));
+            Assertions.assertEquals(BigDecimal.valueOf(5.55),sampleItem.getPrice());
     }
+
     @Test
     public void testUpdatedItemImage(){
     //TODO
