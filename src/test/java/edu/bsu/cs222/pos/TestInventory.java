@@ -1,5 +1,6 @@
 package edu.bsu.cs222.pos;
 
+import com.sun.source.tree.AssertTree;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -22,5 +23,28 @@ public class TestInventory {
         HashMap<Integer, Item> InventoryList = company.getAvailableInventoryList();
         company.addItem(12345,item);
         Assertions.assertFalse(InventoryList.isEmpty());
+    }
+    @Test
+    public void checkDatabaseConnection(){
+        //TODO
+    }
+    @Test
+    public void testUpdatedItemName(){
+        Company company = new Company("SampleCompany");
+        Item sampleItem = new Item("Sloup",BigDecimal.valueOf(5.55));
+        company.addItem(12322, sampleItem);
+        sampleItem.setName("soup");
+        Item sampleItemFromCompany =company.getAvailableInventoryList().get(12322);
+        Assertions.assertEquals("soup",sampleItemFromCompany.getName());
+    }
+
+
+    @Test
+    public void testUpdatedItemCost(){
+        //TODO
+    }
+    @Test
+    public void testUpdatedItemImage(){
+    //TODO
     }
 }
