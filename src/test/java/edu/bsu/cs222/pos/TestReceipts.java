@@ -20,9 +20,4 @@ public class TestReceipts {
         order.addItem(item);
         Assertions.assertEquals(1,order.getSize());
     }
-
-
-
-
-
 }
