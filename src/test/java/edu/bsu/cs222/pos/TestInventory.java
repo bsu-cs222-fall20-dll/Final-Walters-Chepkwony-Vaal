@@ -22,7 +22,7 @@ public class TestInventory {
         Item item = new Item("soup", BigDecimal.valueOf(3.85));
         HashMap<Integer, Item> InventoryList = company.getAvailableInventoryList();
         company.addItem(12345,item);
-        Assertions.assertFalse(InventoryList.isEmpty());
+        Assertions.assertEquals(InventoryList.get(12345),item);
     }
     @Test
     public void checkDatabaseConnection(){
@@ -33,8 +33,8 @@ public class TestInventory {
         Company company = new Company("SampleCompany");
         Item sampleItem = new Item("Sloup",BigDecimal.valueOf(5.55));
         company.addItem(12322, sampleItem);
-        sampleItem.setName("soup");
-        Item sampleItemFromCompany =company.getAvailableInventoryList().get(12322);
+        company.updateItemName(12322, "soup");
+        Item sampleItemFromCompany = company.getAvailableInventoryList().get(12322);
         Assertions.assertEquals("soup",sampleItemFromCompany.getName());
     }
 
