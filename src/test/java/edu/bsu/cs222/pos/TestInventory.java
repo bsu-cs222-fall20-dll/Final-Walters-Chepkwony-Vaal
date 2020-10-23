@@ -40,11 +40,12 @@ public class TestInventory {
 
     @Test
     public void testUpdatedItemCost(){
-            Company company = new Company("SampleCompany");
-            Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
-            company.addItem(12322,sampleItem);
-            sampleItem.setPrice(BigDecimal.valueOf(5.55));
-            Assertions.assertEquals(BigDecimal.valueOf(5.55),sampleItem.getPrice());
+        Company company = new Company("SampleCompany");
+        Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
+        company.addItem(12322,sampleItem);
+        company.updatedItemCost(12322,BigDecimal.valueOf(5.55));
+        Item sampleItemFromCompany = company.getAvailableInventoryList().get(12322);
+        Assertions.assertEquals(BigDecimal.valueOf(5.55),sampleItemFromCompany.getPrice());
     }
 
     @Test
