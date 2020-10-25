@@ -2,19 +2,27 @@ package edu.bsu.cs222.pos;
 import java.math.BigDecimal;
 
 public class Item {
-    public static BigDecimal getPrice() {
+    public  BigDecimal getPrice() {
         return price;
     }
-
-    public static void setPrice(BigDecimal price) {
-        Item.price = price;
-    }
-
-    public static BigDecimal price;
+    public  BigDecimal price;
     public String name;
 
     public Item(String itemName, BigDecimal itemPrice) {
         this.name = itemName;
         this.price = itemPrice;
+    }
+
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

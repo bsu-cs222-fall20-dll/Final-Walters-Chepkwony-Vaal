@@ -1,5 +1,6 @@
 package edu.bsu.cs222.pos;
 
+import com.sun.source.tree.AssertTree;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -21,6 +22,34 @@ public class TestInventory {
         Item item = new Item("soup", BigDecimal.valueOf(3.85));
         HashMap<Integer, Item> InventoryList = company.getAvailableInventoryList();
         company.addItem(12345,item);
-        Assertions.assertFalse(InventoryList.isEmpty());
+        Assertions.assertEquals(InventoryList.get(12345),item);
+    }
+    @Test
+    public void checkDatabaseConnection(){
+        //TODO
+    }
+    @Test
+    public void testUpdatedItemName(){
+        Company company = new Company("SampleCompany");
+        Item sampleItem = new Item("Sloup",BigDecimal.valueOf(5.55));
+        company.addItem(12322, sampleItem);
+        company.updateItemName(12322, "soup");
+        Item sampleItemFromCompany = company.getAvailableInventoryList().get(12322);
+        Assertions.assertEquals("soup",sampleItemFromCompany.getName());
+    }
+
+    @Test
+    public void testUpdatedItemCost(){
+        Company company = new Company("SampleCompany");
+        Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
+        company.addItem(12322,sampleItem);
+        company.updatedItemCost(12322,BigDecimal.valueOf(5.55));
+        Item sampleItemFromCompany = company.getAvailableInventoryList().get(12322);
+        Assertions.assertEquals(BigDecimal.valueOf(5.55),sampleItemFromCompany.getPrice());
+    }
+
+    @Test
+    public void testUpdatedItemImage(){
+    //TODO
     }
 }

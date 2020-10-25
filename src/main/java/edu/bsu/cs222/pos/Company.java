@@ -11,6 +11,19 @@ public class Company {
     public void addItem(int barcodeNumber, Item item){
         inventoryList.put(barcodeNumber,item);
     }
+    private void updateItem(int barcodeNumber, Item item){
+        inventoryList.put(barcodeNumber, item);
+    }
+    public void updateItemName(int barcodeNumber, String newName){
+        Item item = inventoryList.get(barcodeNumber);
+        item.setName(newName);
+        updateItem(barcodeNumber,item);
+    }
+    public void updatedItemCost(int barcodeNumber, BigDecimal itemPrice){
+        Item item = inventoryList.get(barcodeNumber);
+        item.setPrice(itemPrice);
+        updateItem(barcodeNumber,item);
+    }
 
     public Company(String companyName) {
         this.companyName = companyName;
