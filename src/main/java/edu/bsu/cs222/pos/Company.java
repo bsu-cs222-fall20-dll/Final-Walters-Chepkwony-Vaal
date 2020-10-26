@@ -33,4 +33,7 @@ public class Company {
         return inventoryList;
     }
 
+    public void removeItem(int id) {
+        inventoryList.remove(id);
+    }
 }
