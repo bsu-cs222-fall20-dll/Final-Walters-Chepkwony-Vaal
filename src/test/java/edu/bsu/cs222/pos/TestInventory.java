@@ -11,14 +11,14 @@ import java.util.HashMap;
 public class TestInventory {
     @Test
     public void testEmptyCompany(){
-        String companyName = "sampleName";
+        String companyName = "SampleCompany";
         Company company = new Company(companyName);
         HashMap<String, Item> availableInventoryList = company.getAvailableInventoryList();
         Assertions.assertTrue(availableInventoryList.isEmpty());
     }
     @Test
     public void testAddInventory(){
-        Company company = new Company("AnotherName");
+        Company company = new Company("SampleCompany");
         Item item = new Item("soup", BigDecimal.valueOf(3.85));
         HashMap<String, Item> InventoryList = company.getAvailableInventoryList();
         company.addItem("12345678901",item);
@@ -72,7 +72,7 @@ public class TestInventory {
     }
     @Test
     public void testDeleteInventory(){
-        Company company = new Company("AnotherName");
+        Company company = new Company("SampleCompany");
         Item item = new Item("soup", BigDecimal.valueOf(3.85));
         HashMap<String, Item> InventoryList = company.getAvailableInventoryList();
         company.addItem("12345678901",item);
