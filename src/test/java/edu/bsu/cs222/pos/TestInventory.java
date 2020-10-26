@@ -25,16 +25,12 @@ public class TestInventory {
         Assertions.assertEquals(InventoryList.get("12345678901"),item);
     }
     @Test
-    public void checkDatabaseConnection(){
-        //TODO
-    }
-    @Test
     public void testUpdatedItemName(){
         Company company = new Company("SampleCompany");
         Item sampleItem = new Item("Sloup",BigDecimal.valueOf(5.55));
         company.addItem("12322", sampleItem);
         company.updateItemName("12322", "soup");
-        Item sampleItemFromCompany = company.getAvailableInventoryList().get(12322);
+        Item sampleItemFromCompany = company.getAvailableInventoryList().get("12322");
         Assertions.assertEquals("soup",sampleItemFromCompany.getName());
     }
 
@@ -60,6 +56,17 @@ public class TestInventory {
     }
 
     @Test
+    public void testItemSearch(){
+        Company company = new Company("SampleCompany");
+        Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
+        company.addItem("12345678901",sampleItem);
+        Item searchedItem = company.searchByItemName("soup");
+        Assertions.assertEquals(sampleItem,searchedItem);
+
+
+
+    }
+    @Test
     public void testUpdatedItemImage(){
     //TODO
     }
@@ -67,9 +74,9 @@ public class TestInventory {
     public void testDeleteInventory(){
         Company company = new Company("AnotherName");
         Item item = new Item("soup", BigDecimal.valueOf(3.85));
-        HashMap<Integer, Item> InventoryList = company.getAvailableInventoryList();
-        company.addItem(12345,item);
-        company.removeItem(12345);
-        Assertions.assertNull(InventoryList.get(12345));
+        HashMap<String, Item> InventoryList = company.getAvailableInventoryList();
+        company.addItem("12345678901",item);
+        company.removeItem("12345678901");
+        Assertions.assertNull(InventoryList.get("12345678901"));
     }
 }

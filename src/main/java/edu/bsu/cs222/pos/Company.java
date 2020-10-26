@@ -33,7 +33,16 @@ public class Company {
         return inventoryList;
     }
 
-    public void removeItem(int id) {
+    public void removeItem(String id) {
         inventoryList.remove(id);
+    }
+
+    public Item searchByItemName(String searchItemName) {
+        for(Item item : inventoryList.values()){
+            if(item.getName().equals(searchItemName)){
+                return item;
+            }
+        }
+        return null;
     }
 }
