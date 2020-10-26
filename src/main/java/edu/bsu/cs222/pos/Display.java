@@ -13,7 +13,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 
 public class Display {
 
@@ -24,14 +23,39 @@ public class Display {
             private Label companyNameLabel = new Label("Company Name:");
             private TextField companyNameInput = new TextField("Company");
             private ToggleButton editCompanyName = new ToggleButton("Edit");
+            private HBox companyField = new HBox(
+                    companyNameLabel,
+                    companyNameInput,
+                    editCompanyName);
             private Button addItem = new Button("+");
             private Label itemsListLabel = new Label("Items");
             private HBox itemList = new HBox();
+            private HBox itemsField = new HBox(
+                    itemsListLabel,
+                    addItem
+            );
 
             @Override
             public void start (Stage primaryStage){
                 primaryStage.setWidth(1000);
                 primaryStage.setHeight(800);
+                formatDisplay();
+                toggleEditOpacity();
+                displayItems();
+                primaryStage.setScene(new Scene(createRoot()));
+                primaryStage.show();
+            }
+
+            private Pane createRoot () {
+                VBox root = new VBox();
+                root.getChildren().addAll(
+                        titleLabel,
+                        companyField,
+                        itemsField);
+                return root;
+            }
+
+            private void formatDisplay(){
                 titleLabel.setMinWidth(1000);
                 companyNameInput.setMinWidth(400);
                 titleLabel.setFont(Font.font("Arial", 16));
@@ -40,6 +64,12 @@ public class Display {
                 titleLabel.setAlignment(Pos.CENTER);
                 companyNameLabel.setAlignment(Pos.CENTER);
                 companyNameInput.setAlignment(Pos.CENTER);
+                companyField.setAlignment(Pos.CENTER);
+                itemsField.setAlignment(Pos.CENTER);
+                itemsField.setMinWidth(900);
+            }
+
+            private void toggleEditOpacity(){
                 companyNameInput.setEditable(false);
                 companyNameInput.setOnMouseClicked(event -> companyNameInput.setEditable(true));
                 companyNameInput.setOnAction(event -> companyNameInput.setEditable(false));
@@ -61,14 +91,15 @@ public class Display {
                                 .then(Pos.CENTER_LEFT)
                                 .otherwise(Pos.CENTER)
                 );
-                Item exampleItem = new Item("Example", new BigDecimal(2.0));
-                HBox itemBox = ItemToHBox(exampleItem);
-                itemList.getChildren().addAll(itemBox);
-                primaryStage.setScene(new Scene(createRoot()));
-                primaryStage.show();
             }
 
-            private HBox ItemToHBox(Item item){
+            private void displayItems(){
+                Item exampleItem = new Item("Example", new BigDecimal(2.0));
+                HBox itemBox = itemToHBox(exampleItem);
+                itemList.getChildren().addAll(itemBox);
+            }
+
+            private HBox itemToHBox(Item item){
                 Label itemNameLabel = new Label("Name:");
                 Label itemName = new Label(item.getName());
                 Label itemPriceLabel = new Label("Price:");
@@ -78,26 +109,6 @@ public class Display {
                         itemName,
                         itemPriceLabel,
                         itemPrice);
-            }
-
-            private Pane createRoot () {
-                VBox root = new VBox();
-                HBox companyField = new HBox(
-                        companyNameLabel,
-                        companyNameInput,
-                        editCompanyName);
-                companyField.setAlignment(Pos.CENTER);
-                HBox items = new HBox(
-                        itemsListLabel,
-                        addItem
-                );
-                items.setAlignment(Pos.CENTER);
-                items.setMinWidth(900);
-                root.getChildren().addAll(
-                        titleLabel,
-                        companyField,
-                        items);
-                return root;
             }
         }
 
