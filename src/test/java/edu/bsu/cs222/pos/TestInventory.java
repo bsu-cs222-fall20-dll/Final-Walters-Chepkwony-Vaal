@@ -39,13 +39,23 @@ public class TestInventory {
     }
 
     @Test
+    public void testUniqueBarCodeGenerator(){
+        Company company = new Company("SampleCompany");
+        BarcodeGenerator barcodeGenerator = new BarcodeGenerator(company.getAvailableInventoryList());
+        Item testItem = new Item("sample", BigDecimal.valueOf(44.44));
+        int uniqueBarcode = barcodeGenerator.makeNewCode();
+        company.addItem(uniqueBarcode, testItem );
+        Assertions.assertTrue(barcodeGenerator.getUsedCodes().contains(uniqueBarcode));
+
+
+    }
+    @Test
     public void testUpdatedItemCost(){
         Company company = new Company("SampleCompany");
         Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
         company.addItem(12322,sampleItem);
-        company.updatedItemCost(12322,BigDecimal.valueOf(5.55));
-        Item sampleItemFromCompany = company.getAvailableInventoryList().get(12322);
-        Assertions.assertEquals(BigDecimal.valueOf(5.55),sampleItemFromCompany.getPrice());
+        sampleItem.setPrice(BigDecimal.valueOf(5.55));
+        Assertions.assertEquals(BigDecimal.valueOf(5.55),sampleItem.getPrice());
     }
 
     @Test
