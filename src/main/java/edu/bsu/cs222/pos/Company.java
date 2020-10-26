@@ -6,20 +6,20 @@ import java.util.HashMap;
 
 public class Company {
     private String companyName;
-    private HashMap<Integer,Item> inventoryList = new HashMap<>();
+    private HashMap<String,Item> inventoryList = new HashMap<>();
 
-    public void addItem(int barcodeNumber, Item item){
+    public void addItem(String barcodeNumber, Item item){
         inventoryList.put(barcodeNumber,item);
     }
-    private void updateItem(int barcodeNumber, Item item){
+    private void updateItem(String barcodeNumber, Item item){
         inventoryList.put(barcodeNumber, item);
     }
-    public void updateItemName(int barcodeNumber, String newName){
+    public void updateItemName(String barcodeNumber, String newName){
         Item item = inventoryList.get(barcodeNumber);
         item.setName(newName);
         updateItem(barcodeNumber,item);
     }
-    public void updatedItemCost(int barcodeNumber, BigDecimal itemPrice){
+    public void updatedItemCost(String barcodeNumber, BigDecimal itemPrice){
         Item item = inventoryList.get(barcodeNumber);
         item.setPrice(itemPrice);
         updateItem(barcodeNumber,item);
@@ -29,7 +29,7 @@ public class Company {
         this.companyName = companyName;
     }
 
-    public HashMap<Integer, Item> getAvailableInventoryList() {
+    public HashMap<String, Item> getAvailableInventoryList() {
         return inventoryList;
     }
 

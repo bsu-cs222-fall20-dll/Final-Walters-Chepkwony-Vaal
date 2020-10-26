@@ -13,16 +13,16 @@ public class TestInventory {
     public void testEmptyCompany(){
         String companyName = "sampleName";
         Company company = new Company(companyName);
-        HashMap<Integer, Item> availableInventoryList = company.getAvailableInventoryList();
+        HashMap<String, Item> availableInventoryList = company.getAvailableInventoryList();
         Assertions.assertTrue(availableInventoryList.isEmpty());
     }
     @Test
     public void testAddInventory(){
         Company company = new Company("AnotherName");
         Item item = new Item("soup", BigDecimal.valueOf(3.85));
-        HashMap<Integer, Item> InventoryList = company.getAvailableInventoryList();
-        company.addItem(12345,item);
-        Assertions.assertEquals(InventoryList.get(12345),item);
+        HashMap<String, Item> InventoryList = company.getAvailableInventoryList();
+        company.addItem("12345678901",item);
+        Assertions.assertEquals(InventoryList.get("12345678901"),item);
     }
     @Test
     public void checkDatabaseConnection(){
@@ -32,8 +32,8 @@ public class TestInventory {
     public void testUpdatedItemName(){
         Company company = new Company("SampleCompany");
         Item sampleItem = new Item("Sloup",BigDecimal.valueOf(5.55));
-        company.addItem(12322, sampleItem);
-        company.updateItemName(12322, "soup");
+        company.addItem("12322", sampleItem);
+        company.updateItemName("12322", "soup");
         Item sampleItemFromCompany = company.getAvailableInventoryList().get(12322);
         Assertions.assertEquals("soup",sampleItemFromCompany.getName());
     }
@@ -43,7 +43,8 @@ public class TestInventory {
         Company company = new Company("SampleCompany");
         BarcodeGenerator barcodeGenerator = new BarcodeGenerator(company.getAvailableInventoryList());
         Item testItem = new Item("sample", BigDecimal.valueOf(44.44));
-        int uniqueBarcode = barcodeGenerator.makeNewCode();
+        company.addItem("12345678901",testItem);
+        String uniqueBarcode = barcodeGenerator.makeNewCode();
         company.addItem(uniqueBarcode, testItem );
         Assertions.assertTrue(barcodeGenerator.getUsedCodes().contains(uniqueBarcode));
 
@@ -53,7 +54,7 @@ public class TestInventory {
     public void testUpdatedItemCost(){
         Company company = new Company("SampleCompany");
         Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
-        company.addItem(12322,sampleItem);
+        company.addItem("12322",sampleItem);
         sampleItem.setPrice(BigDecimal.valueOf(5.55));
         Assertions.assertEquals(BigDecimal.valueOf(5.55),sampleItem.getPrice());
     }

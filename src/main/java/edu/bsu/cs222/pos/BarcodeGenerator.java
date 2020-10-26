@@ -4,42 +4,39 @@ import java.util.*;
 
 public class BarcodeGenerator {
     private ArrayList<Integer> availableCodes = new ArrayList<>();
-    private Set<Integer> usedCodes;
+    private Set<String> usedCodes;
+    String newCodeInProgress = "";
+    String newBarcode;
 
-    public BarcodeGenerator(HashMap<Integer, Item> availableInventoryList) {
+    public BarcodeGenerator(HashMap<String, Item> availableInventoryList) {
         this.usedCodes = availableInventoryList.keySet();
-        fillAvailableCodes();
+
 
     }
 
-    private void removeUsedCodes() {
-        for(int usedCode: usedCodes){
-            if(availableCodes.contains(usedCode)){
-                availableCodes.remove(usedCode);
-            }
-        }
-    }
 
     private void fillAvailableCodes(){
-        for(int i = 1; i<10 ; i++){
-            availableCodes.add(i);
-        }
     }
 
-    public int makeNewCode() {
-        Random generator = new Random();
-        int randomIndex = generator.nextInt(availableCodes.size());
-        Integer newCode =availableCodes.get(randomIndex);
-        usedCodes.add(newCode);
-        removeUsedCodes();
-        return newCode;
-        }
+    public String makeNewCode() {
+
+        do {
+            for (int i = 0; i < 12; i++) {
+                int digit = (int) ((Math.random() * (10)) + 0);
+                newCodeInProgress = newCodeInProgress + digit;
+            }
+
+
+        } while (usedCodes.contains(newBarcode));
+        newBarcode = newCodeInProgress;
+        return newBarcode;
+    }
 
     public ArrayList<Integer> getAvailableCodes() {
         return availableCodes;
     }
 
-    public Set<Integer> getUsedCodes() {
+    public Set<String> getUsedCodes() {
         return usedCodes;
     }
 }
