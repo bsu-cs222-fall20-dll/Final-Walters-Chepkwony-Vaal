@@ -63,4 +63,13 @@ public class TestInventory {
     public void testUpdatedItemImage(){
     //TODO
     }
+    @Test
+    public void testDeleteInventory(){
+        Company company = new Company("AnotherName");
+        Item item = new Item("soup", BigDecimal.valueOf(3.85));
+        HashMap<Integer, Item> InventoryList = company.getAvailableInventoryList();
+        company.addItem(12345,item);
+        company.removeItem(12345);
+        Assertions.assertNull(InventoryList.get(12345));
+    }
 }
