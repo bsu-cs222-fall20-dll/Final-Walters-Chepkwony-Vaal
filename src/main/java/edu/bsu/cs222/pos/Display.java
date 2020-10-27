@@ -1,6 +1,7 @@
 package edu.bsu.cs222.pos;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
@@ -28,11 +29,11 @@ public class Display {
                     editCompanyName);
             private final Button addItem = new Button("+");
             private final Label itemsListLabel = new Label("Items");
-            private final HBox itemList = new HBox();
-            private final HBox itemsField = new HBox(
+            private final HBox itemsListHeader = new HBox(
                     itemsListLabel,
-                    addItem
-            );
+                    addItem);
+            private final ScrollPane itemsList = new ScrollPane();
+            private final Pane itemsListPane = new Pane();
 
             @Override
             public void start (Stage primaryStage){
@@ -50,7 +51,8 @@ public class Display {
                 root.getChildren().addAll(
                         titleLabel,
                         companyField,
-                        itemsField);
+                        itemsListHeader,
+                        itemsList);
                 return root;
             }
 
@@ -60,12 +62,16 @@ public class Display {
                 titleLabel.setFont(Font.font("Arial", 16));
                 companyNameLabel.setFont(Font.font("Arial", 15));
                 companyNameInput.setFont(Font.font("Arial", 20));
+                itemsListLabel.setFont(Font.font("Arial", 15));
+                companyField.setMargin(companyNameLabel, new Insets(20, 20, 20, 140));
+                companyField.setMargin(companyNameInput, new Insets(20, 20, 20, 20));
                 titleLabel.setAlignment(Pos.CENTER);
-                companyNameLabel.setAlignment(Pos.CENTER);
-                companyNameInput.setAlignment(Pos.CENTER);
-                companyField.setAlignment(Pos.CENTER);
-                itemsField.setAlignment(Pos.CENTER);
-                itemsField.setMinWidth(900);
+                companyField.setAlignment(Pos.CENTER_LEFT);
+                itemsListLabel.setAlignment(Pos.CENTER_LEFT);
+                addItem.setAlignment(Pos.CENTER_RIGHT);
+                itemsListHeader.setMinWidth(900);
+                itemsList.setMinHeight(500);
+                itemsList.setMinWidth(900);
             }
 
             private void toggleEditOpacity(){
@@ -95,7 +101,7 @@ public class Display {
             private void displayItems(){
                 Item exampleItem = new Item("Example", new BigDecimal(2.0));
                 HBox itemBox = itemToHBox(exampleItem);
-                itemList.getChildren().addAll(itemBox);
+                itemsListPane.getChildren().addAll(itemBox);
             }
 
             private HBox itemToHBox(Item item){
@@ -108,7 +114,7 @@ public class Display {
                         itemName,
                         itemPriceLabel,
                         itemPrice);
-            }
+                }
         }
 
     public static void main(String[] args) {
