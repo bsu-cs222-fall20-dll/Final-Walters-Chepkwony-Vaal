@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.bsu.cs222.pos.TestInventory" tests="8" skipped="0" failures="0" errors="0" timestamp="2020-10-26T18:28:17" hostname="DESKTOP-V498F44" time="0.025">
+<testsuite name="edu.bsu.cs222.pos.TestInventory" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-10-27T13:47:13" hostname="LAPTOP-586BCSVD" time="0.014">
   <properties/>
-  <testcase name="testDeleteInventory" classname="edu.bsu.cs222.pos.TestInventory" time="0.009"/>
-  <testcase name="testAddInventory" classname="edu.bsu.cs222.pos.TestInventory" time="0.002"/>
-  <testcase name="testUniqueBarCodeGenerator" classname="edu.bsu.cs222.pos.TestInventory" time="0.011"/>
-  <testcase name="testUpdatedItemCost" classname="edu.bsu.cs222.pos.TestInventory" time="0.001"/>
-  <testcase name="testUpdatedItemName" classname="edu.bsu.cs222.pos.TestInventory" time="0.0"/>
-  <testcase name="testItemSearch" classname="edu.bsu.cs222.pos.TestInventory" time="0.0"/>
-  <testcase name="testUpdatedItemImage" classname="edu.bsu.cs222.pos.TestInventory" time="0.0"/>
-  <testcase name="testEmptyCompany" classname="edu.bsu.cs222.pos.TestInventory" time="0.0"/>
+  <testcase name="testUniqueBarCodeGenerator" classname="edu.bsu.cs222.pos.TestInventory" time="0.014"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
