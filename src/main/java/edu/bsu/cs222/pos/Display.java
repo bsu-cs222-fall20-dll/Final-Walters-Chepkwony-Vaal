@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -21,7 +22,7 @@ public class Display {
         {
             private final Label titleLabel = new Label("Admin Panel");
             private final Label companyNameLabel = new Label("Company Name:"+"  ");
-            private final TextField companyNameInput = new TextField("Company");
+            private final TextField companyNameInput = new TextField("Enter Your Company Name Here");
             private final ToggleButton editCompanyName = new ToggleButton("Edit");
             private final HBox companyField = new HBox(
                     companyNameLabel,
@@ -32,8 +33,10 @@ public class Display {
             private final HBox itemsListHeader = new HBox(
                     itemsListLabel,
                     addItem);
-            private final ScrollPane itemsList = new ScrollPane();
-            private final Pane itemsListPane = new Pane();
+            private final TableView itemList = new TableView<>();
+            private final TableColumn nameColumn = new TableColumn("Item Name");
+            private final TableColumn priceColumn = new TableColumn("Price");
+            private final ScrollPane itemListScrollPane = new ScrollPane(itemList);
 
             @Override
             public void start (Stage primaryStage){
@@ -52,13 +55,19 @@ public class Display {
                         titleLabel,
                         companyField,
                         itemsListHeader,
-                        itemsList);
+                        itemListScrollPane);
                 return root;
             }
 
             private void formatDisplay(){
                 titleLabel.setMinWidth(1000);
                 companyNameInput.setMinWidth(400);
+                itemsListHeader.setMinWidth(900);
+                nameColumn.setMinWidth(450);
+                priceColumn.setMinWidth(450);
+                itemList.setMinWidth(900);
+                itemListScrollPane.setPrefSize(900, 500);
+                itemListScrollPane.setFitToHeight(true);
                 titleLabel.setFont(Font.font("Arial", 16));
                 companyNameLabel.setFont(Font.font("Arial", 15));
                 companyNameInput.setFont(Font.font("Arial", 20));
@@ -69,9 +78,15 @@ public class Display {
                 companyField.setAlignment(Pos.CENTER_LEFT);
                 itemsListLabel.setAlignment(Pos.CENTER_LEFT);
                 addItem.setAlignment(Pos.CENTER_RIGHT);
-                itemsListHeader.setMinWidth(900);
-                itemsList.setMinHeight(500);
-                itemsList.setMinWidth(900);
+
+                nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+                priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+                itemList.getColumns().addAll(nameColumn, priceColumn);
+                itemListScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+                itemListScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+                itemListScrollPane.setVvalue(.5);
+                itemListScrollPane.setHvalue(.5);
+                itemListScrollPane.setDisable(false);
             }
 
             private void toggleEditOpacity(){
@@ -100,21 +115,8 @@ public class Display {
 
             private void displayItems(){
                 Item exampleItem = new Item("Example", new BigDecimal(2.0));
-                HBox itemBox = itemToHBox(exampleItem);
-                itemsListPane.getChildren().addAll(itemBox);
+                itemList.getItems().add(exampleItem);
             }
-
-            private HBox itemToHBox(Item item){
-                Label itemNameLabel = new Label("Name:");
-                Label itemName = new Label(item.getName());
-                Label itemPriceLabel = new Label("Price:");
-                Label itemPrice = new Label(item.getPrice().toString());
-                return new HBox(
-                        itemNameLabel,
-                        itemName,
-                        itemPriceLabel,
-                        itemPrice);
-                }
         }
 
     public static void main(String[] args) {
