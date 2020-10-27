@@ -1,7 +1,6 @@
 package edu.bsu.cs222.pos;
 
 import javafx.application.Application;
-
 import javafx.geometry.Pos;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Scene;
@@ -19,18 +18,18 @@ public class Display {
     //I had to nest this because my computer is dumb. I'll make it the main class when I'm done.
     public static class DisplayView extends Application
         {
-            private Label titleLabel = new Label("Admin Panel");
-            private Label companyNameLabel = new Label("Company Name:");
-            private TextField companyNameInput = new TextField("Company");
-            private ToggleButton editCompanyName = new ToggleButton("Edit");
-            private HBox companyField = new HBox(
+            private final Label titleLabel = new Label("Admin Panel");
+            private final Label companyNameLabel = new Label("Company Name:"+"  ");
+            private final TextField companyNameInput = new TextField("Company");
+            private final ToggleButton editCompanyName = new ToggleButton("Edit");
+            private final HBox companyField = new HBox(
                     companyNameLabel,
                     companyNameInput,
                     editCompanyName);
-            private Button addItem = new Button("+");
-            private Label itemsListLabel = new Label("Items");
-            private HBox itemList = new HBox();
-            private HBox itemsField = new HBox(
+            private final Button addItem = new Button("+");
+            private final Label itemsListLabel = new Label("Items");
+            private final HBox itemList = new HBox();
+            private final HBox itemsField = new HBox(
                     itemsListLabel,
                     addItem
             );
@@ -38,7 +37,7 @@ public class Display {
             @Override
             public void start (Stage primaryStage){
                 primaryStage.setWidth(1000);
-                primaryStage.setHeight(800);
+                primaryStage.setHeight(600);
                 formatDisplay();
                 toggleEditOpacity();
                 displayItems();
