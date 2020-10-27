@@ -33,9 +33,9 @@ public class Display {
             private final HBox itemsListHeader = new HBox(
                     itemsListLabel,
                     addItem);
-            private final TableView itemList = new TableView<>();
-            private final TableColumn nameColumn = new TableColumn("Item Name");
-            private final TableColumn priceColumn = new TableColumn("Price");
+            private final TableView<Object> itemList = new TableView<>();
+            private final TableColumn<Object, Object> nameColumn = new TableColumn<>("Item Name");
+            private final TableColumn<Object, Object> priceColumn = new TableColumn<>("Price");
             private final ScrollPane itemListScrollPane = new ScrollPane(itemList);
 
             @Override
