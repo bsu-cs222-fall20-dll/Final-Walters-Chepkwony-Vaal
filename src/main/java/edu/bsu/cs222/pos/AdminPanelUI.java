@@ -20,8 +20,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class AdminPanelUI extends Application{
@@ -35,7 +33,6 @@ public class AdminPanelUI extends Application{
             companyNameInput,
             editCompanyName);
     private final Button addItem = new Button("Add new item");
-    private final Button deleteItem = new Button("Delete item");
     private final Label itemsListLabel = new Label("Current Items");
     private final HBox itemsListHeader = new HBox(
             itemsListLabel,
@@ -46,7 +43,7 @@ public class AdminPanelUI extends Application{
     private final ScrollPane itemListScrollPane = new ScrollPane(itemList);
 
     @Override
-    public void start (Stage primaryStage) throws IOException {
+    public void start (Stage primaryStage) {
         primaryStage.setWidth(1000);
         primaryStage.setHeight(600);
         formatDisplay();
@@ -58,9 +55,6 @@ public class AdminPanelUI extends Application{
     public void init() throws Exception {
         super.init();
         Controller.addItemsToDisplay();
-        //TODO: getCompanyName; basically I just gotta ask ab how the company class works
-        //companyNameInput.setText(Company.getCompanyName() == null ?
-                        //"Enter Company Name": Company.getCompanyName());
         companyNameInput.setText("Enter Company Name");
         Controller.editCompanyName(companyNameInput, editCompanyName);
         Controller.editRow(itemList, addItem);

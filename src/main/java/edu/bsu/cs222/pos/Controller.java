@@ -1,13 +1,11 @@
 package edu.bsu.cs222.pos;
 
-import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +51,7 @@ public class Controller {
         );
     }
 
-    public static void editRow(TableView<Item> itemList, Button addItem) throws IOException {
+    public static void editRow(TableView<Item> itemList, Button addItem){
         itemList.setRowFactory( tv -> {
             TableRow<Item> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -76,7 +74,7 @@ public class Controller {
         });
     }
 
-    public static void addItem(Button addItem, TableView<Item> itemList) throws IOException{
+    public static void addItem(Button addItem, TableView<Item> itemList){
         addItem.setOnMouseClicked(event -> {
             addItem.setDisable(true);
             itemList.setDisable(true);
@@ -90,7 +88,7 @@ public class Controller {
         });
     }
 
-    public static void doneEdit(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput,Item item){
+    public static void doneEdit(Button doneButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
         doneButton.setOnMouseClicked(event -> {
             //TODO: Add/Update items + error handling
             item.setName(nameInput.getText());
