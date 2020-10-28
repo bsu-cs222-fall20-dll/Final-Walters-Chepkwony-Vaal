@@ -21,4 +21,7 @@ Checking for the argument types is unnecessary when we are sure of the types tha
 
 ## Authors
 
-Owen Walters [ogwalters@bsu.edu], Dan Chepkwony [dkchepkwony@bsu.edu], Bradley Vaal [bavaal@bsu.edu], and Youxuan Wang [ywang5@bsu.edu].
+Owen Walters\s\s
+Dan Chepkwony\s\s
+Bradley Vaal\s\s
+Youxuan Wang
