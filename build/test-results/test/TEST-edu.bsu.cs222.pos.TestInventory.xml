@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.bsu.cs222.pos.TestInventory" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-10-27T13:47:13" hostname="LAPTOP-586BCSVD" time="0.014">
-  <properties/>
-  <testcase name="testUniqueBarCodeGenerator" classname="edu.bsu.cs222.pos.TestInventory" time="0.014"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
