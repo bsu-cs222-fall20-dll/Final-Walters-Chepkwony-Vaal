@@ -2,6 +2,7 @@ package edu.bsu.cs222.pos;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 

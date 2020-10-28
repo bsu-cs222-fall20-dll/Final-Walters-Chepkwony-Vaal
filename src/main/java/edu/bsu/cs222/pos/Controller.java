@@ -93,7 +93,10 @@ public class Controller {
     public static void doneEdit(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
         doneButton.setOnMouseClicked(event -> {
             //TODO: Add/Update items + error handling
-            Item item = company.searchByItemName(nameInput.getText());
+            BarcodeGenerator bcg = new BarcodeGenerator(company.getAvailableInventoryList());
+            Item item = new Item(nameInput.getText(),BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
+            company.addItem(bcg.makeNewCode(),item);
+//            Item item = company.searchByItemName(nameInput.getText());
             if (titleLabel.getText().equals("Add Item")){
                 System.out.println("add");
             }
@@ -109,6 +112,8 @@ public class Controller {
                             WindowEvent.WINDOW_CLOSE_REQUEST
                     )
             );
+            addItemsToDisplay();
         });
     }
+
 }
