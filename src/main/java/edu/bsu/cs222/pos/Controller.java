@@ -5,6 +5,7 @@ import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -12,13 +13,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Controller {
+    //TODO: how should we init the company?
+    public static Company company = new Company("");
 
     public static void addItemsToDisplay(){
-        //TODO: Replace lines 24 - 26 with line 23
-        //HashMap<String, Item> inventoryList = Company.getAvailableInventoryList();
-        Item exampleItem = new Item("Example", new BigDecimal("2.0"));
-        HashMap<String, Item> inventoryList = new HashMap<>();
-        inventoryList.put("10",exampleItem);
+        HashMap<String, Item> inventoryList = company.getAvailableInventoryList();
+//        Item exampleItem = new Item("Example", new BigDecimal("2.0"));
+//        HashMap<String, Item> inventoryList = new HashMap<>();
+//        inventoryList.put("10",exampleItem);
         ArrayList<Item> inventoryArrayList = new ArrayList<>(inventoryList.values());
         AdminPanelUI.displayItems(inventoryArrayList);
     }
@@ -28,7 +30,7 @@ public class Controller {
         companyNameInput.setOnMouseClicked(event -> companyNameInput.setEditable(true));
         companyNameInput.setOnAction(event -> {
             companyNameInput.setEditable(false);
-            //TODO: Set company name
+            //TODO: Set company name + error handling
             //Company.setCompanyName(companyNameInput.getText());
         });
         companyNameInput.editableProperty().bindBidirectional(editCompanyName.selectedProperty());
@@ -88,8 +90,25 @@ public class Controller {
         });
     }
 
-    public static void doneEdit(Button doneButton){
+    public static void doneEdit(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
         doneButton.setOnMouseClicked(event -> {
+            //TODO: Add/Update items + error handling
+            Item item = company.searchByItemName(nameInput.getText());
+            if (titleLabel.getText().equals("Add Item")){
+                System.out.println("add");
+            }
+            else if(titleLabel.getText().equals("Edit Item")){
+                System.out.println("edit");
+            }
+            else{
+                System.out.println("error");
+            }
+            stage.fireEvent(
+                    new WindowEvent(
+                            stage,
+                            WindowEvent.WINDOW_CLOSE_REQUEST
+                    )
+            );
         });
     }
 }

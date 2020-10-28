@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 public class AdminPanelUI extends Application{
     private final Label titleLabel = new Label("Admin Panel");
+    private final Label errorLabel = new Label("");
     private final Label companyNameLabel = new Label("Company Name:");
     private final TextField companyNameInput = new TextField();
     private final ToggleButton editCompanyName = new ToggleButton("Edit");
@@ -68,6 +70,7 @@ public class AdminPanelUI extends Application{
             VBox root = new VBox();
             root.getChildren().addAll(
                     titleLabel,
+                    errorLabel,
                     companyField,
                     itemsListHeader,
                     itemListScrollPane);
@@ -78,6 +81,8 @@ public class AdminPanelUI extends Application{
     private void formatDisplay(){
         titleLabel.setMinWidth(1000);
         titleLabel.setMinHeight(20);
+        errorLabel.setMinWidth(1000);
+        errorLabel.setMinHeight(10);
         companyNameInput.setMinWidth(400);
         itemsListHeader.setMinWidth(900);
         nameColumn.setMinWidth(450);
@@ -86,6 +91,8 @@ public class AdminPanelUI extends Application{
         itemListScrollPane.setMinWidth(900);
         titleLabel.setFont(Font.font("Arial", 16));
         companyNameLabel.setFont(Font.font("Arial", 15));
+        errorLabel.setTextFill(Color.RED);
+        errorLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
         companyNameInput.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20));
         itemsListLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 15));
         HBox.setMargin(companyNameLabel, new Insets(10, 5, 10, 175));
@@ -93,8 +100,10 @@ public class AdminPanelUI extends Application{
         HBox.setMargin(itemsListLabel, new Insets(15, 20, 10, 50));
         HBox.setMargin(addItem, new Insets(10, 20, 10, 680));
         titleLabel.setTranslateY(5);
+        errorLabel.setTranslateY(5);
         itemList.setTranslateX(50);
         titleLabel.setAlignment(Pos.CENTER);
+        errorLabel.setAlignment(Pos.CENTER);
         companyField.setAlignment(Pos.CENTER_LEFT);
         itemList.setPlaceholder(new Label("No items"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

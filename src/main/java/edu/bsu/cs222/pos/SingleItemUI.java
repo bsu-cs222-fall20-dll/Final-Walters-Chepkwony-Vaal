@@ -31,7 +31,7 @@ public class SingleItemUI{
         secondaryStage.setWidth(300);
         secondaryStage.setHeight(250);
         formatDisplay();
-        Controller.doneEdit(doneButton);
+        Controller.doneEdit(doneButton, secondaryStage, titleLabel, nameInput, priceInput);
         secondaryStage.setScene(new Scene(createRoot()));
         secondaryStage.show();
         return secondaryStage;
