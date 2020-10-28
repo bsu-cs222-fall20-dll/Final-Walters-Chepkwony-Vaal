@@ -65,10 +65,6 @@ public class TestInventory {
 
     }
     @Test
-    public void testUpdatedItemImage(){
-    //TODO
-    }
-    @Test
     public void testDeleteInventory(){
         Company company = new Company("AnotherName");
         Item item = new Item("soup", BigDecimal.valueOf(3.85));

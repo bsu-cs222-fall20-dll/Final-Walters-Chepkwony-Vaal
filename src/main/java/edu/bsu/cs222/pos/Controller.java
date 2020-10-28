@@ -11,14 +11,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Controller {
-    //TODO: how should we init the company?
     public static Company company = new Company("");
 
     public static void addItemsToDisplay(){
         HashMap<String, Item> inventoryList = company.getAvailableInventoryList();
-//        Item exampleItem = new Item("Example", new BigDecimal("2.0"));
-//        HashMap<String, Item> inventoryList = new HashMap<>();
-//        inventoryList.put("10",exampleItem);
         ArrayList<Item> inventoryArrayList = new ArrayList<>(inventoryList.values());
         AdminPanelUI.displayItems(inventoryArrayList);
     }
@@ -28,8 +24,6 @@ public class Controller {
         companyNameInput.setOnMouseClicked(event -> companyNameInput.setEditable(true));
         companyNameInput.setOnAction(event -> {
             companyNameInput.setEditable(false);
-            //TODO: Set company name + error handling
-            //Company.setCompanyName(companyNameInput.getText());
         });
         companyNameInput.editableProperty().bindBidirectional(editCompanyName.selectedProperty());
         editCompanyName.setOnAction(event -> {
@@ -90,7 +84,6 @@ public class Controller {
 
     public static void doneEdit(Button doneButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
         doneButton.setOnMouseClicked(event -> {
-            //TODO: Add/Update items + error handling
             item.setName(nameInput.getText());
             item.setPrice(BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
             stage.fireEvent(
@@ -105,7 +98,6 @@ public class Controller {
     }
     public static void doneAddItem(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
         doneButton.setOnMouseClicked(event -> {
-            //TODO: Add/Update items + error handling
             BarcodeGenerator bcg = new BarcodeGenerator(company.getAvailableInventoryList());
             Item item = new Item(nameInput.getText(),BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
             company.addItem(bcg.makeNewCode(), item);
