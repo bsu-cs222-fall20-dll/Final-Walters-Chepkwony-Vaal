@@ -21,7 +21,7 @@ Checking for the argument types is unnecessary when we are sure of the types tha
 
 ## Authors
 
-Owen Walters\s\s
-Dan Chepkwony\s\s
-Bradley Vaal\s\s
+Owen Walters\
+Dan Chepkwony\
+Bradley Vaal\
 Youxuan Wang
