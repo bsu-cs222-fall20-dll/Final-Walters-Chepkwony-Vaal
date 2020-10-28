@@ -18,9 +18,11 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class Display extends Application{
-    private final Label titleLabel = new Label("Admin Panel");
-        private final Label companyNameLabel = new Label("Company Name:"+"  ");
+import java.io.IOException;
+
+public class AdminPanelUI extends Application{
+        private final Label adminPanelLabel = new Label("Admin Panel");
+        private final Label companyNameLabel = new Label("Company Name:");
         private final TextField companyNameInput = new TextField("Enter Your Company Name Here");
         private final ToggleButton editCompanyName = new ToggleButton("Edit");
         private final HBox companyField = new HBox(
@@ -38,11 +40,12 @@ public class Display extends Application{
         private final ScrollPane itemListScrollPane = new ScrollPane(itemList);
 
         @Override
-        public void start (Stage primaryStage){
+        public void start (Stage primaryStage) throws IOException {
             primaryStage.setWidth(1000);
             primaryStage.setHeight(600);
             formatDisplay();
             Controller.toggleEditOpacity(companyNameInput, editCompanyName);
+            Controller.setUpRowEdit(itemList);
             primaryStage.setScene(new Scene(createRoot()));
             primaryStage.show();
         }
@@ -50,7 +53,7 @@ public class Display extends Application{
         private Pane createRoot () {
             VBox root = new VBox();
             root.getChildren().addAll(
-                    titleLabel,
+                    adminPanelLabel,
                     companyField,
                     itemsListHeader,
                     itemListScrollPane);
@@ -59,14 +62,14 @@ public class Display extends Application{
 
         @SuppressWarnings("unchecked")
         private void formatDisplay(){
-            titleLabel.setMinWidth(1000);
+            adminPanelLabel.setMinWidth(1000);
             companyNameInput.setMinWidth(400);
             itemsListHeader.setMinWidth(900);
             nameColumn.setMinWidth(450);
             priceColumn.setMinWidth(450);
             itemList.setMinWidth(900);
             itemListScrollPane.setMinWidth(900);
-            titleLabel.setFont(Font.font("Arial", 16));
+            adminPanelLabel.setFont(Font.font("Arial", 16));
             companyNameLabel.setFont(Font.font("Arial", 15));
             companyNameInput.setFont(Font.font("Arial", 20));
             itemsListLabel.setFont(Font.font("Arial", FontWeight.BLACK, FontPosture.REGULAR, 15));
@@ -75,7 +78,7 @@ public class Display extends Application{
             HBox.setMargin(itemsListLabel, new Insets(15, 20, 10, 50));
             HBox.setMargin(addItem, new Insets(10, 20, 10, 680));
             itemList.setTranslateX(50);
-            titleLabel.setAlignment(Pos.CENTER);
+            adminPanelLabel.setAlignment(Pos.CENTER);
             companyField.setAlignment(Pos.CENTER_LEFT);
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
             priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
