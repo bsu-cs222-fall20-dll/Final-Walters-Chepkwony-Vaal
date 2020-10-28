@@ -61,11 +61,11 @@ public class Controller {
                     itemList.setDisable(true);
                     addItem.setDisable(true);
                     Item rowData = row.getItem();
-                    Stage stage = SingleItemUI.popUp();
+                    Stage stage = ModifyItemUI.popUp(rowData);
                     String name = rowData.getName();
                     String price = rowData.getPrice().toString();
-                    SingleItemUI.changeTitleLabel("Edit Item");
-                    SingleItemUI.setDefaultItemValues(name, price);
+                    ModifyItemUI.changeTitleLabel("Edit Item");
+                    ModifyItemUI.setDefaultItemValues(name, price);
                     stage.getScene().getWindow().setOnCloseRequest(closedEvent -> {
                         itemList.setDisable(false);
                         addItem.setDisable(false);
@@ -90,12 +90,27 @@ public class Controller {
         });
     }
 
-    public static void doneEdit(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
+    public static void doneEdit(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput,Item item){
+        doneButton.setOnMouseClicked(event -> {
+            //TODO: Add/Update items + error handling
+            item.setName(nameInput.getText());
+            item.setPrice(BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
+            stage.fireEvent(
+                    new WindowEvent(
+                            stage,
+                            WindowEvent.WINDOW_CLOSE_REQUEST
+                    )
+            );
+            addItemsToDisplay();
+
+        });
+    }
+    public static void doneAddItem(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
         doneButton.setOnMouseClicked(event -> {
             //TODO: Add/Update items + error handling
             BarcodeGenerator bcg = new BarcodeGenerator(company.getAvailableInventoryList());
             Item item = new Item(nameInput.getText(),BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
-            company.addItem(bcg.makeNewCode(),item);
+            company.addItem(bcg.makeNewCode(), item);
 //            Item item = company.searchByItemName(nameInput.getText());
             if (titleLabel.getText().equals("Add Item")){
                 System.out.println("add");
@@ -115,5 +130,6 @@ public class Controller {
             addItemsToDisplay();
         });
     }
+
 
 }

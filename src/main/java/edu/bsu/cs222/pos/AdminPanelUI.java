@@ -35,6 +35,7 @@ public class AdminPanelUI extends Application{
             companyNameInput,
             editCompanyName);
     private final Button addItem = new Button("Add new item");
+    private final Button deleteItem = new Button("Delete item");
     private final Label itemsListLabel = new Label("Current Items");
     private final HBox itemsListHeader = new HBox(
             itemsListLabel,

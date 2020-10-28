@@ -1,18 +1,18 @@
 package edu.bsu.cs222.pos;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
-public class SingleItemUI{
+public class ModifyItemUI {
     public static Label titleLabel = new Label("Add Item");
     private static final Label nameLabel = new Label("Name:");
     public static TextField nameInput = new TextField("");
@@ -24,14 +24,15 @@ public class SingleItemUI{
     private static final HBox priceField = new HBox(
             priceLabel,
             priceInput);
-    private static final Button doneButton = new Button("Done");
+    private static final Button editButton = new Button("Edit");
 
-    public static Stage popUp (){
+    public static Stage popUp (Item item){
         Stage secondaryStage = new Stage();
         secondaryStage.setWidth(300);
         secondaryStage.setHeight(250);
+        secondaryStage.setTitle("Edit Item");
         formatDisplay();
-        Controller.doneAddItem(doneButton, secondaryStage, titleLabel, nameInput, priceInput);
+        Controller.doneEdit(editButton, secondaryStage, titleLabel, nameInput, priceInput,item);
         secondaryStage.setScene(new Scene(createRoot()));
         secondaryStage.show();
         return secondaryStage;
@@ -43,7 +44,7 @@ public class SingleItemUI{
                 titleLabel,
                 nameField,
                 priceField,
-                doneButton);
+                editButton);
         return root;
     }
 
@@ -61,7 +62,7 @@ public class SingleItemUI{
         titleLabel.setAlignment(Pos.CENTER);
         nameField.setAlignment(Pos.CENTER);
         priceField.setAlignment(Pos.CENTER);
-        doneButton.setTranslateX(125);
+        editButton.setTranslateX(125);
     }
 
     public static void changeTitleLabel(String title){
