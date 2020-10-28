@@ -9,9 +9,16 @@ public class Company {
     private HashMap<String,Item> inventoryList = new HashMap<>();
     private Connection db;
 
-    public Company(String companyName) {
+    public Company(String companyName){
+        this(companyName, false);
+    }
+
+    public Company(String companyName, boolean inMemory) {
         this.companyName = companyName;
         StringBuilder dbName = new StringBuilder();
+        if (inMemory){
+            dbName.append("memory:");
+        }
         for (int i = 0; i < companyName.length(); i++) {
             char c = companyName.charAt(i);
             if (Character.isLetterOrDigit(c)){
@@ -31,8 +38,12 @@ public class Company {
         }
 
     }
-    public void addItem(String barcodeNumber, Item item){
-        inventoryList.put(barcodeNumber,item);
+    public void addItem(String barcodeNumber, Item item) throws SQLException {
+        PreparedStatement statement = db.prepareStatement("INSERT INTO Items (ID, Price, Name) values (?, ?, ?)");
+        statement.setString(1, barcodeNumber);
+        statement.setBigDecimal(2, item.price);
+        statement.setString(3, item.name);
+        statement.execute();
     }
     private void updateItem(String barcodeNumber, Item item){
         inventoryList.put(barcodeNumber, item);
@@ -49,8 +60,18 @@ public class Company {
     }
 
 
-    public HashMap<String, Item> getAvailableInventoryList() {
-        return inventoryList;
+    public HashMap<String, Item> getAvailableInventoryList() throws SQLException {
+        HashMap<String, Item> result= new HashMap<String, Item>();
+        Statement statement = db.createStatement();
+        ResultSet resultSet = statement.executeQuery("select * from Items");
+        while(resultSet.next()){
+            result.put(resultSet.getString("ID"),
+                    new Item(
+                            resultSet.getString("Name"),
+                            resultSet.getBigDecimal("Price")
+                    ));
+        }
+        return result;
     }
 
     public void removeItem(String id) {

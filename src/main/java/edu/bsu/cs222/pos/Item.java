@@ -36,4 +36,12 @@ public class Item {
             "Image varchar(32672),"+
             "PRIMARY KEY (ID)" +
             ")";
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name=" + name +
+                ", price='" + name + '\'' +
+                '}';
+    }
 }
