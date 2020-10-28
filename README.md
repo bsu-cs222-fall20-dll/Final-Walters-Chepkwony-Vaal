@@ -9,7 +9,7 @@ and support for discounts/coupons.
 
 ## Build
 
-To build the project, with IntelliJ and gradle installed and configured run the Main class.
+With IntelliJ and gradle installed and configured, run the Main class to build the project.
 
     src > main > java/edu/bsu/cs222/pos > Main
 
