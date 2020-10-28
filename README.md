@@ -13,7 +13,7 @@ With IntelliJ and gradle installed and configured, run the Main class to build t
 
     src > main > java/edu/bsu/cs222/pos > Main
 
-## Suppresions
+## Suppressions
 
 In AdminPanelUI.java on line 102, itemList.getColumns().addAll(nameColumn, priceColumn);
 is suppressed because of an "unchecked generics array creation for varargs parameter."
