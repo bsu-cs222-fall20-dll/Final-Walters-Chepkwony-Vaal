@@ -41,8 +41,6 @@ public class TestInventory {
         String uniqueBarcode = barcodeGenerator.makeNewCode();
         company.addItem(uniqueBarcode, testItem );
         Assertions.assertTrue(barcodeGenerator.getUsedCodes().contains(uniqueBarcode));
-
-
     }
     @Test
     public void testUpdatedItemCost(){
@@ -60,9 +58,6 @@ public class TestInventory {
         company.addItem("12345678901",sampleItem);
         Item searchedItem = company.searchByItemName("soup");
         Assertions.assertEquals(sampleItem,searchedItem);
-
-
-
     }
     @Test
     public void testDeleteInventory(){

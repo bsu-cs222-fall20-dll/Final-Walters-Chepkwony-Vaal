@@ -16,4 +16,8 @@ public class Order {
     public ArrayList<Item> getItemList() {
         return null;
     }
+
+    public void deleteItem(Item item) {
+        itemList.remove(item);
+    }
 }
