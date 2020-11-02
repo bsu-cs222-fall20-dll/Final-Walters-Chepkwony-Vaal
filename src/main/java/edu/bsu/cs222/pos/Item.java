@@ -13,7 +13,6 @@ public class Item {
         this.price = itemPrice;
     }
 
-
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
