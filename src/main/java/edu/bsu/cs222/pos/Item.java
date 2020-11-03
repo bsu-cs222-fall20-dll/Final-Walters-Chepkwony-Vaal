@@ -1,7 +1,10 @@
 package edu.bsu.cs222.pos;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class Item {
+    private final ArrayList<BigDecimal> priceList = new ArrayList<>();
+
     public  BigDecimal getPrice() {
         return price;
     }
@@ -24,4 +27,18 @@ public class Item {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void addItemPrice(){
+        priceList.add(price);
+    }
+
+    public BigDecimal calculateTotalItemPrice(){
+        BigDecimal totalPrice = null;
+        double tax = 0.07;
+        for(BigDecimal eachItemPrice : priceList ) {
+            totalPrice = totalPrice.add(eachItemPrice);
+        }
+        return totalPrice.multiply(new BigDecimal(tax));
+    }
+
 }

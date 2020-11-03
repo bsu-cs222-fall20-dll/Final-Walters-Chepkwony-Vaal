@@ -42,4 +42,5 @@ public class TestReceipts {
         order.setDateAndTime("11/2/20  8:56am");
         Assertions.assertEquals("11/2/20  8:56am",order.getDataAndTime());
     }
+
 }
