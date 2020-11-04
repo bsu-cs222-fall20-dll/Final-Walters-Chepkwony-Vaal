@@ -9,7 +9,9 @@ import java.util.Date;
 public class Order {
     private String dateAndTime;
     private ArrayList<Item> itemList = new ArrayList<>();
+    private BigDecimal taxRate = BigDecimal.valueOf(.07);
     private BigDecimal subtotal;
+    private BigDecimal total;
 
     public Order(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -20,6 +22,7 @@ public class Order {
     public void addItem(Item item) {
         itemList.add(item);
         calculateSubtotal();
+        calculateTotal();
     }
 
     public int getSize() {
@@ -44,10 +47,24 @@ public class Order {
         }
     }
 
+    public void calculateTotal(){
+        total = BigDecimal.valueOf(0);
+        total = getSubtotal().multiply(taxRate);
+    }
+
 
     public BigDecimal getSubtotal() {
         return subtotal;
     }
 
+
+    public void setTaxRate(BigDecimal taxRate) {
+        this.taxRate = taxRate;
+    }
+
+
+    public BigDecimal getTotalWithTax() {
+        return total;
+    }
 
 }

@@ -47,10 +47,29 @@ public class TestReceipts {
         BigDecimal presumedTotal = BigDecimal.valueOf(1.50).add(BigDecimal.valueOf(3.67));
         Assertions.assertEquals(presumedTotal,subtotal);
     }
-
     @Test
     public void testCalculateTax(){
-        //TODO
+
+        Order order = new Order();
+        Item item1 = new Item("Soup",BigDecimal.valueOf(3.67));
+        Item item2 = new Item("Napkin",BigDecimal.valueOf(1.50));
+        order.addItem(item1);
+        order.addItem(item2);
+        BigDecimal total =order.getTotalWithTax();
+        BigDecimal presumedTotal = BigDecimal.valueOf(1.50).add(BigDecimal.valueOf(3.67)).multiply(BigDecimal.valueOf(.07));
+        Assertions.assertEquals(presumedTotal,total);
+    }
+    @Test
+    public void testCalculateChangedTax(){
+        Order order = new Order();
+        Item item1 = new Item("Soup",BigDecimal.valueOf(3.67));
+        Item item2 = new Item("Napkin",BigDecimal.valueOf(1.50));
+        order.setTaxRate(BigDecimal.valueOf(.09));
+        order.addItem(item1);
+        order.addItem(item2);
+        BigDecimal total =order.getTotalWithTax();
+        BigDecimal presumedTotal = BigDecimal.valueOf(1.50).add(BigDecimal.valueOf(3.67)).multiply(BigDecimal.valueOf(.09));
+        Assertions.assertEquals(presumedTotal,total);
     }
 
     @Test
