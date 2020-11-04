@@ -2,6 +2,7 @@ package edu.bsu.cs222.pos;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -55,8 +56,6 @@ public class TestInventory {
         String uniqueBarcode = barcodeGenerator.makeNewCode();
         company.addItem(uniqueBarcode, testItem );
         Assertions.assertTrue(barcodeGenerator.getUsedCodes().contains(uniqueBarcode));
-
-
     }
     @Test
     public void testUpdatedItemCost(){
@@ -74,13 +73,6 @@ public class TestInventory {
         company.addItem("12345678901",sampleItem);
         Item searchedItem = company.searchByItemName("soup");
         Assertions.assertEquals(sampleItem,searchedItem);
-
-
-
-    }
-    @Test
-    public void testUpdatedItemImage(){
-    //TODO
     }
     @Test
     public void testDeleteInventory(){
