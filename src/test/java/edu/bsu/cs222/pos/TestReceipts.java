@@ -9,20 +9,20 @@ import java.util.ArrayList;
 public class TestReceipts {
     @Test
     public void testEmptyOrder() {
-        Order order = new Order("11/2/20  11:29am");
+        Order order = new Order();
         ArrayList<Item> itemList = order.getItemList();
         Assertions.assertNull(itemList);
     }
     @Test
     public void testOrderWithAddition(){
-        Order order = new Order("11/1/20  10:30am");
+        Order order = new Order();
         Item item = new Item("sponge", BigDecimal.valueOf(5.25));
         order.addItem(item);
         Assertions.assertEquals(1,order.getSize());
     }
     @Test
     public void testOrderWithRemoving(){
-        Order order = new Order("10/30/20  9:45am");
+        Order order = new Order();
         Item item = new Item("Soup",BigDecimal.valueOf(3.67));
         order.addItem(item);
         order.deleteItem(item);
@@ -30,17 +30,35 @@ public class TestReceipts {
     }
     @Test
     public void testUpdatedItemPrice(){
-        Order order = new Order("10/31/20  11:42am");
+        Order order = new Order();
         Item item = new Item("Napkin",BigDecimal.valueOf(1.50));
         order.addItem(item);
         item.setPrice(BigDecimal.valueOf(1.50));
         Assertions.assertEquals(BigDecimal.valueOf(1.50),item.getPrice());
     }
     @Test
-    public void testUpdatedTimeAndDate(){
-        Order order = new Order("11/2/20  8:56am");
-        order.setDateAndTime("11/2/20  8:56am");
-        Assertions.assertEquals("11/2/20  8:56am",order.getDataAndTime());
+    public void testTotalOrderPrice(){
+        Order order = new Order();
+        Item item1 = new Item("Soup",BigDecimal.valueOf(3.67));
+        Item item2 = new Item("Napkin",BigDecimal.valueOf(1.50));
+        order.addItem(item1);
+        order.addItem(item2);
+        BigDecimal subtotal = order.getSubtotal();
+        BigDecimal presumedTotal = BigDecimal.valueOf(1.50).add(BigDecimal.valueOf(3.67));
+        Assertions.assertEquals(presumedTotal,subtotal);
+    }
+
+    @Test
+    public void testCalculateTax(){
+        //TODO
+    }
+
+    @Test
+    public void testDateAndTime(){
+        Order order = new Order();
+        String date = order.getDateAndTime();
+        System.out.println(date);
+        Assertions.assertNotNull(order.getDateAndTime());
     }
 
 }

@@ -49,6 +49,7 @@ public class AdminPanelUI extends Application{
 
     @Override
     public void start (Stage primaryStage) {
+        primaryStage.setTitle("Administrative Access");
         primaryStage.setWidth(1000);
         primaryStage.setHeight(600);
         formatDisplay();

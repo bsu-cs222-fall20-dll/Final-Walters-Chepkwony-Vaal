@@ -32,13 +32,6 @@ public class Item {
         priceList.add(price);
     }
 
-    public BigDecimal calculateTotalItemPrice(){
-        BigDecimal totalPrice = null;
-        double tax = 0.07;
-        for(BigDecimal eachItemPrice : priceList ) {
-            totalPrice = totalPrice.add(eachItemPrice);
-        }
-        return totalPrice.multiply(new BigDecimal(tax));
-    }
+
 
 }
