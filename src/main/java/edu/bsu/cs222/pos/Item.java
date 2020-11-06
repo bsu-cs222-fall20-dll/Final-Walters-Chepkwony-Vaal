@@ -24,4 +24,6 @@ public class Item {
     public void setName(String name) {
         this.name = name;
     }
+
+    public static String createTable = "CREATE TABLE ITEMS (ID varchar(40) NOT NULL,Price decimal(18,2) NOT NULL,Name varchar(32672) NOT NULL,Image varchar(32672),PRIMARY KEY (ID))";
 }
