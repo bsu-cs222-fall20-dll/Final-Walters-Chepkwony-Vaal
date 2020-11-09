@@ -1,31 +1,33 @@
 package edu.bsu.cs222.pos;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import java.util.ArrayList;
+
 
 public class ReceiptUI extends Application{
     private final Label titleLabel = new Label("Company Name");
+    private final Label itemLabel = new Label("Item Name");
+    private final Label priceLabel = new Label("Price");
+    private final Label taxLabel = new Label("Tax:");
+    private final Label balanceLabel = new Label("Balance:");
+    private final Label dateAndTimeLabel = new Label("Date and Time:");
     private final HBox receiptItems = new HBox();
     private final HBox receiptTotal = new HBox();
+
+    private static final TableView<Item> receiptItemList = new TableView<>();
+    private final TableColumn<Item, Item> receiptNameColumn = new TableColumn<>("Item Name");
+    private final TableColumn<Item, Item> receiptPriceColumn = new TableColumn<>("Price");
+    private final ScrollPane receiptItemListScrollPane = new ScrollPane(receiptItemList);
 
     @Override
     public void start (Stage primaryStage) {
@@ -41,7 +43,12 @@ public class ReceiptUI extends Application{
         VBox root = new VBox();
         root.getChildren().addAll(
                 titleLabel,
-                receiptItems
+                receiptItems,
+                receiptItemListScrollPane,
+                taxLabel,
+                balanceLabel,
+                dateAndTimeLabel
+
         );
         return root;
     }
