@@ -13,39 +13,27 @@ public class TestInventory {
         String companyName = "SampleCompany";
         Company company = new Company(companyName, true);
         HashMap<String, Item> availableInventoryList = null;
-        try {
-            availableInventoryList = company.getAvailableInventoryList();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        availableInventoryList = company.getAvailableInventoryList();
         Assertions.assertTrue(availableInventoryList.isEmpty());
     }
     @Test
     public void testAddInventory(){
         Company company = new Company("SampleCompany", true);
         Item item = new Item("soup", new BigDecimal("3.85"));
-        try {
-            company.addItem("12345678901",item);
-            HashMap<String, Item> InventoryList = company.getAvailableInventoryList();
-            Item dbItem = InventoryList.get("12345678901");
-            Assertions.assertEquals(dbItem.toString(),item.toString());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        company.addItem("12345678901",item);
+        HashMap<String, Item> InventoryList = company.getAvailableInventoryList();
+        Item dbItem = InventoryList.get("12345678901");
+        Assertions.assertEquals(dbItem.toString(),item.toString());
     }
     @Test
     public void testUpdatedItemName(){
         Company company = new Company("SampleCompany");
         Item sampleItem = new Item("Sloup",BigDecimal.valueOf(5.55));
-        try {
-            company.addItem("12322", sampleItem);
-            company.updateItemName("12322", "soup");
-            Item sampleItemFromCompany = company.getAvailableInventoryList().get("12322");
-            Assertions.assertEquals("soup",sampleItemFromCompany.getName());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }/*
+        company.addItem("12322", sampleItem);
+        company.updateItemName("12322", "soup");
+        Item sampleItemFromCompany = company.getAvailableInventoryList().get("12322");
+        Assertions.assertEquals("soup",sampleItemFromCompany.getName());
+    }
 
     @Test
     public void testUniqueBarCodeGenerator(){
@@ -82,5 +70,5 @@ public class TestInventory {
         company.addItem("12345678901",item);
         company.removeItem("12345678901");
         Assertions.assertNull(InventoryList.get("12345678901"));
-    }*/
+    }
 }

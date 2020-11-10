@@ -7,13 +7,18 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Controller {
-    public static Company company = new Company("");
+    public static Company company;
 
-    public static void addItemsToDisplay(){
+    static {
+        company = new Company("");
+    }
+
+    public static void addItemsToDisplay() throws SQLException {
         HashMap<String, Item> inventoryList = company.getAvailableInventoryList();
         ArrayList<Item> inventoryArrayList = new ArrayList<>(inventoryList.values());
         AdminPanelUI.displayItems(inventoryArrayList);
@@ -92,16 +97,21 @@ public class Controller {
                             WindowEvent.WINDOW_CLOSE_REQUEST
                     )
             );
-            addItemsToDisplay();
+            try {
+                addItemsToDisplay();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
 
         });
     }
     public static void doneAddItem(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
         doneButton.setOnMouseClicked(event -> {
-            BarcodeGenerator bcg = new BarcodeGenerator(company.getAvailableInventoryList());
+            BarcodeGenerator bcg = null;
+            bcg = new BarcodeGenerator(company.getAvailableInventoryList());
             Item item = new Item(nameInput.getText(),BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
             company.addItem(bcg.makeNewCode(), item);
-//            Item item = company.searchByItemName(nameInput.getText());
+            //            Item item = company.searchByItemName(nameInput.getText());
             if (titleLabel.getText().equals("Add Item")){
                 System.out.println("add");
             }
@@ -117,7 +127,11 @@ public class Controller {
                             WindowEvent.WINDOW_CLOSE_REQUEST
                     )
             );
-            addItemsToDisplay();
+            try {
+                addItemsToDisplay();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         });
     }
 

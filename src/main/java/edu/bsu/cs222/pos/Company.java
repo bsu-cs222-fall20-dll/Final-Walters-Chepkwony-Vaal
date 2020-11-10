@@ -8,13 +8,15 @@ public class Company {
     private String companyName;
     private HashMap<String,Item> inventoryList = new HashMap<>();
     private Connection db;
+    private BarcodeGenerator bcg;
 
-    public Company(String companyName){
+    public Company(String companyName)  {
         this(companyName, false);
     }
 
     public Company(String companyName, boolean inMemory) {
         this.companyName = companyName;
+        this.bcg = new BarcodeGenerator(this.getAvailableInventoryList());
         StringBuilder dbName = new StringBuilder();
         if (inMemory){
             dbName.append("memory:");
@@ -38,12 +40,18 @@ public class Company {
         }
 
     }
-    public void addItem(String barcodeNumber, Item item) throws SQLException {
-        PreparedStatement statement = db.prepareStatement("INSERT INTO Items (ID, Price, Name) values (?, ?, ?)");
-        statement.setString(1, barcodeNumber);
-        statement.setBigDecimal(2, item.price);
-        statement.setString(3, item.name);
-        statement.execute();
+    public void addItem(String barcodeNumber, Item item)  {
+        PreparedStatement statement = null;
+        try {
+            statement = db.prepareStatement("INSERT INTO Items (ID, Price, Name) values (?, ?, ?)");
+            statement.setString(1, barcodeNumber);
+            statement.setBigDecimal(2, item.price);
+            statement.setString(3, item.name);
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
     private void updateItem(String barcodeNumber, Item item){
         inventoryList.put(barcodeNumber, item);
@@ -59,16 +67,21 @@ public class Company {
         updateItem(barcodeNumber,item);
     }
 
-    public HashMap<String, Item> getAvailableInventoryList() throws SQLException {
+    public HashMap<String, Item> getAvailableInventoryList() {
         HashMap<String, Item> result= new HashMap<String, Item>();
-        Statement statement = db.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from Items");
-        while(resultSet.next()){
-            result.put(resultSet.getString("ID"),
-                    new Item(
-                            resultSet.getString("Name"),
-                            resultSet.getBigDecimal("Price")
-                    ));
+        Statement statement = null;
+        try {
+            statement = db.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from Items");
+            while(resultSet.next()){
+                result.put(resultSet.getString("ID"),
+                        new Item(
+                                resultSet.getString("Name"),
+                                resultSet.getBigDecimal("Price")
+                        ));
+        }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return result;
     }
