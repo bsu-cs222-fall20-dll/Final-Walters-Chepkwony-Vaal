@@ -41,10 +41,12 @@ public class AdminPanelUI extends Application{
     private final TableColumn<Item, Item> nameColumn = new TableColumn<>("Item Name");
     private final TableColumn<Item, Item> priceColumn = new TableColumn<>("Price");
     private final ScrollPane itemListScrollPane = new ScrollPane(itemList);
-    private final Button CheckForReceipt = new Button("View the Receipt");
-    private final Label Receipt = new Label("Receipt");
-    private final HBox ReceiptList = new HBox(Receipt,itemsListLabel,addItem);
 
+    private final Button ViewTheReceipt = new Button("View the Receipt");
+    private final Label ReceiptLabel = new Label("Receipt");
+    private final HBox ReceiptListHeader = new HBox(
+            ReceiptLabel,
+            itemsListLabel);
 
 
     @Override

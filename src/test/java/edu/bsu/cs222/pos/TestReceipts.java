@@ -79,5 +79,4 @@ public class TestReceipts {
         System.out.println(date);
         Assertions.assertNotNull(order.getDateAndTime());
     }
-
 }
