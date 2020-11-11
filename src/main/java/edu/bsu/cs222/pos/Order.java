@@ -1,17 +1,43 @@
 package edu.bsu.cs222.pos;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Order {
-    public String dateAndTime;
+    public Long dateAndTime;
     private ArrayList<Item> itemList = new ArrayList<>();
+    private BigDecimal subtotal;
+    private BigDecimal totalWithTax;
+    private BigDecimal taxRate = BigDecimal.valueOf(.07);
+    private BigDecimal tax;
 
-    public Order(String DateAndTime){
-        this.dateAndTime = DateAndTime;
+
+    public Order(){
+        Date date = new Date();
+        this.dateAndTime = date.getTime();
+        this.subtotal = BigDecimal.valueOf(0.00);
+        this.totalWithTax = BigDecimal.valueOf(0.00);
+
     }
 
     public void addItem(Item item) {
         itemList.add(item);
+        calculateTotalWithTax();
+    }
+
+    private void calculateTotalWithTax() {
+        calculateSubtotal();
+        tax = subtotal.multiply(taxRate);
+        totalWithTax =subtotal.add(tax);
+
+    }
+
+    private void calculateSubtotal() {
+        subtotal = BigDecimal.valueOf(0.00);
+        for(Item item: itemList){
+            subtotal = subtotal.add(item.getPrice());
+        }
     }
 
     public int getSize() {
@@ -26,12 +52,30 @@ public class Order {
         itemList.remove(item);
     }
 
-    public String getDataAndTime(){
+    public Long getDateAndTime(){
         return dateAndTime;
     }
-
-    public void setDateAndTime(String dateAndTime) {
-        this.dateAndTime = dateAndTime;
+    public BigDecimal getSubtotal() {
+        return subtotal;
     }
 
+    public BigDecimal getTotalWithTax() {
+        return totalWithTax;
+    }
+
+    public void setTotalWithTax(BigDecimal totalWithTax) {
+        this.totalWithTax = totalWithTax;
+    }
+
+    public void setTaxRate(BigDecimal taxRate) {
+        this.taxRate = taxRate;
+    }
+
+    public BigDecimal getTaxRate() {
+        return taxRate;
+    }
+
+    public BigDecimal getTax() {
+        return tax;
+    }
 }

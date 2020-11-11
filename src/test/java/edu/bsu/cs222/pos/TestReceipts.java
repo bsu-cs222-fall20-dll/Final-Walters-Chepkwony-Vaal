@@ -57,7 +57,7 @@ public class TestReceipts {
         order.addItem(item2);
         BigDecimal total =order.getTotalWithTax();
         BigDecimal presumedTotal = BigDecimal.valueOf(1.50).add(BigDecimal.valueOf(3.67)).multiply(BigDecimal.valueOf(.07));
-        Assertions.assertEquals(presumedTotal,total);
+        Assertions.assertEquals(presumedTotal,order.getTax());
     }
     @Test
     public void testCalculateChangedTax(){
@@ -68,14 +68,14 @@ public class TestReceipts {
         order.addItem(item1);
         order.addItem(item2);
         BigDecimal total =order.getTotalWithTax();
-        BigDecimal presumedTotal = BigDecimal.valueOf(1.50).add(BigDecimal.valueOf(3.67)).multiply(BigDecimal.valueOf(.09));
-        Assertions.assertEquals(presumedTotal,total);
+        BigDecimal presumedSubtotal = BigDecimal.valueOf(1.50).add(BigDecimal.valueOf(3.67)).multiply(BigDecimal.valueOf(1.09));
+        Assertions.assertEquals(presumedSubtotal,total);
     }
 
     @Test
     public void testDateAndTime(){
         Order order = new Order();
-        String date = order.getDateAndTime();
+        Long date = order.getDateAndTime();
         System.out.println(date);
         Assertions.assertNotNull(order.getDateAndTime());
     }
