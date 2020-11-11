@@ -6,10 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -22,6 +19,12 @@ import java.util.ArrayList;
 public class ReceiptUI extends Application{
     private final Label titleLabel = new Label("Company Name");
     private final Label taxLabel = new Label("Tax:");
+    private final TextField taxInput = new TextField();
+    private final ToggleButton editTaxInput = new ToggleButton("Edit");
+    private final HBox taxField = new HBox(
+            taxLabel,
+            taxInput,
+            editTaxInput);
     private final Label balanceLabel = new Label("Balance:");
     private final Label dateAndTimeLabel = new Label("Date and Time:");
     private final Label thankLabel = new Label("Thank you for shopping at");
@@ -45,7 +48,7 @@ public class ReceiptUI extends Application{
         root.getChildren().addAll(
                 titleLabel,
                 receiptItemListScrollPane,
-                taxLabel,
+                taxField,
                 balanceLabel,
                 dateAndTimeLabel,
                 thankLabel
@@ -68,9 +71,9 @@ public class ReceiptUI extends Application{
         receiptItemList.setTranslateX(10);
         receiptItemList.getColumns().addAll(receiptNameColumn, receiptPriceColumn);
         taxLabel.setFont(Font.font("Arial", 20));
-        HBox.setMargin(taxLabel, new Insets(10, 5, 10, 175));
+        taxField.setAlignment(Pos.CENTER_LEFT);
         balanceLabel.setFont(Font.font("Arial", 20));
-        HBox.setMargin(balanceLabel, new Insets(10, 5, 10, 175));
+        balanceLabel.setAlignment(Pos.CENTER_LEFT);
         dateAndTimeLabel.setFont(Font.font("Arial", 20));
         HBox.setMargin(dateAndTimeLabel, new Insets(10, 5, 10, 175));
         receiptItemListScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
