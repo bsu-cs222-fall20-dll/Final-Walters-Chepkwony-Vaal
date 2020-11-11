@@ -48,7 +48,6 @@ public class AdminPanelUI extends Application{
             ReceiptLabel,
             itemsListLabel);
 
-
     @Override
     public void start (Stage primaryStage) {
         primaryStage.setTitle("Administrative Access");
@@ -63,7 +62,7 @@ public class AdminPanelUI extends Application{
     public void init() throws Exception {
         super.init();
         Controller.addItemsToDisplay();
-        companyNameInput.setText("Enter Company Name");
+        companyNameInput.setText("Edit Company Name");
         Controller.editCompanyName(companyNameInput, editCompanyName);
         Controller.editRow(itemList, addItem);
         Controller.addItem(addItem, itemList);
