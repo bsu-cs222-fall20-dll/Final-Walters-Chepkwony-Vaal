@@ -24,8 +24,7 @@ public class ReceiptUI extends Application{
     private final Label taxLabel = new Label("Tax:");
     private final Label balanceLabel = new Label("Balance:");
     private final Label dateAndTimeLabel = new Label("Date and Time:");
-    private final HBox receiptItems = new HBox();
-    private final HBox receiptTotal = new HBox();
+    private final Label thankLabel = new Label("Thank you for shopping at");
     private static final TableView<Item> receiptItemList = new TableView<>();
     private final TableColumn<Item, Item> receiptNameColumn = new TableColumn<>("Item Name");
     private final TableColumn<Item, Item> receiptPriceColumn = new TableColumn<>("Price");
@@ -45,11 +44,11 @@ public class ReceiptUI extends Application{
         VBox root = new VBox();
         root.getChildren().addAll(
                 titleLabel,
-                receiptItems,
                 receiptItemListScrollPane,
                 taxLabel,
                 balanceLabel,
-                dateAndTimeLabel
+                dateAndTimeLabel,
+                thankLabel
         );
         return root;
     }
@@ -60,13 +59,13 @@ public class ReceiptUI extends Application{
         titleLabel.setFont(Font.font("Arial", 25));
         titleLabel.setTranslateY(5);
         titleLabel.setAlignment(Pos.CENTER);
-        receiptItems.setMinWidth(400);
-        receiptItems.setMinHeight(400);
-        receiptItems.setMinWidth(400);
-        receiptItems.setMinHeight(150);
+        thankLabel.setFont(Font.font("Arial", 13));
+        thankLabel.setTranslateY(5);
+        thankLabel.setAlignment(Pos.CENTER);
         receiptNameColumn.setMinWidth(180);
-        receiptItemList.setMinWidth(350);
-        receiptItemList.setTranslateX(50);
+        receiptPriceColumn.setMinWidth(180);
+        receiptItemList.setMinWidth(300);
+        receiptItemList.setTranslateX(10);
         receiptItemList.getColumns().addAll(receiptNameColumn, receiptPriceColumn);
         taxLabel.setFont(Font.font("Arial", 20));
         HBox.setMargin(taxLabel, new Insets(10, 5, 10, 175));
