@@ -16,7 +16,6 @@ public class Company {
 
     public Company(String companyName, boolean inMemory) {
         this.companyName = companyName;
-        this.bcg = new BarcodeGenerator(this.getAvailableInventoryList());
         StringBuilder dbName = new StringBuilder();
         if (inMemory){
             dbName.append("memory:");
@@ -38,6 +37,7 @@ public class Company {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        this.bcg = new BarcodeGenerator(this);
 
     }
     public void addItem(String barcodeNumber, Item item)  {
@@ -53,18 +53,24 @@ public class Company {
         }
 
     }
-    private void updateItem(String barcodeNumber, Item item){
-        inventoryList.put(barcodeNumber, item);
+    public void updateItemName(String barcodeNumber, String newName) {
+        PreparedStatement statement = null;
+        try {
+            statement = db.prepareStatement("UPDATE ITEMS SET Name = ? WHERE ID = ?");
+            statement.setString(1, newName);
+            statement.setString(2, barcodeNumber);
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
-    public void updateItemName(String barcodeNumber, String newName){
-        Item item = inventoryList.get(barcodeNumber);
-        item.setName(newName);
-        updateItem(barcodeNumber,item);
-    }
-    public void updatedItemCost(String barcodeNumber, BigDecimal itemPrice){
-        Item item = inventoryList.get(barcodeNumber);
-        item.setPrice(itemPrice);
-        updateItem(barcodeNumber,item);
+
+    public void updateItemCost(String barcodeNumber, BigDecimal newPrice) throws SQLException {
+        PreparedStatement statement = db.prepareStatement("UPDATE ITEMS SET Price = ? WHERE ID = ?");
+        statement.setBigDecimal(1, newPrice);
+        statement.setString(2, barcodeNumber);
+        statement.execute();
     }
 
     public HashMap<String, Item> getAvailableInventoryList() {

@@ -108,7 +108,7 @@ public class Controller {
     public static void doneAddItem(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
         doneButton.setOnMouseClicked(event -> {
             BarcodeGenerator bcg = null;
-            bcg = new BarcodeGenerator(company.getAvailableInventoryList());
+            bcg = new BarcodeGenerator(company);
             Item item = new Item(nameInput.getText(),BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
             company.addItem(bcg.makeNewCode(), item);
             //            Item item = company.searchByItemName(nameInput.getText());

@@ -2,13 +2,13 @@ package edu.bsu.cs222.pos;
 
 import java.util.*;
 
-public class BarcodeGenerator {
+public class  BarcodeGenerator {
     private Set<String> usedCodes;
     String newCodeInProgress = "";
     String newBarcode;
 
-    public BarcodeGenerator(HashMap<String, Item> availableInventoryList) {
-        this.usedCodes = availableInventoryList.keySet();
+    public BarcodeGenerator(Company company) {
+        this.usedCodes = company.getAvailableInventoryList().keySet();
 
 
     }
@@ -22,7 +22,7 @@ public class BarcodeGenerator {
                 int digit = (int) ((Math.random() * (10)) + 0);
                 newCodeInProgress = newCodeInProgress.concat(String.valueOf(digit));
             }
-
+//TODO
 
         } while (usedCodes.contains(newBarcode));
         newBarcode = newCodeInProgress;
