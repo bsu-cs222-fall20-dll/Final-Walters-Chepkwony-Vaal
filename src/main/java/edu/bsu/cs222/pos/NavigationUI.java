@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 public class NavigationUI extends Application{
     //should force user to enter a company name before being able to press any buttons
+    //TODO add a create new company button
     private final Label titleLabel = new Label("Welcome to POS System!");
     private final Label companyNameLabel = new Label("Company Name:");
     private final TextField companyNameInput = new TextField();

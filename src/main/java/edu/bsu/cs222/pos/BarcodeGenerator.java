@@ -1,15 +1,17 @@
 package edu.bsu.cs222.pos;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class  BarcodeGenerator {
     private Set<String> usedCodes;
-    String newCodeInProgress = "";
-    String newBarcode;
+    private String newCodeInProgress = "";
+    private String newBarcode;
+    private Company company;
 
     public BarcodeGenerator(Company company) {
-        this.usedCodes = company.getAvailableInventoryList().keySet();
-
+        this.usedCodes = Set.copyOf(company.getAvailableInventoryList().keySet());
+        this.company = company;
 
     }
 
@@ -24,9 +26,11 @@ public class  BarcodeGenerator {
             }
 //TODO
 
-        } while (usedCodes.contains(newBarcode));
-        newBarcode = newCodeInProgress;
-        return newBarcode;
+//        } while (usedCodes.contains(newCodeInProgress));
+        } while (company.getItem(newCodeInProgress) !=null);
+//        newBarcode = newCodeInProgress;
+//        usedCodes.add(newCodeInProgress);
+        return newCodeInProgress;
     }
 
 

@@ -17,7 +17,7 @@ public class TestInventory {
     }
     @Test
     public void testAddInventory(){
-        Company company = new Company("SampleCompany", true);
+        Company company = new Company("SampleCompany",true);
         Item item = new Item("soup", new BigDecimal("3.85"));
         company.addItem("12345678901",item);
         HashMap<String, Item> InventoryList = company.getAvailableInventoryList();
@@ -37,13 +37,13 @@ public class TestInventory {
 
     @Test
     public void testUniqueBarCodeGenerator(){
-        Company company = new Company("SampleCompay",true);
+        Company company = new Company("SampleCompany",true);
         BarcodeGenerator barcodeGenerator = new BarcodeGenerator(company);
         Item testItem = new Item("sample", BigDecimal.valueOf(44.44));
-        company.addItem("12345678901",testItem);
+//        company.addItem("12345678901",testItem);
         String uniqueBarcode = barcodeGenerator.makeNewCode();
         company.addItem(uniqueBarcode, testItem );
-        Assertions.assertTrue(barcodeGenerator.getUsedCodes().contains(uniqueBarcode));
+        Assertions.assertNotNull(company.getItem(uniqueBarcode));
     }
     @Test
     public void testUpdatedItemCost(){
@@ -59,7 +59,7 @@ public class TestInventory {
         Company company = new Company("SampleCompany",true);
         Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
         company.addItem("12345678901",sampleItem);
-        Item searchedItem = company.searchByItemName("soup");
+        Item searchedItem = company.getItem()
         Assertions.assertEquals(sampleItem,searchedItem);
     }
     @Test

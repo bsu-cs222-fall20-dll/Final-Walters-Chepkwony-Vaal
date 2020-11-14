@@ -1,68 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.bsu.cs222.pos.TestInventory" tests="7" skipped="0" failures="3" errors="0" timestamp="2020-11-11T18:49:22" hostname="DESKTOP-V498F44" time="1.826">
+<testsuite name="edu.bsu.cs222.pos.TestInventory" tests="7" skipped="0" failures="2" errors="0" timestamp="2020-11-14T16:08:10" hostname="DESKTOP-V498F44" time="1.098">
   <properties/>
-  <testcase name="testDeleteInventory" classname="edu.bsu.cs222.pos.TestInventory" time="1.517"/>
-  <testcase name="testAddInventory" classname="edu.bsu.cs222.pos.TestInventory" time="0.044"/>
-  <testcase name="testUniqueBarCodeGenerator" classname="edu.bsu.cs222.pos.TestInventory" time="0.215">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;
-	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
-	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
-	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:35)
-	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:162)
-	at edu.bsu.cs222.pos.TestInventory.testUniqueBarCodeGenerator(TestInventory.java:46)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
-	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
-	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:118)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)
-	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:412)
-	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
-	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
-	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
-	at java.base/java.lang.Thread.run(Thread.java:832)
-</failure>
-  </testcase>
-  <testcase name="testUpdatedItemCost" classname="edu.bsu.cs222.pos.TestInventory" time="0.005"/>
-  <testcase name="testUpdatedItemName" classname="edu.bsu.cs222.pos.TestInventory" time="0.026"/>
-  <testcase name="testItemSearch" classname="edu.bsu.cs222.pos.TestInventory" time="0.012">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;edu.bsu.cs222.pos.Item@366444a8&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;edu.bsu.cs222.pos.Item@366444a8&gt; but was: &lt;null&gt;
+  <testcase name="testDeleteInventory" classname="edu.bsu.cs222.pos.TestInventory" time="0.949"/>
+  <testcase name="testAddInventory" classname="edu.bsu.cs222.pos.TestInventory" time="0.055"/>
+  <testcase name="testUniqueBarCodeGenerator" classname="edu.bsu.cs222.pos.TestInventory" time="0.026"/>
+  <testcase name="testUpdatedItemCost" classname="edu.bsu.cs222.pos.TestInventory" time="0.006"/>
+  <testcase name="testUpdatedItemName" classname="edu.bsu.cs222.pos.TestInventory" time="0.034"/>
+  <testcase name="testItemSearch" classname="edu.bsu.cs222.pos.TestInventory" time="0.019">
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;edu.bsu.cs222.pos.Item@1d16155d&gt; but was: &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;edu.bsu.cs222.pos.Item@1d16155d&gt; but was: &lt;null&gt;
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:195)
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:184)
@@ -118,7 +63,7 @@
 	at java.base/java.lang.Thread.run(Thread.java:832)
 </failure>
   </testcase>
-  <testcase name="testEmptyCompany" classname="edu.bsu.cs222.pos.TestInventory" time="0.005">
+  <testcase name="testEmptyCompany" classname="edu.bsu.cs222.pos.TestInventory" time="0.006">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;true&gt; but was: &lt;false&gt;
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
@@ -175,7 +120,7 @@
 </failure>
   </testcase>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-b8a4-151c-00000e789dc0' defined on 'ITEMS'.
+  <system-err><![CDATA[org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-c783-93a0-00000e7863a8' defined on 'ITEMS'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:93)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Util.java:230)
 	at org.apache.derby.impl.jdbc.TransactionResourceImpl.wrapInSQLException(TransactionResourceImpl.java:431)
@@ -234,7 +179,7 @@
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-Caused by: ERROR 23505: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-b8a4-151c-00000e789dc0' defined on 'ITEMS'.
+Caused by: ERROR 23505: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-c783-93a0-00000e7863a8' defined on 'ITEMS'.
 	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:300)
 	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:295)
 	at org.apache.derby.impl.sql.execute.IndexChanger.insertAndCheckDups(IndexChanger.java:593)
@@ -248,7 +193,7 @@ Caused by: ERROR 23505: The statement was aborted because it would have caused a
 	at org.apache.derby.impl.sql.GenericPreparedStatement.execute(GenericPreparedStatement.java:351)
 	at org.apache.derby.impl.jdbc.EmbedStatement.executeStatement(EmbedStatement.java:1344)
 	... 51 more
-org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-b8a4-151c-00000e789dc0' defined on 'ITEMS'.
+org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-c783-93a0-00000e7863a8' defined on 'ITEMS'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:93)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Util.java:230)
 	at org.apache.derby.impl.jdbc.TransactionResourceImpl.wrapInSQLException(TransactionResourceImpl.java:431)
@@ -307,7 +252,7 @@ org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationExcepti
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-Caused by: ERROR 23505: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-b8a4-151c-00000e789dc0' defined on 'ITEMS'.
+Caused by: ERROR 23505: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-c783-93a0-00000e7863a8' defined on 'ITEMS'.
 	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:300)
 	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:295)
 	at org.apache.derby.impl.sql.execute.IndexChanger.insertAndCheckDups(IndexChanger.java:593)
@@ -321,7 +266,7 @@ Caused by: ERROR 23505: The statement was aborted because it would have caused a
 	at org.apache.derby.impl.sql.GenericPreparedStatement.execute(GenericPreparedStatement.java:351)
 	at org.apache.derby.impl.jdbc.EmbedStatement.executeStatement(EmbedStatement.java:1344)
 	... 51 more
-org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-b8a4-151c-00000e789dc0' defined on 'ITEMS'.
+org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-c783-93a0-00000e7863a8' defined on 'ITEMS'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:93)
 	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Util.java:230)
 	at org.apache.derby.impl.jdbc.TransactionResourceImpl.wrapInSQLException(TransactionResourceImpl.java:431)
@@ -380,7 +325,7 @@ org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationExcepti
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
 	at java.base/java.lang.Thread.run(Thread.java:832)
-Caused by: ERROR 23505: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-b8a4-151c-00000e789dc0' defined on 'ITEMS'.
+Caused by: ERROR 23505: The statement was aborted because it would have caused a duplicate key value in a unique or primary key constraint or unique index identified by 'SQL0000000081-97e00100-0175-c783-93a0-00000e7863a8' defined on 'ITEMS'.
 	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:300)
 	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:295)
 	at org.apache.derby.impl.sql.execute.IndexChanger.insertAndCheckDups(IndexChanger.java:593)

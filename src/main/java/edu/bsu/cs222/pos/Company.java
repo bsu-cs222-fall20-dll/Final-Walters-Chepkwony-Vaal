@@ -93,15 +93,24 @@ public class Company {
     }
 
 
-    public Item getItem(String id) throws SQLException {
-        PreparedStatement statement = db.prepareStatement("SELECT * from Items where ID = ?");
-        statement.setString(1, id);
-        statement.execute();
-        ResultSet resultSet = statement.getResultSet();
+    public Item getItem(String id)  {
+        PreparedStatement statement = null;
         Item result = null;
-        if (resultSet.next()) {
-            result = new Item(resultSet.getString("Name"), resultSet.getBigDecimal("Price"));
+        try {
+
+            statement = db.prepareStatement("SELECT * from Items where ID = ?");
+            statement.setString(1, id);
+            statement.execute();
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                result = new Item(resultSet.getString("Name"), resultSet.getBigDecimal("Price"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+
+
+
         return result;
     }
 
