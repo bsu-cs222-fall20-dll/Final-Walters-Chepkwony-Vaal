@@ -133,4 +133,8 @@ public class Company {
         }
         return null;
     }
+
+    public String getCompanyName() {
+        return companyName;
+    }
 }

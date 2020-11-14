@@ -20,55 +20,47 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AdminPanelUI extends Application{
-    private final Label titleLabel = new Label("Admin Panel");
-    private final Label errorLabel = new Label("");
-    private final Label companyNameLabel = new Label("Company Name:");
-    private final TextField companyNameInput = new TextField();
-    private final ToggleButton editCompanyName = new ToggleButton("Edit");
-    private final HBox companyField = new HBox(
+public class AdminPanelUI{
+    private static final Label titleLabel = new Label("Admin Panel");
+    private static final Label errorLabel = new Label("");
+    private static final Label companyNameLabel = new Label("Company Name:");
+    private static final TextField companyNameInput = new TextField();
+    private static final ToggleButton editCompanyName = new ToggleButton("Edit");
+    private static final HBox companyField = new HBox(
             companyNameLabel,
             companyNameInput,
             editCompanyName);
-    private final Button addItem = new Button("Add new item");
-    private final Label itemsListLabel = new Label("Current Items");
-    private final HBox itemsListHeader = new HBox(
+    private static final Button addItem = new Button("Add new item");
+    private static final Label itemsListLabel = new Label("Current Items");
+    private static final HBox itemsListHeader = new HBox(
             itemsListLabel,
             addItem);
     private static final TableView<Item> itemList = new TableView<>();
-    private final TableColumn<Item, Item> nameColumn = new TableColumn<>("Item Name");
-    private final TableColumn<Item, Item> priceColumn = new TableColumn<>("Price");
-    private final ScrollPane itemListScrollPane = new ScrollPane(itemList);
+    private static final TableColumn<Item, Item> nameColumn = new TableColumn<>("Item Name");
+    private static final TableColumn<Item, Item> priceColumn = new TableColumn<>("Price");
+    private static final ScrollPane itemListScrollPane = new ScrollPane(itemList);
 
-    private final Button ViewTheReceipt = new Button("View the Receipt");
-    private final Label ReceiptLabel = new Label("Receipt");
-    private final HBox ReceiptListHeader = new HBox(
-            ReceiptLabel,
-            itemsListLabel);
-
-    @Override
-    public void start (Stage primaryStage) {
+    public static Stage popUp () throws SQLException {
+        Stage primaryStage = new Stage();
         primaryStage.setTitle("Administrative Access");
         primaryStage.setWidth(1000);
         primaryStage.setHeight(600);
-        formatDisplay();
-        primaryStage.setScene(new Scene(createRoot()));
-        primaryStage.show();
-    }
-
-    @Override
-    public void init() throws Exception {
-        super.init();
         Controller.addItemsToDisplay();
         companyNameInput.setText("Edit Company Name");
         Controller.editCompanyName(companyNameInput, editCompanyName);
         Controller.editRow(itemList, addItem);
         Controller.addItem(addItem, itemList);
+        formatDisplay();
+        primaryStage.setScene(new Scene(createRoot()));
+        primaryStage.show();
+        return primaryStage;
     }
 
-    private Pane createRoot () {
+    private static Pane createRoot() {
             VBox root = new VBox();
             root.getChildren().addAll(
                     titleLabel,
@@ -80,7 +72,7 @@ public class AdminPanelUI extends Application{
         }
 
     @SuppressWarnings("unchecked")
-    private void formatDisplay(){
+    private static void formatDisplay(){
         titleLabel.setMinWidth(1000);
         titleLabel.setMinHeight(20);
         errorLabel.setMinWidth(1000);

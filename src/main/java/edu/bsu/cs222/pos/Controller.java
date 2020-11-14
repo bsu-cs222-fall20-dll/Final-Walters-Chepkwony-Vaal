@@ -1,5 +1,6 @@
 package edu.bsu.cs222.pos;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -10,12 +11,57 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class Controller {
     public static Company company;
 
-    static {
-        company = new Company("");
+    public static void enterCompanyName(TextInputDialog opening, Button admin, Button cashier){
+        admin.setDisable(true);
+        cashier.setDisable(true);
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                Optional<String> result = opening.showAndWait();
+                result.ifPresent(name -> company = new Company(name) );
+                admin.setDisable(false);
+                cashier.setDisable(false);
+            }
+        });
+
+    }
+
+    public static void toAdmin(Button adminButton, Button cashierButton){
+        adminButton.setOnMouseClicked(event -> {
+            adminButton.setDisable(true);
+            cashierButton.setDisable(true);
+            Stage adminPanel = null;
+            try {
+                adminPanel = AdminPanelUI.popUp();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            adminPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
+                adminButton.setDisable(false);
+                cashierButton.setDisable(false);
+            });
+        });
+    }
+
+    public static void toCashier(Button cashierButton, Button adminButton){
+        cashierButton.setOnMouseClicked(event -> {
+            cashierButton.setDisable(true);
+            adminButton.setDisable(true);
+            Stage adminPanel = null;
+            try {
+                adminPanel = AdminPanelUI.popUp();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            adminPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
+                cashierButton.setDisable(false);
+                adminButton.setDisable(false);
+            });
+        });
     }
 
     public static void addItemsToDisplay() throws SQLException {
@@ -26,6 +72,7 @@ public class Controller {
 
     public static void editCompanyName(TextField companyNameInput, ToggleButton editCompanyName){
         companyNameInput.setEditable(false);
+        companyNameInput.setText(company.getCompanyName());
         companyNameInput.setOnMouseClicked(event -> companyNameInput.setEditable(true));
         companyNameInput.setOnAction(event -> {
             companyNameInput.setEditable(false);
@@ -134,6 +181,5 @@ public class Controller {
             }
         });
     }
-
 
 }
