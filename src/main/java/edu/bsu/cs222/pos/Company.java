@@ -40,6 +40,13 @@ public class Company {
         this.bcg = new BarcodeGenerator(this);
 
     }
+    public void close(){
+        try {
+            db.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    };
     public void addItem(String barcodeNumber, Item item)  {
         PreparedStatement statement = null;
         try {
