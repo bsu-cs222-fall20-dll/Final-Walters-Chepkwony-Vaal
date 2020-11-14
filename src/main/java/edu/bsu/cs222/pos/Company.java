@@ -93,6 +93,18 @@ public class Company {
     }
 
 
+    public Item getItem(String id) throws SQLException {
+        PreparedStatement statement = db.prepareStatement("SELECT * from Items where ID = ?");
+        statement.setString(1, id);
+        statement.execute();
+        ResultSet resultSet = statement.getResultSet();
+        Item result = null;
+        if (resultSet.next()) {
+            result = new Item(resultSet.getString("Name"), resultSet.getBigDecimal("Price"));
+        }
+        return result;
+    }
+
     public void removeItem(String id) {
         inventoryList.remove(id);
     }
