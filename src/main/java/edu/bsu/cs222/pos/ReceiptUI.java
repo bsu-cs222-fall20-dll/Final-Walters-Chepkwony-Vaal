@@ -56,6 +56,7 @@ public class ReceiptUI extends Application{
         return root;
     }
 
+    @SuppressWarnings("unchecked")
     private void formatDisplay(){
         titleLabel.setMinWidth(400);
         titleLabel.setMinHeight(50);

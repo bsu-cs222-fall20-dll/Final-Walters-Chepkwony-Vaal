@@ -23,8 +23,13 @@ public class Controller {
             @Override public void run() {
                 Optional<String> result = opening.showAndWait();
                 result.ifPresent(name -> company = new Company(name) );
-                admin.setDisable(false);
-                cashier.setDisable(false);
+                if(company != null) {
+                    admin.setDisable(false);
+                    cashier.setDisable(false);
+                }
+                else{
+                    run();
+                }
             }
         });
 
@@ -51,13 +56,13 @@ public class Controller {
         cashierButton.setOnMouseClicked(event -> {
             cashierButton.setDisable(true);
             adminButton.setDisable(true);
-            Stage adminPanel = null;
+            Stage cashierPanel = null;
             try {
-                adminPanel = AdminPanelUI.popUp();
+                cashierPanel = CashierUI.popUp();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            adminPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
+            cashierPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
                 cashierButton.setDisable(false);
                 adminButton.setDisable(false);
             });
