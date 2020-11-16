@@ -4,16 +4,15 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 public class TestInventory {
     @Test
     public void testEmptyCompany(){
-        String companyName = "SampleCompany";
+        String companyName = "EmptyCompany";
         Company company = new Company(companyName, true);
-        HashMap<String, Item> availableInventoryList = company.getAvailableInventoryList();
-        Assertions.assertTrue(availableInventoryList.isEmpty());
+        Assertions.assertTrue(company.getAvailableInventoryList().isEmpty());
+        company.emptyDatabase();
     }
     @Test
     public void testAddInventory(){
@@ -23,6 +22,7 @@ public class TestInventory {
         HashMap<String, Item> InventoryList = company.getAvailableInventoryList();
         Item dbItem = InventoryList.get("12345678901");
         Assertions.assertEquals(dbItem.getName(),item.getName());
+        company.emptyDatabase();
     }
     @Test
     public void testUpdatedItemName(){
@@ -33,6 +33,7 @@ public class TestInventory {
         company.updateItemName("12322", "soup");
         Item sampleItemFromCompany = company.getAvailableInventoryList().get("12322");
         Assertions.assertEquals("soup",sampleItemFromCompany.getName());
+        company.emptyDatabase();
     }
 
     @Test
@@ -44,6 +45,7 @@ public class TestInventory {
         String uniqueBarcode = barcodeGenerator.makeNewCode();
         company.addItem(uniqueBarcode, testItem );
         Assertions.assertNotNull(company.getItem(uniqueBarcode));
+        company.emptyDatabase();
     }
     @Test
     public void testUpdatedItemCost(){
@@ -52,6 +54,7 @@ public class TestInventory {
         company.addItem("12322",sampleItem);
         sampleItem.setPrice(BigDecimal.valueOf(5.55));
         Assertions.assertEquals(BigDecimal.valueOf(5.55),sampleItem.getPrice());
+        company.emptyDatabase();
     }
 
     @Test
@@ -59,8 +62,9 @@ public class TestInventory {
         Company company = new Company("SampleCompany",true);
         Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
         company.addItem("12345678901",sampleItem);
-        Item searchedItem = company.getItem()
-        Assertions.assertEquals(sampleItem,searchedItem);
+        Item searchedItem = company.getItem("12345678901");
+        Assertions.assertEquals(sampleItem.getName(),searchedItem.getName());
+        company.emptyDatabase();
     }
     @Test
     public void testDeleteInventory(){
@@ -70,5 +74,6 @@ public class TestInventory {
         company.addItem("12345678901",item);
         company.removeItem("12345678901");
         Assertions.assertNull(InventoryList.get("12345678901"));
+        company.emptyDatabase();
     }
 }

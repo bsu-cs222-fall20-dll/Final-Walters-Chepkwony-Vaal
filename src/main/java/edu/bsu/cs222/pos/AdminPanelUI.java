@@ -44,7 +44,7 @@ public class AdminPanelUI{
     private static final TableColumn<Item, Item> priceColumn = new TableColumn<>("Price");
     private static final ScrollPane itemListScrollPane = new ScrollPane(itemList);
 
-    public static Stage popUp () throws SQLException {
+    public static Stage popUp () {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Administrative Access");
         primaryStage.setWidth(1000);

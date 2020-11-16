@@ -37,16 +37,12 @@ public class Controller {
     public static void toAdmin(Button adminButton, Button cashierButton){
         adminButton.setOnMouseClicked(event -> {
             adminButton.setDisable(true);
-            //cashierButton.setDisable(true);
+            cashierButton.setDisable(true);
             Stage adminPanel = null;
-            try {
-                adminPanel = AdminPanelUI.popUp();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            adminPanel = AdminPanelUI.popUp();
             adminPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
                 adminButton.setDisable(false);
-                //cashierButton.setDisable(false);
+                cashierButton.setDisable(false);
             });
         });
     }
@@ -56,11 +52,7 @@ public class Controller {
             //cashierButton.setDisable(true);
             //adminButton.setDisable(true);
             Stage cashierPanel = null;
-            try {
-                cashierPanel = CashierUI.popUp();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            cashierPanel = CashierUI.popUp();
             cashierPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
                 cashierButton.setDisable(false);
                 adminButton.setDisable(false);
@@ -68,7 +60,7 @@ public class Controller {
         });
     }
 
-    public static void addItemsToDisplay() throws SQLException {
+    public static void addItemsToDisplay()  {
         HashMap<String, Item> inventoryList = company.getAvailableInventoryList();
         ArrayList<Item> inventoryArrayList = new ArrayList<>(inventoryList.values());
         AdminPanelUI.displayItems(inventoryArrayList);
@@ -148,18 +140,14 @@ public class Controller {
                             WindowEvent.WINDOW_CLOSE_REQUEST
                     )
             );
-            try {
-                addItemsToDisplay();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            addItemsToDisplay();
 
         });
     }
     public static void doneAddItem(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
         doneButton.setOnMouseClicked(event -> {
-            BarcodeGenerator bcg = null;
-            bcg = new BarcodeGenerator(company);
+
+            BarcodeGenerator bcg = new BarcodeGenerator(company);
             Item item = new Item(nameInput.getText(),BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
             company.addItem(bcg.makeNewCode(), item);
             //            Item item = company.searchByItemName(nameInput.getText());
@@ -178,11 +166,7 @@ public class Controller {
                             WindowEvent.WINDOW_CLOSE_REQUEST
                     )
             );
-            try {
-                addItemsToDisplay();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            addItemsToDisplay();
         });
     }
 

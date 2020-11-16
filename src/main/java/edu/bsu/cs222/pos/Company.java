@@ -137,4 +137,12 @@ public class Company {
     public String getCompanyName() {
         return companyName;
     }
+    public void emptyDatabase(){
+        try {
+            Statement statement = db.createStatement();
+            statement.executeQuery("DROP TABLE ITEMS");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
