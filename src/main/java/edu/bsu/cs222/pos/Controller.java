@@ -25,7 +25,6 @@ public class Controller {
                 result.ifPresent(name -> company = new Company(name) );
                 if(company != null) {
                     admin.setDisable(false);
-                    cashier.setDisable(false);
                 }
                 else{
                     run();
@@ -38,7 +37,7 @@ public class Controller {
     public static void toAdmin(Button adminButton, Button cashierButton){
         adminButton.setOnMouseClicked(event -> {
             adminButton.setDisable(true);
-            cashierButton.setDisable(true);
+            //cashierButton.setDisable(true);
             Stage adminPanel = null;
             try {
                 adminPanel = AdminPanelUI.popUp();
@@ -47,15 +46,15 @@ public class Controller {
             }
             adminPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
                 adminButton.setDisable(false);
-                cashierButton.setDisable(false);
+                //cashierButton.setDisable(false);
             });
         });
     }
 
     public static void toCashier(Button cashierButton, Button adminButton){
         cashierButton.setOnMouseClicked(event -> {
-            cashierButton.setDisable(true);
-            adminButton.setDisable(true);
+            //cashierButton.setDisable(true);
+            //adminButton.setDisable(true);
             Stage cashierPanel = null;
             try {
                 cashierPanel = CashierUI.popUp();
