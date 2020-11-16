@@ -17,21 +17,21 @@ import java.util.ArrayList;
 
 
 public class ReceiptUI extends Application{
-    private final Label titleLabel = new Label("Company Name");
-    private final Label taxLabel = new Label("Tax:");
-    private final TextField taxInput = new TextField();
-    private final ToggleButton editTaxInput = new ToggleButton("Edit");
-    private final HBox taxField = new HBox(
+    private static final Label titleLabel = new Label("Company Name");
+    private static final Label taxLabel = new Label("Tax:");
+    private static final TextField taxInput = new TextField();
+    private static final ToggleButton editTaxInput = new ToggleButton("Edit");
+    private static final HBox taxField = new HBox(
             taxLabel,
             taxInput,
             editTaxInput);
-    private final Label balanceLabel = new Label("Balance:");
-    private final Label dateAndTimeLabel = new Label("Date and Time:");
-    private final Label thankLabel = new Label("Thank you for shopping at");
+    private static final Label balanceLabel = new Label("Balance:");
+    private static final Label dateAndTimeLabel = new Label("Date and Time:");
+    private static final Label thankLabel = new Label("Thank you for shopping at");
     private static final TableView<Item> receiptItemList = new TableView<>();
-    private final TableColumn<Item, Item> receiptNameColumn = new TableColumn<>("Item Name");
-    private final TableColumn<Item, Item> receiptPriceColumn = new TableColumn<>("Price");
-    private final ScrollPane receiptItemListScrollPane = new ScrollPane(receiptItemList);
+    private static final TableColumn<Item, Item> receiptNameColumn = new TableColumn<>("Item Name");
+    private static final TableColumn<Item, Item> receiptPriceColumn = new TableColumn<>("Price");
+    private static final ScrollPane receiptItemListScrollPane = new ScrollPane(receiptItemList);
 
     @Override
     public void start (Stage primaryStage) {

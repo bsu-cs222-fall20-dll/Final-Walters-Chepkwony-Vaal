@@ -46,8 +46,8 @@ public class Controller {
 
     public static void toCashier(Button cashierButton, Button adminButton){
         cashierButton.setOnMouseClicked(event -> {
-            //cashierButton.setDisable(true);
-            //adminButton.setDisable(true);
+            cashierButton.setDisable(true);
+            adminButton.setDisable(true);
             Stage cashierPanel = CashierUI.popUp();
             cashierPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
                 cashierButton.setDisable(false);

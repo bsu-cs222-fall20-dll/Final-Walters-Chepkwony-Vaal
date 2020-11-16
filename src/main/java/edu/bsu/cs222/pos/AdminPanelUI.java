@@ -80,7 +80,7 @@ public class AdminPanelUI{
         priceColumn.setMinWidth(450);
         itemList.setMinWidth(900);
         itemListScrollPane.setMinWidth(900);
-        titleLabel.setFont(Font.font("Arial", 16));
+        titleLabel.setFont(Font.font("Arial", 20));
         companyNameLabel.setFont(Font.font("Arial", 15));
         errorLabel.setTextFill(Color.RED);
         errorLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
