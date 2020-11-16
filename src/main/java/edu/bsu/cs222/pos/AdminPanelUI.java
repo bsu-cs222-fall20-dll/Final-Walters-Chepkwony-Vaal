@@ -102,6 +102,7 @@ public class AdminPanelUI{
         itemList.setPlaceholder(new Label("No items"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        itemList.getColumns().clear();
         itemList.getColumns().addAll(nameColumn, priceColumn);
         itemListScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         itemListScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
