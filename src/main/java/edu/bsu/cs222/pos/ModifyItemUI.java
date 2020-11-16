@@ -49,6 +49,11 @@ public class ModifyItemUI {
     }
 
     public static void formatDisplay(){
+        //IDK if this is the correct function name, but it got rid of the warning.
+        formatTitle(titleLabel, nameField, priceField, nameLabel, nameInput, priceLabel, priceInput, editButton);
+    }
+
+    static void formatTitle(Label titleLabel, HBox nameField, HBox priceField, Label nameLabel, TextField nameInput, Label priceLabel, TextField priceInput, Button editButton) {
         titleLabel.setMinWidth(300);
         titleLabel.setMinHeight(40);
         nameField.setMinWidth(300);

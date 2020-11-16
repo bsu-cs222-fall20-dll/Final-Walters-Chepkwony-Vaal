@@ -1,6 +1,5 @@
 package edu.bsu.cs222.pos;
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -20,8 +19,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AdminPanelUI{

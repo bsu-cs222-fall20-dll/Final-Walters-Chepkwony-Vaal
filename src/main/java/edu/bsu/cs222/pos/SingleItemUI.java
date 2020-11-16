@@ -46,20 +46,7 @@ public class SingleItemUI{
     }
 
     public static void formatDisplay(){
-        titleLabel.setMinWidth(300);
-        titleLabel.setMinHeight(40);
-        nameField.setMinWidth(300);
-        priceField.setMinWidth(300);
-        titleLabel.setFont(Font.font("Arial", 16));
-        HBox.setMargin(nameLabel, new Insets(20, 20, 10, 20));
-        HBox.setMargin(nameInput, new Insets(20, 20, 10, 20));
-        HBox.setMargin(priceLabel, new Insets(20, 20, 40, 20));
-        HBox.setMargin(priceInput, new Insets(20, 20, 40, 20));
-        titleLabel.setTranslateY(10);
-        titleLabel.setAlignment(Pos.CENTER);
-        nameField.setAlignment(Pos.CENTER);
-        priceField.setAlignment(Pos.CENTER);
-        doneButton.setTranslateX(125);
+        ModifyItemUI.formatTitle(titleLabel, nameField, priceField, nameLabel, nameInput, priceLabel, priceInput, doneButton);
     }
 
     public static void changeTitleLabel(String title){

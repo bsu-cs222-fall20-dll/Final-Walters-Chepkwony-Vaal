@@ -6,9 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -38,8 +36,7 @@ public class Controller {
         adminButton.setOnMouseClicked(event -> {
             adminButton.setDisable(true);
             cashierButton.setDisable(true);
-            Stage adminPanel = null;
-            adminPanel = AdminPanelUI.popUp();
+            Stage  adminPanel = AdminPanelUI.popUp();
             adminPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
                 adminButton.setDisable(false);
                 cashierButton.setDisable(false);
@@ -51,8 +48,7 @@ public class Controller {
         cashierButton.setOnMouseClicked(event -> {
             //cashierButton.setDisable(true);
             //adminButton.setDisable(true);
-            Stage cashierPanel = null;
-            cashierPanel = CashierUI.popUp();
+            Stage cashierPanel = CashierUI.popUp();
             cashierPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
                 cashierButton.setDisable(false);
                 adminButton.setDisable(false);
@@ -70,9 +66,8 @@ public class Controller {
         companyNameInput.setEditable(false);
         companyNameInput.setText(company.getCompanyName());
         companyNameInput.setOnMouseClicked(event -> companyNameInput.setEditable(true));
-        companyNameInput.setOnAction(event -> {
-            companyNameInput.setEditable(false);
-        });
+        companyNameInput.setOnAction(event ->
+            companyNameInput.setEditable(false));
         companyNameInput.editableProperty().bindBidirectional(editCompanyName.selectedProperty());
         editCompanyName.setOnAction(event -> {
             if (editCompanyName.isSelected()) {
