@@ -46,7 +46,15 @@ public class Company {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    };
+    }
+    public void emptyDatabase(){
+        try {
+            Statement statement = db.createStatement();
+            statement.executeQuery("DROP TABLE ITEMS");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
     public void addItem(String barcodeNumber, Item item)  {
         PreparedStatement statement = null;
         try {
@@ -121,8 +129,10 @@ public class Company {
         return result;
     }
 
-    public void removeItem(String id) {
-        inventoryList.remove(id);
+    public void removeItem(String id) throws SQLException {
+        PreparedStatement statement = db.prepareStatement("DELETE from ITEMS WHERE ID = ?");
+        statement.setString(1, id);
+        statement.execute();
     }
 
     public Item searchByItemName(String searchItemName) {
@@ -136,13 +146,5 @@ public class Company {
 
     public String getCompanyName() {
         return companyName;
-    }
-    public void emptyDatabase(){
-        try {
-            Statement statement = db.createStatement();
-            statement.executeQuery("DROP TABLE ITEMS");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 }

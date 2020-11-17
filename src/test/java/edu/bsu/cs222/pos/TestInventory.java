@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class TestInventory {
@@ -72,7 +73,11 @@ public class TestInventory {
         Item item = new Item("soup", BigDecimal.valueOf(3.85));
         HashMap<String, Item> InventoryList = company.getAvailableInventoryList();
         company.addItem("12345678901",item);
-        company.removeItem("12345678901");
+        try {
+            company.removeItem("12345678901");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         Assertions.assertNull(InventoryList.get("12345678901"));
         company.emptyDatabase();
     }
