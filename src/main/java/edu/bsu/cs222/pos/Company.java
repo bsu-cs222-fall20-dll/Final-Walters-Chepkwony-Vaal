@@ -135,15 +135,6 @@ public class Company {
         statement.execute();
     }
 
-    public Item searchByItemName(String searchItemName) {
-        for(Item item : inventoryList.values()){
-            if(item.getName().equals(searchItemName)){
-                return item;
-            }
-        }
-        return null;
-    }
-
     public String getCompanyName() {
         return companyName;
     }
