@@ -32,9 +32,11 @@ public class AdminPanelUI{
             companyNameInput,
             editCompanyName);
     private static final Button addItem = new Button("Add new item");
+    private static final Button deleteItem = new Button("Delete Item");
     private static final Label itemsListLabel = new Label("Current Items");
     private static final HBox itemsListHeader = new HBox(
             itemsListLabel,
+            deleteItem,
             addItem);
     private static final TableView<Item> itemList = new TableView<>();
     private static final TableColumn<Item, Item> nameColumn = new TableColumn<>("Item Name");

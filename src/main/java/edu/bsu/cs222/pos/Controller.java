@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -48,7 +49,12 @@ public class Controller {
         cashierButton.setOnMouseClicked(event -> {
             cashierButton.setDisable(true);
             adminButton.setDisable(true);
-            Stage cashierPanel = CashierUI.popUp();
+            Stage cashierPanel = null;
+            try {
+                cashierPanel = CashierUI.popUp();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
             cashierPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
                 cashierButton.setDisable(false);
                 adminButton.setDisable(false);
@@ -110,6 +116,31 @@ public class Controller {
             return row ;
         });
     }
+
+    public static void SelectRow(TableView<Item> itemList, Button deleteButton){
+        itemList.setRowFactory( tv -> {
+            TableRow<Item> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
+                    Item selectedItem = row.getItem();
+                    deleteButton.setOnMouseClicked(event1 ->{
+                        try {
+                            company.removeItem(selectedItem.getName());
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+
+
+                    });
+
+
+                }
+            });
+            return row ;
+        });
+    }
+
+
 
     public static void addItem(Button addItem, TableView<Item> itemList){
         addItem.setOnMouseClicked(event -> {

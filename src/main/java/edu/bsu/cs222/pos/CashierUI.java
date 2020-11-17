@@ -11,6 +11,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 public class CashierUI{
     private static final Label titleLabel = new Label("Cashier Panel");
     private  static final Label errorLabel = new Label("");
@@ -19,7 +21,7 @@ public class CashierUI{
     private static final TableColumn <String,String> itemColumn = new TableColumn<>("Items");
     private static final ScrollPane barcodeAndItemsPane = new ScrollPane(barcodeAndItems);
 
-    public static Stage popUp() {
+    public static Stage popUp () throws SQLException {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Cashier Access");
         primaryStage.setWidth(1000);

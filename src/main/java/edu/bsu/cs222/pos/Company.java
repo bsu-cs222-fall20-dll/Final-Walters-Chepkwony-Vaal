@@ -66,6 +66,7 @@ public class Company {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        item.setBarcode(barcodeNumber);
 
     }
     public void updateItemName(String barcodeNumber, String newName) {
