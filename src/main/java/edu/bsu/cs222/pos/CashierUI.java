@@ -4,7 +4,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -15,13 +14,10 @@ import javafx.stage.Stage;
 public class CashierUI{
     private static final Label titleLabel = new Label("Cashier Panel");
     private  static final Label errorLabel = new Label("");
-    private static final Label foodTypeLabel = new Label("Food Types");
-    private static final HBox foodTypeHeader = new HBox(
-            foodTypeLabel
-            );
-    private static final TableView <String> foodTypes = new TableView<>();
-    private static final TableColumn <String,String> foodTypeColumn = new TableColumn<>("Food Types");
-    private static final ScrollPane foodTypeScrollPane = new ScrollPane(foodTypes);
+    private static final TableView <String> barcodeAndItems = new TableView<>();
+    private static final TableColumn <String,String> barcodeColumn = new TableColumn<>("Barcode");
+    private static final TableColumn <String,String> itemColumn = new TableColumn<>("Items");
+    private static final ScrollPane barcodeAndItemsPane = new ScrollPane(barcodeAndItems);
 
     public static Stage popUp() {
         Stage primaryStage = new Stage();
@@ -39,8 +35,7 @@ public class CashierUI{
         root.getChildren().addAll(
                 titleLabel,
                 errorLabel,
-                foodTypeHeader,
-                foodTypeScrollPane
+                barcodeAndItemsPane
                 );
         return root;
     }
@@ -51,21 +46,27 @@ public class CashierUI{
         errorLabel.setMinWidth(1000);
         errorLabel.setMinHeight(10);
         errorLabel.setTextFill(Color.RED);
-        foodTypeColumn.setMinWidth(200);
-        foodTypeScrollPane.setMinWidth(200);
-        foodTypeHeader.setMinWidth(200);
+        barcodeColumn.setMinWidth(150);
+        itemColumn.setMinWidth(150);
+        barcodeAndItemsPane.setMinWidth(300);
+        barcodeAndItems.setMaxWidth(300);
         errorLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
         titleLabel.setFont(Font.font("Arial", 20));
         titleLabel.setTranslateY(5);
         errorLabel.setTranslateY(5);
+        barcodeAndItems.setTranslateX(5);
         titleLabel.setAlignment(Pos.CENTER);
         errorLabel.setAlignment(Pos.CENTER);
-        foodTypeColumn.setCellValueFactory(new PropertyValueFactory<>("Food Types"));
-        foodTypeScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        foodTypeScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        foodTypeScrollPane.setVvalue(.5);
-        foodTypeScrollPane.setHvalue(.5);
-        foodTypeScrollPane.setDisable(false);
+        barcodeAndItems.setPlaceholder(new Label("No items"));
+        barcodeColumn.setCellValueFactory(new PropertyValueFactory<>("Barcode"));
+        itemColumn.setCellValueFactory(new PropertyValueFactory<>("Items"));
+        barcodeAndItems.getColumns().clear();
+        barcodeAndItems.getColumns().addAll(barcodeColumn, itemColumn);
+        barcodeAndItemsPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        barcodeAndItemsPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        barcodeAndItemsPane.setVvalue(.5);
+        barcodeAndItemsPane.setHvalue(.5);
+        barcodeAndItemsPane.setDisable(false);
 
 
     }
