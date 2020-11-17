@@ -49,16 +49,15 @@ public class Controller {
         cashierButton.setOnMouseClicked(event -> {
             cashierButton.setDisable(true);
             adminButton.setDisable(true);
-            Stage cashierPanel = null;
             try {
-                cashierPanel = CashierUI.popUp();
+                Stage cashierPanel = CashierUI.popUp();
+                cashierPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
+                    cashierButton.setDisable(false);
+                    adminButton.setDisable(false);
+                });
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            cashierPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
-                cashierButton.setDisable(false);
-                adminButton.setDisable(false);
-            });
         });
     }
 
@@ -125,7 +124,8 @@ public class Controller {
                     Item selectedItem = row.getItem();
                     deleteButton.setOnMouseClicked(event1 ->{
                         try {
-                            company.removeItem(selectedItem.getName());
+                            company.removeItem(selectedItem.getBarcode());
+                            addItemsToDisplay();
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }

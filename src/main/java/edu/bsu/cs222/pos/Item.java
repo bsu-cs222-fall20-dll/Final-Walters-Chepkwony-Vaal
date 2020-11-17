@@ -30,6 +30,10 @@ public class Item {
         this.barcode = barcode;
     }
 
+    public String getBarcode() {
+        return barcode;
+    }
+
     public static String createTable = "CREATE TABLE ITEMS (ID varchar(40) NOT NULL,Price decimal(18,2) NOT NULL,Name varchar(32672) NOT NULL,Image varchar(32672),PRIMARY KEY (ID))";
 
 }
