@@ -25,6 +25,7 @@ public class ModifyItemUI {
             priceLabel,
             priceInput);
     private static final Button editButton = new Button("Edit");
+    private static final Button deleteButton = new Button("Delete");
 
     public static Stage popUp (Item item){
         Stage secondaryStage = new Stage();
@@ -32,7 +33,7 @@ public class ModifyItemUI {
         secondaryStage.setHeight(250);
         secondaryStage.setTitle("Edit Item");
         formatDisplay();
-        Controller.doneEdit(editButton, secondaryStage, nameInput, priceInput,item);
+        Controller.doneEdit(editButton, deleteButton, secondaryStage, nameInput, priceInput,item);
         secondaryStage.setScene(new Scene(createRoot()));
         secondaryStage.show();
         return secondaryStage;
@@ -44,13 +45,14 @@ public class ModifyItemUI {
                 titleLabel,
                 nameField,
                 priceField,
-                editButton);
+                editButton,
+                deleteButton);
         return root;
     }
 
     public static void formatDisplay(){
-        //IDK if this is the correct function name, but it got rid of the warning.
         formatTitle(titleLabel, nameField, priceField, nameLabel, nameInput, priceLabel, priceInput, editButton);
+        deleteButton.setTranslateX(125);
     }
 
     static void formatTitle(Label titleLabel, HBox nameField, HBox priceField, Label nameLabel, TextField nameInput, Label priceLabel, TextField priceInput, Button editButton) {
@@ -61,8 +63,9 @@ public class ModifyItemUI {
         titleLabel.setFont(Font.font("Arial", 16));
         HBox.setMargin(nameLabel, new Insets(20, 20, 10, 20));
         HBox.setMargin(nameInput, new Insets(20, 20, 10, 20));
-        HBox.setMargin(priceLabel, new Insets(20, 20, 40, 20));
-        HBox.setMargin(priceInput, new Insets(20, 20, 40, 20));
+        HBox.setMargin(priceLabel, new Insets(20, 20, 20, 20));
+        HBox.setMargin(priceInput, new Insets(20, 20, 20, 20));
+        HBox.setMargin(editButton, new Insets(10, 0, 10, 0));
         titleLabel.setTranslateY(10);
         titleLabel.setAlignment(Pos.CENTER);
         nameField.setAlignment(Pos.CENTER);

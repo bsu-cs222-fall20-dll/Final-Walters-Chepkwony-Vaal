@@ -24,6 +24,7 @@ public class Controller {
                 result.ifPresent(name -> company = new Company(name) );
                 if(company != null) {
                     admin.setDisable(false);
+                    cashier.setDisable(false);
                 }
                 else{
                     run();
@@ -156,10 +157,12 @@ public class Controller {
         });
     }
 
-    public static void doneEdit(Button doneButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
+    public static void doneEdit(Button doneButton, Button deleteButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
         doneButton.setOnMouseClicked(event -> {
             item.setName(nameInput.getText());
+            company.updateItemName(item.getBarcode(), nameInput.getText());
             item.setPrice(BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
+            company.updateItemName(item.getBarcode(), priceInput.getText());
             stage.fireEvent(
                     new WindowEvent(
                             stage,
@@ -167,7 +170,20 @@ public class Controller {
                     )
             );
             addItemsToDisplay();
-
+        });
+        deleteButton.setOnMouseClicked(event -> {
+            try {
+                company.removeItem(item.getBarcode());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            stage.fireEvent(
+                    new WindowEvent(
+                            stage,
+                            WindowEvent.WINDOW_CLOSE_REQUEST
+                    )
+            );
+            addItemsToDisplay();
         });
     }
     public static void doneAddItem(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){

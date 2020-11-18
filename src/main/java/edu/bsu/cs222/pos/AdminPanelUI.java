@@ -32,11 +32,9 @@ public class AdminPanelUI{
             companyNameInput,
             editCompanyName);
     private static final Button addItem = new Button("Add new item");
-    private static final Button deleteItem = new Button("Delete Item");
     private static final Label itemsListLabel = new Label("Current Items");
     private static final HBox itemsListHeader = new HBox(
             itemsListLabel,
-            deleteItem,
             addItem);
     private static final TableView<Item> itemList = new TableView<>();
     private static final TableColumn<Item, Item> nameColumn = new TableColumn<>("Item Name");
@@ -51,7 +49,7 @@ public class AdminPanelUI{
         Controller.addItemsToDisplay();
         companyNameInput.setText("Edit Company Name");
         Controller.editCompanyName(companyNameInput, editCompanyName);
-        Controller.editRow(itemList, addItem, deleteItem);
+        Controller.editRow(itemList, addItem);
         Controller.addItem(addItem, itemList);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
@@ -90,13 +88,10 @@ public class AdminPanelUI{
         itemsListLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 15));
         itemsListLabel.setMinWidth(100);
         addItem.setMinWidth(100);
-        deleteItem.setMinWidth(100);
-        deleteItem.setAlignment(Pos.CENTER_RIGHT);
         HBox.setMargin(companyNameLabel, new Insets(10, 5, 10, 175));
         HBox.setMargin(companyNameInput, new Insets(10, 20, 10, 0));
         HBox.setMargin(itemsListLabel, new Insets(15, 20, 10, 50));
-        HBox.setMargin(deleteItem, new Insets(10,20,10,100));
-        HBox.setMargin(addItem, new Insets(10, 20, 10, 200));
+        HBox.setMargin(addItem, new Insets(10, 20, 10, 650));
         titleLabel.setTranslateY(5);
         errorLabel.setTranslateY(5);
         itemList.setTranslateX(50);
