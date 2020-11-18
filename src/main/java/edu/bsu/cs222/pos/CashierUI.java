@@ -112,6 +112,7 @@ public class CashierUI{
         barcodeAndItems.setMinWidth(300);
         receiptItemList.setMinWidth(300);
         receiptItemListScrollPane.setMinWidth(300);
+        selectedItemLabel.setMinWidth(160);
         barcodeAndItemsLabel.setFont(Font.font("Arial", 15));
         selectedItemLabel.setFont(Font.font("Arial", 15));
         ReceiptLabel.setFont(Font.font("Arial", 15));
@@ -128,23 +129,20 @@ public class CashierUI{
         errorLabel.setAlignment(Pos.CENTER);
         HBox.setMargin(barcodeAndItemsLabel, new Insets(1, 150, 1, 10));
         HBox.setMargin(ReceiptLabel, new Insets(1, 10, 1, 380));
-        HBox.setMargin(barcodeAndItems, new Insets(1, 150, 1, 10));
-        HBox.setMargin(receiptItemList, new Insets(1, 10, 1, 150));
+        HBox.setMargin(barcodeAndItems, new Insets(1, 110, 1, 10));
+        HBox.setMargin(receiptItemList, new Insets(1, 5, 1, 85));
         VBox.setMargin(selectedItemLabel, new Insets(3, 5, 3, 1));
         VBox.setMargin(selectedItemInput, new Insets(3, 5, 3, 1));
         VBox.setMargin(priceLabel, new Insets(3, 5, 3, 1));
         VBox.setMargin(priceInput, new Insets(3, 5, 3, 1));
         VBox.setMargin(qualityLabel, new Insets(3, 5, 3, 1));
         VBox.setMargin(qualityInput, new Insets(3, 5, 3, 1));
-
         HBox.setMargin(subtotalLabel, new Insets(1, 5, 1, 750));
         HBox.setMargin(subtotalInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(taxLabel, new Insets(1, 5, 1, 780));
         HBox.setMargin(taxInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(totalLabel, new Insets(1, 5, 1, 770));
         HBox.setMargin(totalInput, new Insets(1, 5, 1, 2));
-
-
         barcodeAndItems.setPlaceholder(new Label("No items and barcode"));
         receiptItemList.setPlaceholder(new Label("No items"));
         barcodeColumn.setCellValueFactory(new PropertyValueFactory<>("Barcode"));
