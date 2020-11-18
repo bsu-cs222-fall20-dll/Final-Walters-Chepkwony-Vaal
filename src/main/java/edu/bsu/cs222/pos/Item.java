@@ -9,6 +9,11 @@ public class Item {
     public String name;
     private String barcode;
 
+    public Item(String itemName, BigDecimal itemPrice, String barcode){
+        this.name = itemName;
+        this.price = itemPrice;
+        this.barcode = barcode;
+    }
     public Item(String itemName, BigDecimal itemPrice) {
         this.name = itemName;
         this.price = itemPrice;

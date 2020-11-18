@@ -105,7 +105,8 @@ public class Company {
                 result.put(resultSet.getString("ID"),
                         new Item(
                                 resultSet.getString("Name"),
-                                resultSet.getBigDecimal("Price")
+                                resultSet.getBigDecimal("Price"),
+                                resultSet.getString("ID")
                         ));
         }
         } catch (SQLException throwables) {
