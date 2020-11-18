@@ -27,6 +27,12 @@ public class CashierUI{
     private static final Label qualityLabel = new Label("Quality:");
     private static final TextField qualityInput = new TextField();
     private static final Label ReceiptLabel = new Label("Receipt:");
+    private static final Label subtotalLabel = new Label("Subtotal:");
+    private static final TextField subtotalInput = new TextField();
+    private static final Label taxLabel = new Label("Tax:");
+    private static final TextField taxInput = new TextField();
+    private static final Label totalLabel = new Label("Total:");
+    private static final TextField totalInput = new TextField();
     private static final TableView <String> barcodeAndItems = new TableView<>();
     private static final TableView<Item> receiptItemList = new TableView<>();
     private static final VBox codeForTheMiddleLabel = new VBox(
@@ -40,6 +46,22 @@ public class CashierUI{
     private static final HBox LittleTitleField = new HBox(
             barcodeAndItemsLabel,
             ReceiptLabel);
+
+    private static final HBox subtotalField = new HBox(
+            subtotalLabel,
+            subtotalInput
+    );
+    private static final HBox taxField = new HBox(
+            taxLabel,
+            taxInput);
+    private static final HBox totalField = new HBox(
+            totalLabel,
+            totalInput);
+    private static final VBox receiptBottomField = new VBox(
+            subtotalField,
+            taxField,
+            totalField
+    );
     private static final HBox codeField = new HBox(
             barcodeAndItems,
             codeForTheMiddleLabel,
@@ -69,7 +91,8 @@ public class CashierUI{
                 titleLabel,
                 errorLabel,
                 LittleTitleField,
-                codeField
+                codeField,
+                receiptBottomField
         );
         return root;
     }
@@ -93,6 +116,9 @@ public class CashierUI{
         ReceiptLabel.setFont(Font.font("Arial", 15));
         priceLabel.setFont(Font.font("Arial", 15));
         qualityLabel.setFont(Font.font("Arial", 15));
+        subtotalLabel.setFont(Font.font("Arial", 15));
+        taxLabel.setFont(Font.font("Arial", 15));
+        totalLabel.setFont(Font.font("Arial", 15));
         errorLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
         titleLabel.setFont(Font.font("Arial", 25));
         titleLabel.setTranslateY(5);
@@ -109,6 +135,15 @@ public class CashierUI{
         VBox.setMargin(priceInput, new Insets(3, 5, 3, 1));
         VBox.setMargin(qualityLabel, new Insets(3, 5, 3, 1));
         VBox.setMargin(qualityInput, new Insets(3, 5, 3, 1));
+
+        HBox.setMargin(subtotalLabel, new Insets(1, 5, 1, 750));
+        HBox.setMargin(subtotalInput, new Insets(1, 5, 1, 2));
+        HBox.setMargin(taxLabel, new Insets(1, 5, 1, 780));
+        HBox.setMargin(taxInput, new Insets(1, 5, 1, 2));
+        HBox.setMargin(totalLabel, new Insets(1, 5, 1, 770));
+        HBox.setMargin(totalInput, new Insets(1, 5, 1, 2));
+
+
         barcodeAndItems.setPlaceholder(new Label("No items and barcode"));
         receiptItemList.setPlaceholder(new Label("No items"));
         barcodeColumn.setCellValueFactory(new PropertyValueFactory<>("Barcode"));
