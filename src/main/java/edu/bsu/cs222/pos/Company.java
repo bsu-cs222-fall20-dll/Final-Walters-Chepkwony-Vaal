@@ -56,7 +56,6 @@ public class Company {
         }
     }
     public void addItem(String barcodeNumber, Item item)  {
-        item.setBarcode(barcodeNumber);
         try {
             PreparedStatement statement = db.prepareStatement("INSERT INTO Items (ID, Price, Name) values (?, ?, ?)");
             statement.setString(1, barcodeNumber);
@@ -71,7 +70,6 @@ public class Company {
 
     }
     public void updateItemName(String barcodeNumber, String newName) {
-
         try {
            PreparedStatement statement = db.prepareStatement("UPDATE ITEMS SET Name = ? WHERE ID = ?");
             statement.setString(1, newName);
@@ -84,7 +82,6 @@ public class Company {
     }
 
     public void updateItemCost(String barcodeNumber, BigDecimal newPrice)  {
-
         try {
             PreparedStatement statement = db.prepareStatement("UPDATE ITEMS SET Price = ? WHERE ID = ?");
             statement.setBigDecimal(1, newPrice);
@@ -125,7 +122,7 @@ public class Company {
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                result = new Item(resultSet.getString("Name"), resultSet.getBigDecimal("Price"));
+                result = new Item(resultSet.getString("Name"), resultSet.getBigDecimal("Price"), id);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
