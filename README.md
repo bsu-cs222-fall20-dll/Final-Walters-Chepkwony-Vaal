@@ -19,7 +19,7 @@ In AdminPanelUI.java on line 71, itemList.getColumns().addAll(nameColumn, priceC
 is suppressed because of an "unchecked generics array creation for varargs parameter."
 Checking for the argument types is unnecessary when we are sure of the types that will be passed in.
 
-In CashierUI on line 43, there is a suppression for the same reason.
+In CashierUI on line 160, there is a suppression for the same reason.
 
 ## Authors
 
