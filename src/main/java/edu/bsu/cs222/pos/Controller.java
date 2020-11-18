@@ -117,23 +117,6 @@ public class Controller {
         });
     }
 
-    public static void SelectRow(TableView<Item> itemList, Button deleteButton){
-        itemList.setRowFactory( tv -> {
-            TableRow<Item> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
-                    Item selectedItem = row.getItem();
-                    deleteButton.setOnMouseClicked(event1 ->{
-                        company.removeItem(selectedItem.getBarcode());
-                        addItemsToDisplay();
-                    });
-
-
-                }
-            });
-            return row ;
-        });
-    }
 
 
 
@@ -153,9 +136,8 @@ public class Controller {
 
     public static void doneEdit(Button doneButton, Button deleteButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
         doneButton.setOnMouseClicked(event -> {
-            item.setName(nameInput.getText());
             company.updateItemName(item.getBarcode(), nameInput.getText());
-            item.setPrice(BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
+//            item.setPrice(BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
             company.updateItemName(item.getBarcode(), priceInput.getText());
             stage.fireEvent(
                     new WindowEvent(

@@ -129,8 +129,8 @@ public class CashierUI{
         errorLabel.setAlignment(Pos.CENTER);
         HBox.setMargin(barcodeAndItemsLabel, new Insets(1, 150, 1, 10));
         HBox.setMargin(ReceiptLabel, new Insets(1, 10, 1, 380));
-        HBox.setMargin(barcodeAndItems, new Insets(1, 150, 1, 10));
-        HBox.setMargin(receiptItemList, new Insets(1, 5, 1, 45));
+        HBox.setMargin(barcodeAndItems, new Insets(1, 110, 1, 10));
+        HBox.setMargin(receiptItemList, new Insets(1, 5, 1, 85));
         VBox.setMargin(selectedItemLabel, new Insets(3, 5, 3, 1));
         VBox.setMargin(selectedItemInput, new Insets(3, 5, 3, 1));
         VBox.setMargin(priceLabel, new Insets(3, 5, 3, 1));
