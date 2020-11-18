@@ -50,7 +50,7 @@ public class Company {
     public void emptyDatabase(){
         try {
             Statement statement = db.createStatement();
-            statement.executeQuery("DROP TABLE ITEMS");
+            statement.executeUpdate("DROP TABLE ITEMS");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

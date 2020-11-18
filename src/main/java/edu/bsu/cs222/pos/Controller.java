@@ -124,14 +124,8 @@ public class Controller {
                 if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     Item selectedItem = row.getItem();
                     deleteButton.setOnMouseClicked(event1 ->{
-                        try {
-                            company.removeItem(selectedItem.getBarcode());
-                            addItemsToDisplay();
-                        } catch (SQLException throwables) {
-                            throwables.printStackTrace();
-                        }
-
-
+                        company.removeItem(selectedItem.getBarcode());
+                        addItemsToDisplay();
                     });
 
 
@@ -172,11 +166,7 @@ public class Controller {
             addItemsToDisplay();
         });
         deleteButton.setOnMouseClicked(event -> {
-            try {
-                company.removeItem(item.getBarcode());
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            company.removeItem(item.getBarcode());
             stage.fireEvent(
                     new WindowEvent(
                             stage,
