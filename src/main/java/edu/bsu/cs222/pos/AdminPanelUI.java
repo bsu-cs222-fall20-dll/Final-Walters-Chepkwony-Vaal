@@ -51,7 +51,7 @@ public class AdminPanelUI{
         Controller.addItemsToDisplay();
         companyNameInput.setText("Edit Company Name");
         Controller.editCompanyName(companyNameInput, editCompanyName);
-        Controller.editRow(itemList, addItem);
+        Controller.editRow(itemList, addItem, deleteItem);
         Controller.addItem(addItem, itemList);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
@@ -88,10 +88,15 @@ public class AdminPanelUI{
         errorLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
         companyNameInput.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 20));
         itemsListLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 15));
+        itemsListLabel.setMinWidth(100);
+        addItem.setMinWidth(100);
+        deleteItem.setMinWidth(100);
+        deleteItem.setAlignment(Pos.CENTER_RIGHT);
         HBox.setMargin(companyNameLabel, new Insets(10, 5, 10, 175));
         HBox.setMargin(companyNameInput, new Insets(10, 20, 10, 0));
         HBox.setMargin(itemsListLabel, new Insets(15, 20, 10, 50));
-        HBox.setMargin(addItem, new Insets(10, 20, 10, 680));
+        HBox.setMargin(deleteItem, new Insets(10,20,10,100));
+        HBox.setMargin(addItem, new Insets(10, 20, 10, 200));
         titleLabel.setTranslateY(5);
         errorLabel.setTranslateY(5);
         itemList.setTranslateX(50);
