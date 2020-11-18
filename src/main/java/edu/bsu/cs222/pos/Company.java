@@ -5,10 +5,10 @@ import java.sql.*;
 import java.util.HashMap;
 
 public class Company {
-    private String companyName;
-    private HashMap<String,Item> inventoryList = new HashMap<>();
+    private final String companyName;
+
     private Connection db;
-    private BarcodeGenerator bcg;
+
 
     public Company(String companyName)  {
         this(companyName, false);
@@ -37,16 +37,16 @@ public class Company {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        this.bcg = new BarcodeGenerator(this);
 
     }
-    public void close(){
-        try {
-            db.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
+//    mostly needed for tests, but the tests all work without this method
+//    public void close(){
+//        try {
+//            db.close();
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
     public void emptyDatabase(){
         try {
             Statement statement = db.createStatement();
@@ -56,23 +56,24 @@ public class Company {
         }
     }
     public void addItem(String barcodeNumber, Item item)  {
-        PreparedStatement statement = null;
+        item.setBarcode(barcodeNumber);
         try {
-            statement = db.prepareStatement("INSERT INTO Items (ID, Price, Name) values (?, ?, ?)");
+            PreparedStatement statement = db.prepareStatement("INSERT INTO Items (ID, Price, Name) values (?, ?, ?)");
             statement.setString(1, barcodeNumber);
             statement.setBigDecimal(2, item.price);
             statement.setString(3, item.name);
             statement.execute();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        item.setBarcode(barcodeNumber);
+
 
     }
     public void updateItemName(String barcodeNumber, String newName) {
-        PreparedStatement statement = null;
+
         try {
-            statement = db.prepareStatement("UPDATE ITEMS SET Name = ? WHERE ID = ?");
+           PreparedStatement statement = db.prepareStatement("UPDATE ITEMS SET Name = ? WHERE ID = ?");
             statement.setString(1, newName);
             statement.setString(2, barcodeNumber);
             statement.execute();
@@ -82,18 +83,23 @@ public class Company {
 
     }
 
-    public void updateItemCost(String barcodeNumber, BigDecimal newPrice) throws SQLException {
-        PreparedStatement statement = db.prepareStatement("UPDATE ITEMS SET Price = ? WHERE ID = ?");
-        statement.setBigDecimal(1, newPrice);
-        statement.setString(2, barcodeNumber);
-        statement.execute();
+    public void updateItemCost(String barcodeNumber, BigDecimal newPrice)  {
+
+        try {
+            PreparedStatement statement = db.prepareStatement("UPDATE ITEMS SET Price = ? WHERE ID = ?");
+            statement.setBigDecimal(1, newPrice);
+            statement.setString(2, barcodeNumber);
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
     public HashMap<String, Item> getAvailableInventoryList() {
-        HashMap<String, Item> result= new HashMap<String, Item>();
-        Statement statement = null;
+        HashMap<String, Item> result= new HashMap<>();
         try {
-            statement = db.createStatement();
+            Statement statement = db.createStatement();
             ResultSet resultSet = statement.executeQuery("select * from Items");
             while(resultSet.next()){
                 result.put(resultSet.getString("ID"),
@@ -110,11 +116,10 @@ public class Company {
 
 
     public Item getItem(String id)  {
-        PreparedStatement statement = null;
         Item result = null;
         try {
 
-            statement = db.prepareStatement("SELECT * from Items where ID = ?");
+           PreparedStatement statement = db.prepareStatement("SELECT * from Items where ID = ?");
             statement.setString(1, id);
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
@@ -130,10 +135,17 @@ public class Company {
         return result;
     }
 
-    public void removeItem(String id) throws SQLException {
-        PreparedStatement statement = db.prepareStatement("DELETE from ITEMS WHERE ID = ?");
-        statement.setString(1, id);
-        statement.execute();
+    public void removeItem(String id)  {
+
+        try {
+            PreparedStatement statement = db.prepareStatement("DELETE from ITEMS WHERE ID = ?");
+            statement.setString(1, id);
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            System.out.println("remove failed");
+        }
+
     }
 
     public String getCompanyName() {

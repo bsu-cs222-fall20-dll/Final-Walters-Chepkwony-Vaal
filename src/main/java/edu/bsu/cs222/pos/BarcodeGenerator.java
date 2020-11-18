@@ -1,16 +1,10 @@
 package edu.bsu.cs222.pos;
 
-import java.sql.SQLException;
-import java.util.*;
 
 public class  BarcodeGenerator {
-    private Set<String> usedCodes;
-    private String newCodeInProgress = "";
-    private String newBarcode;
-    private Company company;
+    private final Company company;
 
     public BarcodeGenerator(Company company) {
-        this.usedCodes = Set.copyOf(company.getAvailableInventoryList().keySet());
         this.company = company;
 
     }
@@ -18,7 +12,7 @@ public class  BarcodeGenerator {
 
 
     public String makeNewCode() {
-
+    String newCodeInProgress = "";
         do {
             for (int i = 0; i < 12; i++) {
                 int digit = (int) ((Math.random() * (10)) + 0);
@@ -34,7 +28,4 @@ public class  BarcodeGenerator {
     }
 
 
-    public Set<String> getUsedCodes() {
-        return usedCodes;
-    }
 }

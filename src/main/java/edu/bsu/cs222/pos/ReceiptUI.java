@@ -1,8 +1,7 @@
 package edu.bsu.cs222.pos;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,7 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 
 
 public class ReceiptUI extends Application{
@@ -56,7 +54,7 @@ public class ReceiptUI extends Application{
         return root;
     }
 
-    @SuppressWarnings("unchecked")
+
     private void formatDisplay(){
         titleLabel.setMinWidth(400);
         titleLabel.setMinHeight(50);
@@ -82,12 +80,6 @@ public class ReceiptUI extends Application{
         receiptItemListScrollPane.setVvalue(.5);
         receiptItemListScrollPane.setHvalue(.5);
         receiptItemListScrollPane.setDisable(false);
-    }
-
-    public static void displayItem(ArrayList<Item> data){
-        ObservableList<Item> observableData = FXCollections.observableList(data);
-        receiptItemList.setItems(observableData);
-        receiptItemList.refresh();
     }
 
 }

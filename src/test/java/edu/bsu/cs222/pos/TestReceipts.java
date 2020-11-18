@@ -55,7 +55,6 @@ public class TestReceipts {
         Item item2 = new Item("Napkin",BigDecimal.valueOf(1.50));
         order.addItem(item1);
         order.addItem(item2);
-        BigDecimal total =order.getTotalWithTax();
         BigDecimal presumedTotal = BigDecimal.valueOf(1.50).add(BigDecimal.valueOf(3.67)).multiply(BigDecimal.valueOf(.07));
         Assertions.assertEquals(presumedTotal,order.getTax());
     }

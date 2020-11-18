@@ -12,6 +12,7 @@ public class Item {
     public Item(String itemName, BigDecimal itemPrice) {
         this.name = itemName;
         this.price = itemPrice;
+        this.barcode = "";
     }
 
     public void setPrice(BigDecimal price) {
