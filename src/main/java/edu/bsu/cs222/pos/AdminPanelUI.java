@@ -46,11 +46,11 @@ public class AdminPanelUI{
         primaryStage.setTitle("Administrative Access");
         primaryStage.setWidth(1000);
         primaryStage.setHeight(600);
-        Controller.addItemsToDisplay();
+        AdminController.addItemsToDisplay();
         companyNameInput.setText("Edit Company Name");
-        Controller.editCompanyName(companyNameInput, editCompanyName);
-        Controller.editRow(itemList, addItem);
-        Controller.addItem(addItem, itemList);
+        AdminController.editCompanyName(companyNameInput, editCompanyName);
+        AdminController.editRow(itemList, addItem);
+        AdminController.addItem(addItem, itemList);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
         primaryStage.show();

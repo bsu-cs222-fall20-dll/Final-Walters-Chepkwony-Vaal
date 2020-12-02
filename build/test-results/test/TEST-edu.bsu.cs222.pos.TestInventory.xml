@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.bsu.cs222.pos.TestInventory" tests="7" skipped="0" failures="0" errors="0" timestamp="2020-11-18T16:24:25" hostname="DESKTOP-V498F44" time="1.635">
+<testsuite name="edu.bsu.cs222.pos.TestInventory" tests="7" skipped="0" failures="0" errors="0" timestamp="2020-12-02T18:10:21" hostname="DESKTOP-V498F44" time="1.809">
   <properties/>
-  <testcase name="testDeleteInventory" classname="edu.bsu.cs222.pos.TestInventory" time="1.069"/>
-  <testcase name="testAddInventory" classname="edu.bsu.cs222.pos.TestInventory" time="0.072"/>
-  <testcase name="testUniqueBarCodeGenerator" classname="edu.bsu.cs222.pos.TestInventory" time="0.052"/>
-  <testcase name="testUpdatedItemCost" classname="edu.bsu.cs222.pos.TestInventory" time="0.064"/>
-  <testcase name="testUpdatedItemName" classname="edu.bsu.cs222.pos.TestInventory" time="0.064"/>
-  <testcase name="testItemSearch" classname="edu.bsu.cs222.pos.TestInventory" time="0.052"/>
-  <testcase name="testEmptyCompany" classname="edu.bsu.cs222.pos.TestInventory" time="0.26"/>
+  <testcase name="testDeleteInventory" classname="edu.bsu.cs222.pos.TestInventory" time="1.148"/>
+  <testcase name="testAddInventory" classname="edu.bsu.cs222.pos.TestInventory" time="0.077"/>
+  <testcase name="testUniqueBarCodeGenerator" classname="edu.bsu.cs222.pos.TestInventory" time="0.068"/>
+  <testcase name="testUpdatedItemCost" classname="edu.bsu.cs222.pos.TestInventory" time="0.099"/>
+  <testcase name="testUpdatedItemName" classname="edu.bsu.cs222.pos.TestInventory" time="0.073"/>
+  <testcase name="testItemSearch" classname="edu.bsu.cs222.pos.TestInventory" time="0.063"/>
+  <testcase name="testEmptyCompany" classname="edu.bsu.cs222.pos.TestInventory" time="0.275"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

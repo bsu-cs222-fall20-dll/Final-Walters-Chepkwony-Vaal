@@ -113,7 +113,7 @@ public class Company {
     }
 
 
-    public Item getItem(String id)  {
+    public Item getItemByID(String id)  {
         Item result = null;
         try {
 
@@ -127,11 +127,25 @@ public class Company {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
-
         return result;
     }
+    //TODO must add barcode to database!!
+//    public Item getItemByBarcode(String barcode) {
+//        Item result = null;
+//        try {
+//
+//        PreparedStatement statement = db.prepareStatement("SELECT * from Items where  = ?");
+//        statement.setString(1, barcode);
+//        statement.execute();
+//        ResultSet resultSet = statement.getResultSet();
+//        if (resultSet.next()) {
+//            result = new Item(resultSet.getString("Name"), resultSet.getBigDecimal("Price"), id);
+//        }
+//    } catch (SQLException throwables) {
+//        throwables.printStackTrace();
+//    }
+//        return result;
+//}
 
     public void removeItem(String id)  {
 

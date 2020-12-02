@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
-public class Controller {
-    public static Company company;
+public class AdminController {
+    private static Company company;
 
     public static void enterCompanyName(TextInputDialog opening, Button admin, Button cashier){
         admin.setDisable(true);
@@ -184,4 +184,7 @@ public class Controller {
         });
     }
 
+    public static Company getCompany() {
+        return company;
+    }
 }

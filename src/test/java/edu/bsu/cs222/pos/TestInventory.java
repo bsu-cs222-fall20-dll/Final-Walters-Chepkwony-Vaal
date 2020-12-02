@@ -44,7 +44,7 @@ public class TestInventory {
         Item testItem = new Item("sample", BigDecimal.valueOf(44.44));
         String uniqueBarcode = barcodeGenerator.makeNewCode();
         company.addItem(uniqueBarcode, testItem );
-        Assertions.assertNotNull(company.getItem(uniqueBarcode));
+        Assertions.assertNotNull(company.getItemByID(uniqueBarcode));
         company.emptyDatabase();
     }
     @Test
@@ -53,7 +53,7 @@ public class TestInventory {
         Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
         company.addItem("12322",sampleItem);
         company.updateItemCost("12322",BigDecimal.valueOf(5.55));
-        Assertions.assertEquals(BigDecimal.valueOf(5.55),company.getItem("12322").getPrice());
+        Assertions.assertEquals(BigDecimal.valueOf(5.55),company.getItemByID("12322").getPrice());
         company.emptyDatabase();
     }
 
@@ -62,7 +62,7 @@ public class TestInventory {
         Company company = new Company("SampleCompany",true);
         Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
         company.addItem("12345678901",sampleItem);
-        Item searchedItem = company.getItem("12345678901");
+        Item searchedItem = company.getItemByID("12345678901");
         Assertions.assertEquals(sampleItem.getName(),searchedItem.getName());
         company.emptyDatabase();
     }

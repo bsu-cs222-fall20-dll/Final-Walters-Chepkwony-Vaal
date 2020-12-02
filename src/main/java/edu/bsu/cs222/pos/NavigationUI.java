@@ -22,9 +22,9 @@ public class NavigationUI extends Application{
     public void start (Stage primaryStage) {
         primaryStage.setWidth(500);
         primaryStage.setHeight(300);
-        Controller.enterCompanyName(opening, adminButton, cashierButton);
-        Controller.toAdmin(adminButton, cashierButton);
-        Controller.toCashier(cashierButton, adminButton);
+        AdminController.enterCompanyName(opening, adminButton, cashierButton);
+        AdminController.toAdmin(adminButton, cashierButton);
+        AdminController.toCashier(cashierButton, adminButton);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
         primaryStage.show();

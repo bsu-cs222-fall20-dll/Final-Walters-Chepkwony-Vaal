@@ -26,7 +26,7 @@ public class SingleItemUI{
         secondaryStage.setWidth(300);
         secondaryStage.setHeight(250);
         formatDisplay();
-        Controller.doneAddItem(doneButton, secondaryStage, titleLabel, nameInput, priceInput);
+        AdminController.doneAddItem(doneButton, secondaryStage, titleLabel, nameInput, priceInput);
         secondaryStage.setScene(new Scene(createRoot()));
         secondaryStage.show();
         return secondaryStage;

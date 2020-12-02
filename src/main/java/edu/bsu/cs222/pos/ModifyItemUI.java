@@ -33,7 +33,7 @@ public class ModifyItemUI {
         secondaryStage.setHeight(250);
         secondaryStage.setTitle("Edit Item");
         formatDisplay();
-        Controller.doneEdit(editButton, deleteButton, secondaryStage, nameInput, priceInput,item);
+        AdminController.doneEdit(editButton, deleteButton, secondaryStage, nameInput, priceInput,item);
         secondaryStage.setScene(new Scene(createRoot()));
         secondaryStage.show();
         return secondaryStage;

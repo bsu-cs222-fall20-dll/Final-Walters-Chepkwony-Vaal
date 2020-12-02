@@ -21,7 +21,7 @@ public class  BarcodeGenerator {
 //TODO
 
 //        } while (usedCodes.contains(newCodeInProgress));
-        } while (company.getItem(newCodeInProgress) !=null);
+        } while (company.getItemByID(newCodeInProgress) !=null);
 //        newBarcode = newCodeInProgress;
 //        usedCodes.add(newCodeInProgress);
         return newCodeInProgress;
