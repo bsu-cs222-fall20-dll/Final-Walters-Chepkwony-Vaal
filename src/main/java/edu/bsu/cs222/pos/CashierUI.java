@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -14,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
 
+import javax.swing.text.View;
 import java.sql.SQLException;
 
 
@@ -40,7 +42,8 @@ public class CashierUI{
     private static final TableView <String> barcodeAndItems = new TableView<>();
     private static final TableView<Item> receiptItemList = new TableView<>();
     private static final HBox barcodeHBox = new HBox(barcodeSearchField,barcodeSearchButton);
-
+    private static final Image img = new Image("C://Users//bvaal//IdeaProjects//Final-Walters-Chepkwony-Vaal-Wang//src//main//search");
+    public static final ImageView searchView = new ImageView(img);
     private static final VBox codeForTheMiddleLabel = new VBox(
             barcodeSearchLabel,
             barcodeHBox,
@@ -171,7 +174,7 @@ public class CashierUI{
         receiptItemListScrollPane.setVvalue(.5);
         receiptItemListScrollPane.setHvalue(.5);
         receiptItemListScrollPane.setDisable(false);
-        barcodeSearchButton.setGraphic();
+        barcodeSearchButton.setGraphic(searchView);
     }
 
 
