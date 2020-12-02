@@ -161,9 +161,8 @@ public class AdminController {
     public static void doneAddItem(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
         doneButton.setOnMouseClicked(event -> {
 
-            BarcodeGenerator bcg = new BarcodeGenerator(company);
             Item item = new Item(nameInput.getText(),BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
-            company.addItem(bcg.makeNewCode(), item);
+            company.addItem(company.generateBarcode(), item);
             //            Item item = company.searchByItemName(nameInput.getText());
             if (titleLabel.getText().equals("Add Item")){
                 System.out.println("add");
