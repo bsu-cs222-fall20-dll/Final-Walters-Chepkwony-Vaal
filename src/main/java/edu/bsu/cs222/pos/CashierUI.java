@@ -42,7 +42,7 @@ public class CashierUI{
     private static final TableView <String> barcodeAndItems = new TableView<>();
     private static final TableView<Item> receiptItemList = new TableView<>();
     private static final HBox barcodeHBox = new HBox(barcodeSearchField,barcodeSearchButton);
-    private static final Image img = new Image("C://Users//bvaal//IdeaProjects//Final-Walters-Chepkwony-Vaal-Wang//src//main//search");
+    private static final Image img = new Image("search_icon.png",20,10,true,true);
     public static final ImageView searchView = new ImageView(img);
     private static final VBox codeForTheMiddleLabel = new VBox(
             barcodeSearchLabel,
@@ -175,6 +175,8 @@ public class CashierUI{
         receiptItemListScrollPane.setHvalue(.5);
         receiptItemListScrollPane.setDisable(false);
         barcodeSearchButton.setGraphic(searchView);
+        barcodeSearchButton.setMaxHeight(20);
+        barcodeSearchButton.setMaxWidth(20);
     }
 
 
