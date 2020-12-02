@@ -129,23 +129,16 @@ public class Company {
         }
         return result;
     }
-    //TODO must add barcode to database!!
-//    public Item getItemByBarcode(String barcode) {
-//        Item result = null;
-//        try {
-//
-//        PreparedStatement statement = db.prepareStatement("SELECT * from Items where  = ?");
-//        statement.setString(1, barcode);
-//        statement.execute();
-//        ResultSet resultSet = statement.getResultSet();
-//        if (resultSet.next()) {
-//            result = new Item(resultSet.getString("Name"), resultSet.getBigDecimal("Price"), id);
-//        }
-//    } catch (SQLException throwables) {
-//        throwables.printStackTrace();
-//    }
-//        return result;
-//}
+    public String generateBarcode() {
+        String newCodeInProgress = "";
+        do {
+            for (int i = 0; i < 12; i++) {
+                int digit = (int) ((Math.random() * (10)) + 0);
+                newCodeInProgress = newCodeInProgress.concat(String.valueOf(digit));
+            }
+        } while (getItemByID(newCodeInProgress) !=null);
+        return newCodeInProgress;
+    }
 
     public void removeItem(String id)  {
 

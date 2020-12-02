@@ -30,9 +30,8 @@ public class TestInventory {
         Company company = new Company("SampleCompany",true);
         Item sampleItem = new Item("Sloup",BigDecimal.valueOf(5.55));
         company.addItem("12322", sampleItem);
-        //TODO update item in db Owen
         company.updateItemName("12322", "soup");
-        Item sampleItemFromCompany = company.getAvailableInventoryList().get("12322");
+        Item sampleItemFromCompany = company.getItemByID("12322");
         Assertions.assertEquals("soup",sampleItemFromCompany.getName());
         company.emptyDatabase();
     }
@@ -40,9 +39,8 @@ public class TestInventory {
     @Test
     public void testUniqueBarCodeGenerator(){
         Company company = new Company("SampleCompany",true);
-        BarcodeGenerator barcodeGenerator = new BarcodeGenerator(company);
         Item testItem = new Item("sample", BigDecimal.valueOf(44.44));
-        String uniqueBarcode = barcodeGenerator.makeNewCode();
+        String uniqueBarcode = company.generateBarcode();
         company.addItem(uniqueBarcode, testItem );
         Assertions.assertNotNull(company.getItemByID(uniqueBarcode));
         company.emptyDatabase();
