@@ -138,7 +138,7 @@ public class AdminController {
         doneButton.setOnMouseClicked(event -> {
             company.updateItemName(item.getBarcode(), nameInput.getText());
 //            item.setPrice(BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
-            company.updateItemName(item.getBarcode(), priceInput.getText());
+            company.updateItemCost(item.getBarcode(), new BigDecimal(priceInput.getText()));
             stage.fireEvent(
                     new WindowEvent(
                             stage,
