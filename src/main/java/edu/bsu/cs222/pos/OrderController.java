@@ -21,19 +21,13 @@ public class OrderController {
         barcodeAndItems.setRowFactory( tv -> {
             TableRow<Item> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
                     barcodeAndItems.setDisable(true);
                     addItem.setDisable(true);
                     Item rowData = row.getItem();
-                    Stage stage = ModifyItemUI.popUp(rowData);
-                    String name = rowData.getName();
                     String price = rowData.getPrice().toString();
-                    ModifyItemUI.changeTitleLabel("Edit Item");
-                    ModifyItemUI.setDefaultItemValues(name, price);
-                    stage.getScene().getWindow().setOnCloseRequest(closedEvent -> {
                         barcodeAndItems.setDisable(false);
                         addItem.setDisable(false);
-                    });
                 }
             });
             return row ;

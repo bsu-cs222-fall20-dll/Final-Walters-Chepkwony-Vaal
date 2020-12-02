@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -20,6 +21,9 @@ public class CashierUI{
     private static final Label titleLabel = new Label("Cashier Panel");
     private  static final Label errorLabel = new Label("");
     private static final Label barcodeAndItemsLabel = new Label("Barcode And Items:");
+    private static final Label barcodeSearchLabel = new Label("Barcode Search");
+    private static final TextField barcodeSearchField = new TextField();
+    private static final Button barcodeSearchButton = new Button();
     private static final Label selectedItemLabel = new Label("Selected Items:");
     private static final TextField selectedItemInput = new TextField();
     private static final Label priceLabel = new Label("Price:");
@@ -35,7 +39,11 @@ public class CashierUI{
     private static final TextField totalInput = new TextField();
     private static final TableView <String> barcodeAndItems = new TableView<>();
     private static final TableView<Item> receiptItemList = new TableView<>();
+    private static final HBox barcodeHBox = new HBox(barcodeSearchField,barcodeSearchButton);
+
     private static final VBox codeForTheMiddleLabel = new VBox(
+            barcodeSearchLabel,
+            barcodeHBox,
             selectedItemLabel,
             selectedItemInput,
             priceLabel,
@@ -163,6 +171,7 @@ public class CashierUI{
         receiptItemListScrollPane.setVvalue(.5);
         receiptItemListScrollPane.setHvalue(.5);
         receiptItemListScrollPane.setDisable(false);
+        barcodeSearchButton.setGraphic();
     }
 
 
