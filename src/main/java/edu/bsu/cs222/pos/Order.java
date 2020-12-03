@@ -23,6 +23,7 @@ public class Order {
 
     public void addItem(Item item) {
         itemList.add(item);
+        calculateSubtotal();
         calculateTotalWithTax();
     }
 
@@ -45,7 +46,7 @@ public class Order {
     }
 
     public ArrayList<Item> getItemList() {
-        return null;
+        return itemList;
     }
 
     public void deleteItem(Item item) {
@@ -55,8 +56,7 @@ public class Order {
     public Long getDateAndTime(){
         return dateAndTime;
     }
-    public BigDecimal getSubtotal() {
-        return subtotal;
+    public BigDecimal getSubtotal() { return subtotal;
     }
 
     public BigDecimal getTotalWithTax() {

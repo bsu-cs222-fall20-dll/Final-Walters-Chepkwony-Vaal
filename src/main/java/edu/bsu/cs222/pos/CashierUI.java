@@ -1,5 +1,7 @@
 package edu.bsu.cs222.pos;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,29 +19,29 @@ import javafx.stage.Stage;
 
 import javax.swing.text.View;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class CashierUI{
     private static final Label titleLabel = new Label("Cashier Panel");
     private  static final Label errorLabel = new Label("");
-    private static final Label barcodeAndItemsLabel = new Label("Barcode And Items:");
+    private static final Label barcodeAndItemsLabel = new Label("Items");
     private static final Label barcodeSearchLabel = new Label("Barcode Search");
     private static final TextField barcodeSearchField = new TextField();
     private static final Button barcodeSearchButton = new Button();
-    private static final Label selectedItemLabel = new Label("Selected Items:");
+    private static final Label selectedItemLabel = new Label("Selected Item");
     private static final TextField selectedItemInput = new TextField();
-    private static final Label priceLabel = new Label("Price:");
+    private static final Label priceLabel = new Label("Selected Item Price");
     private static final TextField priceInput = new TextField();
-    private static final Label qualityLabel = new Label("Quality:");
-    private static final TextField qualityInput = new TextField();
-    private static final Label ReceiptLabel = new Label("Receipt:");
-    private static final Label subtotalLabel = new Label("Subtotal:");
+    private static final Button addItemButton = new Button("Add To Cart");
+    private static final Label ReceiptLabel = new Label("Receipt");
+    private static final Label subtotalLabel = new Label("Subtotal");
     private static final TextField subtotalInput = new TextField();
-    private static final Label taxLabel = new Label("Tax:");
+    private static final Label taxLabel = new Label("Tax");
     private static final TextField taxInput = new TextField();
-    private static final Label totalLabel = new Label("Total:");
+    private static final Label totalLabel = new Label("Total");
     private static final TextField totalInput = new TextField();
-    private static final TableView <String> barcodeAndItems = new TableView<>();
+    private static final TableView <Item> barcodeAndItems = new TableView<>();
     private static final TableView<Item> receiptItemList = new TableView<>();
     private static final HBox barcodeHBox = new HBox(barcodeSearchField,barcodeSearchButton);
     private static final Image img = new Image("search_icon.png",20,10,true,true);
@@ -51,8 +53,8 @@ public class CashierUI{
             selectedItemInput,
             priceLabel,
             priceInput,
-            qualityLabel,
-            qualityInput
+            addItemButton
+
     );
     private static final HBox LittleTitleField = new HBox(
             barcodeAndItemsLabel,
@@ -78,8 +80,9 @@ public class CashierUI{
             codeForTheMiddleLabel,
             receiptItemList
             );
-    private static final TableColumn <String,String> barcodeColumn = new TableColumn<>("Barcode");
-    private static final TableColumn <String,String> itemColumn = new TableColumn<>("Items");
+    private static final TableColumn <Item, Item> barcodeColumn = new TableColumn<>("Barcode");
+    private static final TableColumn <Item ,Item> itemColumn = new TableColumn<>("Items");
+    private static final TableColumn <Item ,Item> priceColumn = new TableColumn<>("Price");
     private static final TableColumn<Item, Item> receiptNameColumn = new TableColumn<>("Item Name");
     private static final TableColumn<Item, Item> receiptPriceColumn = new TableColumn<>("Price");
     private static final ScrollPane barcodeAndItemsPane = new ScrollPane(barcodeAndItems);
@@ -90,6 +93,9 @@ public class CashierUI{
         primaryStage.setTitle("Cashier Access");
         primaryStage.setWidth(1000);
         primaryStage.setHeight(600);
+        CashierController.addSellableItemsToDisplay();
+        CashierController.itemSearch(barcodeSearchField, barcodeSearchButton, selectedItemInput, priceInput);
+        CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
         primaryStage.show();
@@ -108,27 +114,27 @@ public class CashierUI{
         return root;
     }
 
-    @SuppressWarnings("unchecked")
     private static void formatDisplay(){
         titleLabel.setMinWidth(1000);
         titleLabel.setMinHeight(10);
         errorLabel.setMinWidth(1000);
         errorLabel.setMinHeight(10);
         errorLabel.setTextFill(Color.RED);
-        barcodeColumn.setMinWidth(150);
-        itemColumn.setMinWidth(150);
-        receiptNameColumn.setMinWidth(150);
-        receiptPriceColumn.setMinWidth(150);
-        barcodeAndItemsPane.setMinWidth(300);
-        barcodeAndItems.setMinWidth(300);
-        receiptItemList.setMinWidth(300);
-        receiptItemListScrollPane.setMinWidth(300);
+        barcodeColumn.setMinWidth(116);
+        itemColumn.setMinWidth(116);
+        priceColumn.setMinWidth(116);
+        receiptNameColumn.setMinWidth(175);
+        receiptPriceColumn.setMinWidth(175);
+        barcodeAndItemsPane.setMinWidth(350);
+        barcodeAndItems.setMinWidth(350);
+        receiptItemList.setMinWidth(350);
+        receiptItemListScrollPane.setMinWidth(350);
         selectedItemLabel.setMinWidth(160);
         barcodeAndItemsLabel.setFont(Font.font("Arial", 15));
         selectedItemLabel.setFont(Font.font("Arial", 15));
         ReceiptLabel.setFont(Font.font("Arial", 15));
         priceLabel.setFont(Font.font("Arial", 15));
-        qualityLabel.setFont(Font.font("Arial", 15));
+        addItemButton.setFont(Font.font("Arial", 15));
         subtotalLabel.setFont(Font.font("Arial", 15));
         taxLabel.setFont(Font.font("Arial", 15));
         totalLabel.setFont(Font.font("Arial", 15));
@@ -139,30 +145,30 @@ public class CashierUI{
         titleLabel.setAlignment(Pos.CENTER);
         errorLabel.setAlignment(Pos.CENTER);
         HBox.setMargin(barcodeAndItemsLabel, new Insets(1, 150, 1, 10));
-        HBox.setMargin(ReceiptLabel, new Insets(1, 10, 1, 380));
-        HBox.setMargin(barcodeAndItems, new Insets(1, 110, 1, 10));
-        HBox.setMargin(receiptItemList, new Insets(1, 5, 1, 85));
+        HBox.setMargin(ReceiptLabel, new Insets(1, 10, 1, 435));
+        HBox.setMargin(barcodeAndItems, new Insets(1, 40, 1, 10));
+        HBox.setMargin(receiptItemList, new Insets(1, 5, 1, 35));
         VBox.setMargin(selectedItemLabel, new Insets(3, 5, 3, 1));
         VBox.setMargin(selectedItemInput, new Insets(3, 5, 3, 1));
         VBox.setMargin(priceLabel, new Insets(3, 5, 3, 1));
         VBox.setMargin(priceInput, new Insets(3, 5, 3, 1));
-        VBox.setMargin(qualityLabel, new Insets(3, 5, 3, 1));
-        VBox.setMargin(qualityInput, new Insets(3, 5, 3, 1));
+        VBox.setMargin(addItemButton, new Insets(20, 5, 3, 42.5));
         HBox.setMargin(subtotalLabel, new Insets(1, 5, 1, 750));
         HBox.setMargin(subtotalInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(taxLabel, new Insets(1, 5, 1, 780));
         HBox.setMargin(taxInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(totalLabel, new Insets(1, 5, 1, 770));
         HBox.setMargin(totalInput, new Insets(1, 5, 1, 2));
-        barcodeAndItems.setPlaceholder(new Label("No items and barcode"));
+        barcodeAndItems.setPlaceholder(new Label("No items"));
         receiptItemList.setPlaceholder(new Label("No items"));
-        barcodeColumn.setCellValueFactory(new PropertyValueFactory<>("Barcode"));
-        itemColumn.setCellValueFactory(new PropertyValueFactory<>("Items"));
-        receiptNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        receiptPriceColumn.setCellValueFactory(new PropertyValueFactory<>("Price"));
+        barcodeColumn.setCellValueFactory(new PropertyValueFactory<>("barcode"));
+        itemColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        receiptNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        receiptPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         barcodeAndItems.getColumns().clear();
         receiptItemList.getColumns().clear();
-        barcodeAndItems.getColumns().addAll(barcodeColumn, itemColumn);
+        barcodeAndItems.getColumns().addAll(barcodeColumn, itemColumn, priceColumn);
         receiptItemList.getColumns().addAll(receiptNameColumn, receiptPriceColumn);
         barcodeAndItemsPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         barcodeAndItemsPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -174,9 +180,31 @@ public class CashierUI{
         receiptItemListScrollPane.setVvalue(.5);
         receiptItemListScrollPane.setHvalue(.5);
         receiptItemListScrollPane.setDisable(false);
+        selectedItemInput.setDisable(true);
+        priceInput.setDisable(true);
+        subtotalInput.setDisable(true);
+        taxInput.setDisable(true);
+        totalInput.setDisable(true);
+        selectedItemInput.setStyle("-fx-opacity: .75;");
+        priceInput.setStyle("-fx-opacity: .75;");
+        subtotalInput.setStyle("-fx-opacity: .75;");
+        taxInput.setStyle("-fx-opacity: .75;");
+        totalInput.setStyle("-fx-opacity: .75;");
         barcodeSearchButton.setGraphic(searchView);
         barcodeSearchButton.setMaxHeight(20);
         barcodeSearchButton.setMaxWidth(20);
+    }
+
+    public static void displaySellableItems(ArrayList<Item> data){
+        ObservableList<Item> observableData = FXCollections.observableList(data);
+        barcodeAndItems.setItems(observableData);
+        barcodeAndItems.refresh();
+    }
+
+    public static void displaySelectedItems(ArrayList<Item> data){
+        ObservableList<Item> observableData = FXCollections.observableList(data);
+        receiptItemList.setItems(observableData);
+        receiptItemList.refresh();
     }
 
 
