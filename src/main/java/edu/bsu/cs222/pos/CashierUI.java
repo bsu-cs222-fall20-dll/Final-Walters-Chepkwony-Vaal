@@ -34,7 +34,7 @@ public class CashierUI{
     private static final Label priceLabel = new Label("Selected Item Price");
     private static final TextField priceInput = new TextField();
     private static final Button addItemButton = new Button("Add To Cart");
-    private static final Button anotherOrder = new Button("Another Order");
+    private static final Button anotherOrderButton = new Button("Another Order");
     private static final Label ReceiptLabel = new Label("Receipt");
     private static final Label subtotalLabel = new Label("Subtotal");
     private static final TextField subtotalInput = new TextField();
@@ -42,6 +42,8 @@ public class CashierUI{
     private static final TextField taxInput = new TextField();
     private static final Label totalLabel = new Label("Total");
     private static final TextField totalInput = new TextField();
+    private static final Label dateAndTimeLabel = new Label("Date and Time:");
+    private static final TextField dateAndTimeInput = new TextField();
     private static final TableView <Item> barcodeAndItems = new TableView<>();
     private static final TableView<Item> receiptItemList = new TableView<>();
     private static final HBox barcodeHBox = new HBox(barcodeSearchField,barcodeSearchButton);
@@ -55,7 +57,7 @@ public class CashierUI{
             priceLabel,
             priceInput,
             addItemButton,
-            anotherOrder
+            anotherOrderButton
 
     );
     private static final HBox LittleTitleField = new HBox(
@@ -72,10 +74,14 @@ public class CashierUI{
     private static final HBox totalField = new HBox(
             totalLabel,
             totalInput);
+    private static final HBox dateAndTimeField = new HBox(
+            dateAndTimeLabel,
+            dateAndTimeInput);
     private static final VBox receiptBottomField = new VBox(
             subtotalField,
             taxField,
-            totalField
+            totalField,
+            dateAndTimeField
     );
     private static final HBox codeField = new HBox(
             barcodeAndItems,
@@ -93,12 +99,12 @@ public class CashierUI{
     public static Stage popUp() throws SQLException {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Cashier Access");
-        primaryStage.setWidth(1000);
-        primaryStage.setHeight(600);
+        primaryStage.setWidth(1010);
+        primaryStage.setHeight(680);
         CashierController.addSellableItemsToDisplay();
         CashierController.itemSearch(barcodeSearchField, barcodeSearchButton, selectedItemInput, priceInput);
-        CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput);
-        CashierController.makeAnotherOrder(anotherOrder);
+        CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput,dateAndTimeInput);
+        CashierController.makeAnotherOrder(anotherOrderButton);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
         primaryStage.show();
@@ -138,10 +144,11 @@ public class CashierUI{
         ReceiptLabel.setFont(Font.font("Arial", 15));
         priceLabel.setFont(Font.font("Arial", 15));
         addItemButton.setFont(Font.font("Arial", 15));
-        anotherOrder.setFont(Font.font("Arial",15));
+        anotherOrderButton.setFont(Font.font("Arial",15));
         subtotalLabel.setFont(Font.font("Arial", 15));
         taxLabel.setFont(Font.font("Arial", 15));
         totalLabel.setFont(Font.font("Arial", 15));
+        dateAndTimeLabel.setFont(Font.font("Arial", 15));
         errorLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
         titleLabel.setFont(Font.font("Arial", 25));
         titleLabel.setTranslateY(5);
@@ -157,13 +164,15 @@ public class CashierUI{
         VBox.setMargin(priceLabel, new Insets(3, 5, 3, 1));
         VBox.setMargin(priceInput, new Insets(3, 5, 3, 1));
         VBox.setMargin(addItemButton, new Insets(20, 5, 3, 42.5));
-        VBox.setMargin(anotherOrder, new Insets(200, 5, 3, 40));
+        VBox.setMargin(anotherOrderButton, new Insets(200, 5, 3, 40));
         HBox.setMargin(subtotalLabel, new Insets(1, 5, 1, 750));
         HBox.setMargin(subtotalInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(taxLabel, new Insets(1, 5, 1, 780));
         HBox.setMargin(taxInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(totalLabel, new Insets(1, 5, 1, 770));
         HBox.setMargin(totalInput, new Insets(1, 5, 1, 2));
+        HBox.setMargin(dateAndTimeLabel, new Insets(1, 5, 1, 702));
+        HBox.setMargin(dateAndTimeInput, new Insets(1, 5, 1, 2));
         barcodeAndItems.setPlaceholder(new Label("No items"));
         receiptItemList.setPlaceholder(new Label("No items"));
         barcodeColumn.setCellValueFactory(new PropertyValueFactory<>("barcode"));

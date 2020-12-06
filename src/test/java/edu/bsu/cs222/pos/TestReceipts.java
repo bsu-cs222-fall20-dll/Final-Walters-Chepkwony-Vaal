@@ -71,11 +71,4 @@ public class TestReceipts {
         Assertions.assertEquals(presumedSubtotal,total);
     }
 
-    @Test
-    public void testDateAndTime(){
-        Order order = new Order();
-        Long date = order.getDateAndTime();
-        System.out.println(date);
-        Assertions.assertNotNull(order.getDateAndTime());
-    }
 }
