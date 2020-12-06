@@ -16,8 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
-
-import javax.swing.text.View;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -199,11 +197,13 @@ public class CashierUI{
         subtotalInput.setDisable(true);
         taxInput.setDisable(true);
         totalInput.setDisable(true);
+        dateAndTimeInput.setDisable(true);
         selectedItemInput.setStyle("-fx-opacity: .75;");
         priceInput.setStyle("-fx-opacity: .75;");
         subtotalInput.setStyle("-fx-opacity: .75;");
         taxInput.setStyle("-fx-opacity: .75;");
         totalInput.setStyle("-fx-opacity: .75;");
+        dateAndTimeInput.setStyle("-fx-opacity: .75;");
         barcodeSearchButton.setGraphic(searchView);
         barcodeSearchButton.setMaxHeight(20);
         barcodeSearchButton.setMaxWidth(20);

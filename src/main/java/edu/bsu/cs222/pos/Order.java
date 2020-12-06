@@ -1,6 +1,7 @@
 package edu.bsu.cs222.pos;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 //Class is not fully implemented into the cashier UI yet
@@ -13,11 +14,13 @@ public class Order {
     private BigDecimal tax;
 
     public Order(){
+        String strDateFormat = "hh:mm:ss a dd-MMM-yyyy";//This still needs to change, it can't work
+        SimpleDateFormat changeDateAndTime = new SimpleDateFormat(strDateFormat);
         Date date = new Date();
-        this.dateAndTime = date.getTime();//still needs to change
+        changeDateAndTime.format(date);
+        this.dateAndTime = date.getTime();
         this.subtotal = BigDecimal.valueOf(0.00);
         this.totalWithTax = BigDecimal.valueOf(0.00);
-
     }
 
     public void addItem(Item item) {
