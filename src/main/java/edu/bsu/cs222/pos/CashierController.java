@@ -44,4 +44,7 @@ public class CashierController {
     }
 
 
+    public static void makeAnotherOrder(Button anotherOrder) {
+
+    }
 }
