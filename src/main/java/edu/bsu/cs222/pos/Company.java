@@ -129,6 +129,23 @@ public class Company {
         }
         return result;
     }
+    public Item getItemByName(String itemName)  {
+        Item result = null;
+        try {
+
+            PreparedStatement statement = db.prepareStatement("SELECT * from Items where NAME = ?");
+            statement.setString(1, itemName);
+            statement.execute();
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                result = new Item(resultSet.getString("Name"), resultSet.getBigDecimal("Price"), resultSet.getString("ID"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
     public String generateBarcode() {
         String newCodeInProgress = "";
         do {

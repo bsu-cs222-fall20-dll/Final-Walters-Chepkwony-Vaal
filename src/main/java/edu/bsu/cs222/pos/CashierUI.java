@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +28,9 @@ public class CashierUI{
     private static final Label barcodeSearchLabel = new Label("Barcode Search");
     private static final TextField barcodeSearchField = new TextField();
     private static final Button barcodeSearchButton = new Button();
+    private static final Label itemNameSearchLabel = new Label("Item Name Search");
+    private static final TextField itemNameSearchField = new TextField();
+    private static final Button itemNameSearchButton = new Button();
     private static final Label selectedItemLabel = new Label("Selected Item");
     private static final TextField selectedItemInput = new TextField();
     private static final Label priceLabel = new Label("Selected Item Price");
@@ -48,9 +52,13 @@ public class CashierUI{
     private static final HBox barcodeHBox = new HBox(barcodeSearchField,barcodeSearchButton);
     private static final Image img = new Image("search_icon.png",20,10,true,true);
     public static final ImageView searchView = new ImageView(img);
+    public static final ImageView searchView2 = new ImageView(img);
+    private static final HBox itemNameSearchHBox = new HBox(itemNameSearchField,itemNameSearchButton);
     private static final VBox codeForTheMiddleLabel = new VBox(
             barcodeSearchLabel,
             barcodeHBox,
+            itemNameSearchLabel,
+            itemNameSearchHBox,
             selectedItemLabel,
             selectedItemInput,
             priceLabel,
@@ -102,7 +110,8 @@ public class CashierUI{
         primaryStage.setWidth(1010);
         primaryStage.setHeight(690);
         CashierController.addSellableItemsToDisplay();
-        CashierController.itemSearch(barcodeSearchField, barcodeSearchButton, selectedItemInput, priceInput);
+        CashierController.itemSearchByBarcode(barcodeSearchField, barcodeSearchButton, selectedItemInput, priceInput);
+        CashierController.itemSearchByName(itemNameSearchField,itemNameSearchButton,selectedItemInput,priceInput);
         CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput,dateAndTimeInput);
         CashierController.reset(resetButton,receiptItemList,
                 barcodeSearchField,selectedItemInput,priceInput,
@@ -128,7 +137,7 @@ public class CashierUI{
 
     private static void formatDisplay(){
         titleLabel.setMinWidth(1000);
-        titleLabel.setMinHeight(10);
+        titleLabel.setMinHeight(30);
         errorLabel.setMinWidth(1000);
         errorLabel.setMinHeight(10);
         errorLabel.setTextFill(Color.RED);
@@ -213,6 +222,9 @@ public class CashierUI{
         barcodeSearchButton.setGraphic(searchView);
         barcodeSearchButton.setMaxHeight(20);
         barcodeSearchButton.setMaxWidth(20);
+        itemNameSearchButton.setGraphic(searchView2);
+        itemNameSearchButton.setMaxHeight(20);
+        itemNameSearchButton.setMaxWidth(20);
     }
 
     public static void displaySellableItems(ArrayList<Item> data){

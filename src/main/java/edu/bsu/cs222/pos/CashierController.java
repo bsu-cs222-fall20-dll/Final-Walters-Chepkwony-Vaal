@@ -17,13 +17,22 @@ public class CashierController {
         CashierUI.displaySellableItems(inventoryArrayList);
     }
 
-    public static void itemSearch(TextField barcodeSearch, Button searchButton, TextField itemInput, TextField priceInput){
+    public static void itemSearchByBarcode(TextField barcodeSearch, Button searchButton, TextField itemInput, TextField priceInput){
         searchButton.setOnMouseClicked(event -> {
             String barcode = barcodeSearch.getText();
             selectedItem = company.getItemByID(barcode);
             itemInput.setText(selectedItem.name);
             priceInput.setText(selectedItem.price.toString());
         });
+    }
+    public static void itemSearchByName(TextField itemNameSearchField, Button itemSearchByNameButton,TextField itemInput, TextField priceInput ){
+        itemSearchByNameButton.setOnMouseClicked(event -> {
+            String itemName = itemNameSearchField.getText();
+            selectedItem = company.getItemByName(itemName);
+            itemInput.setText(selectedItem.name);
+            priceInput.setText(selectedItem.price.toString());
+        });
+
     }
 
     public static void addItemToCart(Button addItem, TextField subtotal, TextField tax, TextField total,TextField dateAndTime){
