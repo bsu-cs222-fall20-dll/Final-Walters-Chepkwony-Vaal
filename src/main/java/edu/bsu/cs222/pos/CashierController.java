@@ -39,14 +39,11 @@ public class CashierController {
         });
     }
 
-    public static void makeAnotherOrder(Button anotherOrderButton, javafx.scene.control.TableView<Item> barcodeAndItems,
+    public static void makeAnotherOrder(Button anotherOrderButton,
                                         javafx.scene.control.TableView<Item> receiptItemList,
                                         TextField barcodeSearch,TextField itemInput, TextField priceInput,
                                         TextField subtotal, TextField tax, TextField total,TextField dateAndTime) {
         anotherOrderButton.setOnMouseClicked(event -> {
-            for ( int i = 0; i < barcodeAndItems.getItems().size(); i++) {
-                barcodeAndItems.getItems().clear();
-            }
             for ( int i = 0; i < receiptItemList.getItems().size(); i++) {
                 receiptItemList.getItems().clear();
             }
