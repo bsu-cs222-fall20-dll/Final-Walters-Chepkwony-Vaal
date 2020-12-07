@@ -32,6 +32,7 @@ public class CashierUI{
     private static final Label priceLabel = new Label("Selected Item Price");
     private static final TextField priceInput = new TextField();
     private static final Button addItemButton = new Button("Add To Cart");
+    private static final Button resetButton = new Button("Reset");
     private static final Button anotherOrderButton = new Button("Another Order");
     private static final Label ReceiptLabel = new Label("Receipt");
     private static final Label subtotalLabel = new Label("Subtotal");
@@ -55,6 +56,7 @@ public class CashierUI{
             priceLabel,
             priceInput,
             addItemButton,
+            resetButton,
             anotherOrderButton
 
     );
@@ -98,11 +100,11 @@ public class CashierUI{
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Cashier Access");
         primaryStage.setWidth(1010);
-        primaryStage.setHeight(680);
+        primaryStage.setHeight(690);
         CashierController.addSellableItemsToDisplay();
         CashierController.itemSearch(barcodeSearchField, barcodeSearchButton, selectedItemInput, priceInput);
         CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput,dateAndTimeInput);
-        CashierController.makeAnotherOrder(anotherOrderButton,receiptItemList,
+        CashierController.reset(resetButton,receiptItemList,
                 barcodeSearchField,selectedItemInput,priceInput,
                 subtotalInput,taxInput,totalInput,dateAndTimeInput);
         formatDisplay();
@@ -118,7 +120,8 @@ public class CashierUI{
                 errorLabel,
                 LittleTitleField,
                 codeField,
-                receiptBottomField
+                receiptBottomField,
+                anotherOrderButton
         );
         return root;
     }
@@ -144,6 +147,7 @@ public class CashierUI{
         ReceiptLabel.setFont(Font.font("Arial", 15));
         priceLabel.setFont(Font.font("Arial", 15));
         addItemButton.setFont(Font.font("Arial", 15));
+        resetButton.setFont(Font.font("Arial",15));
         anotherOrderButton.setFont(Font.font("Arial",15));
         subtotalLabel.setFont(Font.font("Arial", 15));
         taxLabel.setFont(Font.font("Arial", 15));
@@ -164,7 +168,7 @@ public class CashierUI{
         VBox.setMargin(priceLabel, new Insets(3, 5, 3, 1));
         VBox.setMargin(priceInput, new Insets(3, 5, 3, 1));
         VBox.setMargin(addItemButton, new Insets(20, 5, 3, 42.5));
-        VBox.setMargin(anotherOrderButton, new Insets(200, 5, 3, 40));
+        VBox.setMargin(resetButton, new Insets(200, 5, 3, 42));
         HBox.setMargin(subtotalLabel, new Insets(1, 5, 1, 750));
         HBox.setMargin(subtotalInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(taxLabel, new Insets(1, 5, 1, 780));

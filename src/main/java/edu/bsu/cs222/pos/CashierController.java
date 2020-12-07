@@ -39,7 +39,7 @@ public class CashierController {
         });
     }
 
-    public static void makeAnotherOrder(Button anotherOrderButton,
+    public static void reset(Button anotherOrderButton,
                                         javafx.scene.control.TableView<Item> receiptItemList,
                                         TextField barcodeSearch,TextField itemInput, TextField priceInput,
                                         TextField subtotal, TextField tax, TextField total,TextField dateAndTime) {
