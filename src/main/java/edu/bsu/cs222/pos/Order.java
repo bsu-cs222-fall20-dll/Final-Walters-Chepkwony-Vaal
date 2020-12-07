@@ -13,8 +13,8 @@ public class Order {
     private BigDecimal taxRate = BigDecimal.valueOf(.07);
     private BigDecimal tax;
 
-    public Order(){
-        String strDateFormat = "hh:mm:ss a dd-MMM-yyyy";//This still needs to change, it can't work
+    public Order(){//find ways to display date and time
+        String strDateFormat = "hh:mm:ss a dd-MMM-yyyy";
         SimpleDateFormat changeDateAndTime = new SimpleDateFormat(strDateFormat);
         Date date = new Date();
         changeDateAndTime.format(date);
