@@ -1,14 +1,17 @@
 package edu.bsu.cs222.pos;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CashierController {
     private static final Company company = AdminController.getCompany();
     private static Item selectedItem;
-    //will make a button to initialize a new order; won't need to be final
     private final static Order itemsInCart = new Order();
 
     public static void addSellableItemsToDisplay()  {
@@ -21,8 +24,10 @@ public class CashierController {
         searchButton.setOnMouseClicked(event -> {
             String barcode = barcodeSearch.getText();
             selectedItem = company.getItemByID(barcode);
-            itemInput.setText(selectedItem.name);
-            priceInput.setText(selectedItem.price.toString());
+            if (selectedItem != null) {
+                itemInput.setText(selectedItem.name);
+                priceInput.setText(selectedItem.price.toString());
+            }
         });
     }
 
@@ -36,6 +41,24 @@ public class CashierController {
                 dateAndTime.setText(itemsInCart.getDateAndTime().toString());
                 CashierUI.displaySelectedItems(itemsInCart.getItemList());
             }
+        });
+    }
+
+    public static void deleteSelectedItem(TableView<Item> itemList, TextField subtotal, TextField tax, TextField total,TextField dateAndTime){
+        itemList.setRowFactory( tv -> {
+            TableRow<Item> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Item rowData = row.getItem();
+                    itemsInCart.deleteItem(rowData);
+                    subtotal.setText(itemsInCart.getSubtotal().toString());
+                    tax.setText(itemsInCart.getTax().toString());
+                    total.setText(itemsInCart.getTotalWithTax().toString());
+                    dateAndTime.setText(itemsInCart.getDateAndTime().toString());
+                    CashierUI.displaySelectedItems(itemsInCart.getItemList());
+                }
+            });
+            return row ;
         });
     }
 
