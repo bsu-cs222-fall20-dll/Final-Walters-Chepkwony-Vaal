@@ -102,7 +102,9 @@ public class CashierUI{
         CashierController.addSellableItemsToDisplay();
         CashierController.itemSearch(barcodeSearchField, barcodeSearchButton, selectedItemInput, priceInput);
         CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput,dateAndTimeInput);
-        CashierController.makeAnotherOrder(anotherOrderButton);
+        CashierController.makeAnotherOrder(anotherOrderButton,barcodeAndItems,receiptItemList,
+                barcodeSearchField,selectedItemInput,priceInput,
+                subtotalInput,taxInput,totalInput,dateAndTimeInput);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
         primaryStage.show();

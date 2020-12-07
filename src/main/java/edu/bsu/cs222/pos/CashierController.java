@@ -2,6 +2,8 @@ package edu.bsu.cs222.pos;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+import javax.swing.text.TableView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -39,13 +41,24 @@ public class CashierController {
         });
     }
 
-
-    public static void makeAnotherOrder(Button anotherOrderButton) {
+    public static void makeAnotherOrder(Button anotherOrderButton, javafx.scene.control.TableView<Item> barcodeAndItems,
+                                        javafx.scene.control.TableView<Item> receiptItemList,
+                                        TextField barcodeSearch,TextField itemInput, TextField priceInput,
+                                        TextField subtotal, TextField tax, TextField total,TextField dateAndTime) {
         anotherOrderButton.setOnMouseClicked(event -> {
-            if(selectedItem != null){
+            for ( int i = 0; i < barcodeAndItems.getItems().size(); i++) {
+                barcodeAndItems.getItems().clear();
             }
+            for ( int i = 0; i < receiptItemList.getItems().size(); i++) {
+                receiptItemList.getItems().clear();
+            }
+            barcodeSearch.clear();
+            itemInput.clear();
+            priceInput.clear();
+            subtotal.clear();
+            tax.clear();
+            total.clear();
+            dateAndTime.clear();
         });
-
     }
-
 }
