@@ -6,6 +6,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -86,6 +87,16 @@ public class CashierController {
             tax.clear();
             total.clear();
             dateAndTime.clear();
+        });
+    }
+
+    public static void checkout(Button checkoutButton) {
+        checkoutButton.setOnMouseClicked(event -> {
+            checkoutButton.setDisable(true);
+                Stage receipt = ReceiptUI.popUp();
+                receipt.getScene().getWindow().setOnCloseRequest(closedEvent ->{
+                    checkoutButton.setDisable(false);
+            });
         });
     }
 }

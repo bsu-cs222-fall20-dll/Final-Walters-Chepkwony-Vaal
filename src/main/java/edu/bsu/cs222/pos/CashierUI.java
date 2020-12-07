@@ -119,6 +119,7 @@ public class CashierUI{
         CashierController.reset(resetButton,receiptItemList,
                 barcodeSearchField,selectedItemInput,priceInput,
                 subtotalInput,taxInput,totalInput,dateAndTimeInput);
+        CashierController.checkout(checkoutButton);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
         primaryStage.show();

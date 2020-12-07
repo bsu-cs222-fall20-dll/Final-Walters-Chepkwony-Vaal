@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 
 
-public class ReceiptUI extends Application{
+public class ReceiptUI{
     private static final Label titleLabel = new Label("Company Name");
     private static final Label taxLabel = new Label("Tax:");
     private static final TextField taxInput = new TextField();
@@ -31,17 +31,18 @@ public class ReceiptUI extends Application{
     private static final TableColumn<Item, Item> receiptPriceColumn = new TableColumn<>("Price");
     private static final ScrollPane receiptItemListScrollPane = new ScrollPane(receiptItemList);
 
-    @Override
-    public void start (Stage primaryStage) {
+    public static Stage popUp () {
+        Stage primaryStage = new Stage();
         primaryStage.setTitle("Receipt");
         primaryStage.setWidth(400);
         primaryStage.setHeight(600);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
         primaryStage.show();
+        return primaryStage;
     }
 
-    private Pane createRoot () {
+    private static Pane createRoot () {
         VBox root = new VBox();
         root.getChildren().addAll(
                 titleLabel,
@@ -55,26 +56,26 @@ public class ReceiptUI extends Application{
     }
 
 
-    private void formatDisplay(){
+    private static void formatDisplay(){
         titleLabel.setMinWidth(400);
         titleLabel.setMinHeight(50);
-        titleLabel.setFont(Font.font("Arial", 25));
         titleLabel.setTranslateY(5);
-        titleLabel.setAlignment(Pos.CENTER);
-        thankLabel.setFont(Font.font("Arial", 13));
         thankLabel.setTranslateY(5);
-        thankLabel.setAlignment(Pos.CENTER);
         receiptNameColumn.setMinWidth(180);
         receiptPriceColumn.setMinWidth(180);
         receiptItemList.setMinWidth(300);
         receiptItemList.setTranslateX(10);
-        receiptItemList.getColumns().addAll(receiptNameColumn, receiptPriceColumn);
-        taxLabel.setFont(Font.font("Arial", 20));
+        titleLabel.setAlignment(Pos.CENTER);
         taxField.setAlignment(Pos.CENTER_LEFT);
-        balanceLabel.setFont(Font.font("Arial", 20));
         balanceLabel.setAlignment(Pos.CENTER_LEFT);
+        thankLabel.setAlignment(Pos.CENTER);
+        titleLabel.setFont(Font.font("Arial", 25));
+        thankLabel.setFont(Font.font("Arial", 13));
+        taxLabel.setFont(Font.font("Arial", 20));
+        balanceLabel.setFont(Font.font("Arial", 20));
         dateAndTimeLabel.setFont(Font.font("Arial", 20));
         HBox.setMargin(dateAndTimeLabel, new Insets(10, 5, 10, 175));
+        receiptItemList.getColumns().addAll(receiptNameColumn, receiptPriceColumn);
         receiptItemListScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         receiptItemListScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         receiptItemListScrollPane.setVvalue(.5);
