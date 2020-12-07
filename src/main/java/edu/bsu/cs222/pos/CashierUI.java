@@ -37,7 +37,7 @@ public class CashierUI{
     private static final TextField priceInput = new TextField();
     private static final Button addItemButton = new Button("Add To Cart");
     private static final Button resetButton = new Button("Reset");
-    private static final Button anotherOrderButton = new Button("Another Order");
+    private static final Button checkoutButton = new Button("Checkout");
     private static final Label ReceiptLabel = new Label("Receipt");
     private static final Label subtotalLabel = new Label("Subtotal");
     private static final TextField subtotalInput = new TextField();
@@ -64,9 +64,7 @@ public class CashierUI{
             priceLabel,
             priceInput,
             addItemButton,
-            resetButton,
-            anotherOrderButton
-
+            resetButton
     );
     private static final HBox LittleTitleField = new HBox(
             barcodeAndItemsLabel,
@@ -85,11 +83,15 @@ public class CashierUI{
     private static final HBox dateAndTimeField = new HBox(
             dateAndTimeLabel,
             dateAndTimeInput);
+    private static final HBox anotherButtonField = new HBox(
+            checkoutButton
+    );
     private static final VBox receiptBottomField = new VBox(
             subtotalField,
             taxField,
             totalField,
-            dateAndTimeField
+            dateAndTimeField,
+            anotherButtonField
     );
     private static final HBox codeField = new HBox(
             barcodeAndItems,
@@ -113,6 +115,7 @@ public class CashierUI{
         CashierController.itemSearchByBarcode(barcodeSearchField, barcodeSearchButton, selectedItemInput, priceInput);
         CashierController.itemSearchByName(itemNameSearchField,itemNameSearchButton,selectedItemInput,priceInput);
         CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput,dateAndTimeInput);
+        CashierController.deleteSelectedItem(receiptItemList, subtotalInput, taxInput, totalInput,dateAndTimeInput);
         CashierController.reset(resetButton,receiptItemList,
                 barcodeSearchField,selectedItemInput,priceInput,
                 subtotalInput,taxInput,totalInput,dateAndTimeInput);
@@ -129,8 +132,7 @@ public class CashierUI{
                 errorLabel,
                 LittleTitleField,
                 codeField,
-                receiptBottomField,
-                anotherOrderButton
+                receiptBottomField
         );
         return root;
     }
@@ -157,7 +159,7 @@ public class CashierUI{
         priceLabel.setFont(Font.font("Arial", 15));
         addItemButton.setFont(Font.font("Arial", 15));
         resetButton.setFont(Font.font("Arial",15));
-        anotherOrderButton.setFont(Font.font("Arial",15));
+        checkoutButton.setFont(Font.font("Arial",15));
         subtotalLabel.setFont(Font.font("Arial", 15));
         taxLabel.setFont(Font.font("Arial", 15));
         totalLabel.setFont(Font.font("Arial", 15));
@@ -177,7 +179,7 @@ public class CashierUI{
         VBox.setMargin(priceLabel, new Insets(3, 5, 3, 1));
         VBox.setMargin(priceInput, new Insets(3, 5, 3, 1));
         VBox.setMargin(addItemButton, new Insets(20, 5, 3, 42.5));
-        VBox.setMargin(resetButton, new Insets(200, 5, 3, 42));
+        VBox.setMargin(resetButton, new Insets(15, 5, 3, 60.5));
         HBox.setMargin(subtotalLabel, new Insets(1, 5, 1, 750));
         HBox.setMargin(subtotalInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(taxLabel, new Insets(1, 5, 1, 780));
@@ -186,6 +188,7 @@ public class CashierUI{
         HBox.setMargin(totalInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(dateAndTimeLabel, new Insets(1, 5, 1, 702));
         HBox.setMargin(dateAndTimeInput, new Insets(1, 5, 1, 2));
+        HBox.setMargin(checkoutButton, new Insets(10, 5, 1, 892));
         barcodeAndItems.setPlaceholder(new Label("No items"));
         receiptItemList.setPlaceholder(new Label("No items"));
         barcodeColumn.setCellValueFactory(new PropertyValueFactory<>("barcode"));
@@ -238,6 +241,5 @@ public class CashierUI{
         receiptItemList.setItems(observableData);
         receiptItemList.refresh();
     }
-
 
 }

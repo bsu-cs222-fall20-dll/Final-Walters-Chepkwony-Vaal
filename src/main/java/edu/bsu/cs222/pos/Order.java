@@ -49,6 +49,8 @@ public class Order {
 
     public void deleteItem(Item item) {
         itemList.remove(item);
+        calculateSubtotal();
+        calculateTotalWithTax();
     }
 
     public Long getDateAndTime(){

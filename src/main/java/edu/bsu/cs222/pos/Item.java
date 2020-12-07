@@ -2,9 +2,6 @@ package edu.bsu.cs222.pos;
 import java.math.BigDecimal;
 
 public class Item {
-    public  BigDecimal getPrice() {
-        return price;
-    }
     public  BigDecimal price;
     public String name;
     private String barcode;
@@ -14,11 +11,14 @@ public class Item {
         this.price = itemPrice;
         this.barcode = barcode;
     }
+
     public Item(String itemName, BigDecimal itemPrice) {
         this.name = itemName;
         this.price = itemPrice;
         this.barcode = "";
     }
+
+    public  BigDecimal getPrice() { return price; }
 
     public void setPrice(BigDecimal price) {
         this.price = price;
