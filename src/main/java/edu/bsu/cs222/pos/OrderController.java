@@ -3,7 +3,6 @@ package edu.bsu.cs222.pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.HashMap;

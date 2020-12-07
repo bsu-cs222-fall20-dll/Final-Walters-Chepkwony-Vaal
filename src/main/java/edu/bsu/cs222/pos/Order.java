@@ -6,19 +6,17 @@ import java.util.Date;
 //Class is not fully implemented into the cashier UI yet
 public class Order {
     public Long dateAndTime;
-    private ArrayList<Item> itemList = new ArrayList<>();
+    private final ArrayList<Item> itemList = new ArrayList<>();
     private BigDecimal subtotal;
     private BigDecimal totalWithTax;
     private BigDecimal taxRate = BigDecimal.valueOf(.07);
     private BigDecimal tax;
 
-
-    public Order(){
+    public Order(){//find ways to display date and time
         Date date = new Date();
         this.dateAndTime = date.getTime();
         this.subtotal = BigDecimal.valueOf(0.00);
         this.totalWithTax = BigDecimal.valueOf(0.00);
-
     }
 
     public void addItem(Item item) {
@@ -56,6 +54,7 @@ public class Order {
     public Long getDateAndTime(){
         return dateAndTime;
     }
+
     public BigDecimal getSubtotal() { return subtotal;
     }
 

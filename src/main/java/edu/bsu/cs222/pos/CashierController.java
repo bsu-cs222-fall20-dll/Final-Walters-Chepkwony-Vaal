@@ -1,11 +1,7 @@
 package edu.bsu.cs222.pos;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import org.w3c.dom.Text;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +9,7 @@ public class CashierController {
     private static final Company company = AdminController.getCompany();
     private static Item selectedItem;
     //will make a button to initialize a new order; won't need to be final
-    private static Order itemsInCart = new Order();
+    private final static Order itemsInCart = new Order();
 
     public static void addSellableItemsToDisplay()  {
         HashMap<String, Item> inventoryList = company.getAvailableInventoryList();
@@ -30,18 +26,34 @@ public class CashierController {
         });
     }
 
-    public static void addItemToCart(Button addItem, TextField subtotal, TextField tax, TextField total){
+    public static void addItemToCart(Button addItem, TextField subtotal, TextField tax, TextField total,TextField dateAndTime){
         addItem.setOnMouseClicked(event -> {
             if(!(selectedItem == null)) {
                 itemsInCart.addItem(selectedItem);
                 subtotal.setText(itemsInCart.getSubtotal().toString());
                 tax.setText(itemsInCart.getTax().toString());
                 total.setText(itemsInCart.getTotalWithTax().toString());
+                dateAndTime.setText(itemsInCart.getDateAndTime().toString());
                 CashierUI.displaySelectedItems(itemsInCart.getItemList());
-
             }
         });
     }
 
-
+    public static void reset(Button anotherOrderButton,
+                                        javafx.scene.control.TableView<Item> receiptItemList,
+                                        TextField barcodeSearch,TextField itemInput, TextField priceInput,
+                                        TextField subtotal, TextField tax, TextField total,TextField dateAndTime) {
+        anotherOrderButton.setOnMouseClicked(event -> {
+            for ( int i = 0; i < receiptItemList.getItems().size(); i++) {
+                receiptItemList.getItems().clear();
+            }
+            barcodeSearch.clear();
+            itemInput.clear();
+            priceInput.clear();
+            subtotal.clear();
+            tax.clear();
+            total.clear();
+            dateAndTime.clear();
+        });
+    }
 }
