@@ -1,39 +1,56 @@
 package edu.bsu.cs222.pos;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 
-
-public class ReceiptUI{
-    private static final Label titleLabel = new Label("Company Name");
-    private static final Label taxLabel = new Label("Tax:");
-    private static final TextField taxInput = new TextField();
-    private static final ToggleButton editTaxInput = new ToggleButton("Edit");
-    private static final HBox taxField = new HBox(
-            taxLabel,
-            taxInput,
-            editTaxInput);
-    private static final Label balanceLabel = new Label("Balance:");
-    private static final Label dateAndTimeLabel = new Label("Date and Time:");
-    private static final Label thankLabel = new Label("Thank you for shopping at");
+public class ReceiptUI {
+    private static final Label titleLabel = new Label("Receipt");
     private static final TableView<Item> receiptItemList = new TableView<>();
     private static final TableColumn<Item, Item> receiptNameColumn = new TableColumn<>("Item Name");
     private static final TableColumn<Item, Item> receiptPriceColumn = new TableColumn<>("Price");
+    private static final TableColumn<Item, Item> quantityColumn = new TableColumn<>("quantity");
+    private static final Label subtotalLabel = new Label("Subtotal:");
+    private static final TextField subtotalInput = new TextField();
+    private static final Label taxLabel = new Label("Tax:");
+    private static final TextField taxInput = new TextField();
+    private static final Label totalLabel = new Label("Total:");
+    private static final TextField totalInput = new TextField();
+    private static final Label dateAndTimeLabel = new Label("Date and Time:");
+    private static final TextField dateAndTimeInput = new TextField();
     private static final ScrollPane receiptItemListScrollPane = new ScrollPane(receiptItemList);
+
+    private static final HBox subtotalField = new HBox(
+            subtotalLabel,
+            subtotalInput
+    );
+    private static final HBox taxField = new HBox(
+            taxLabel,
+            taxInput);
+    private static final HBox totalField = new HBox(
+            totalLabel,
+            totalInput);
+    private static final HBox dateAndTimeField = new HBox(
+            dateAndTimeLabel,
+            dateAndTimeInput);
 
     public static Stage popUp () {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Receipt");
         primaryStage.setWidth(400);
-        primaryStage.setHeight(600);
+        primaryStage.setHeight(650);
+        CashierController.addItemsInCartToDisplay();
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
         primaryStage.show();
@@ -44,41 +61,45 @@ public class ReceiptUI{
         VBox root = new VBox();
         root.getChildren().addAll(
                 titleLabel,
-                receiptItemListScrollPane,
+                receiptItemList,
+                subtotalField,
                 taxField,
-                balanceLabel,
-                dateAndTimeLabel,
-                thankLabel
+                totalField,
+                dateAndTimeField
         );
         return root;
     }
 
-
     private static void formatDisplay(){
         titleLabel.setMinWidth(400);
         titleLabel.setMinHeight(50);
-        titleLabel.setTranslateY(5);
-        thankLabel.setTranslateY(5);
-        receiptNameColumn.setMinWidth(180);
-        receiptPriceColumn.setMinWidth(180);
-        receiptItemList.setMinWidth(300);
-        receiptItemList.setTranslateX(10);
+        receiptItemListScrollPane.setMinHeight(600);
+        receiptNameColumn.setMinWidth(170);
+        receiptPriceColumn.setMinWidth(135);
+        quantityColumn.setMinWidth(50);
         titleLabel.setAlignment(Pos.CENTER);
-        taxField.setAlignment(Pos.CENTER_LEFT);
-        balanceLabel.setAlignment(Pos.CENTER_LEFT);
-        thankLabel.setAlignment(Pos.CENTER);
-        titleLabel.setFont(Font.font("Arial", 25));
-        thankLabel.setFont(Font.font("Arial", 13));
-        taxLabel.setFont(Font.font("Arial", 20));
-        balanceLabel.setFont(Font.font("Arial", 20));
-        dateAndTimeLabel.setFont(Font.font("Arial", 20));
-        HBox.setMargin(dateAndTimeLabel, new Insets(10, 5, 10, 175));
-        receiptItemList.getColumns().addAll(receiptNameColumn, receiptPriceColumn);
+        titleLabel.setFont(Font.font("Arial", 20));
         receiptItemListScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         receiptItemListScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         receiptItemListScrollPane.setVvalue(.5);
         receiptItemListScrollPane.setHvalue(.5);
         receiptItemListScrollPane.setDisable(false);
+        HBox.setMargin(subtotalInput, new Insets(1, 5, 1, 35));
+        HBox.setMargin(taxInput, new Insets(1, 5, 1, 65));
+        HBox.setMargin(totalInput, new Insets(1, 5, 1, 55));
+        receiptNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        receiptPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        receiptPriceColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        receiptItemList.getColumns().clear();
+        receiptItemList.setPlaceholder(new Label("No items"));
+        receiptItemList.getColumns().addAll(receiptNameColumn, receiptPriceColumn,quantityColumn);
+
     }
 
+    public static void displayItemsInCart(ArrayList<Item> data){
+        ObservableList<Item> observableData = FXCollections.observableList(data);
+        receiptItemList.setItems(observableData);
+        receiptItemList.refresh();
+    }
 }
+

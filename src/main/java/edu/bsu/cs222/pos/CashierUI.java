@@ -23,7 +23,7 @@ public class CashierUI{
     private static final Label titleLabel = new Label("Cashier Panel");
     private static final Label errorLabel = new Label("");
     private static final Label barcodeAndItemsLabel = new Label("Items");
-    private static final Label searchLabel = new Label("Barcode Search or ame search:");
+    private static final Label searchLabel = new Label("Barcode Search or name search:");
     private static final ComboBox<String> searchSelection=new ComboBox<>();
     private static final TextField searchField = new TextField();
     private static final Button searchButton = new Button();
@@ -34,7 +34,7 @@ public class CashierUI{
     private static final Button addItemButton = new Button("Add To Cart");
     private static final Button resetButton = new Button("Reset");
     private static final Button checkoutButton = new Button("Checkout");
-    private static final Label ReceiptLabel = new Label("Receipt");
+    private static final Label ReceiptLabel = new Label("Personal Cart :");
     private static final Label subtotalLabel = new Label("Subtotal");
     private static final TextField subtotalInput = new TextField();
     private static final Label taxLabel = new Label("Tax");

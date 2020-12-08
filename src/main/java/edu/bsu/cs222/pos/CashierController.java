@@ -42,7 +42,7 @@ public class CashierController {
                 subtotal.setText(itemsInCart.getSubtotal().toString());
                 tax.setText(itemsInCart.getTax().toString());
                 total.setText(itemsInCart.getTotalWithTax().toString());
-                dateAndTime.setText(itemsInCart.getDateAndTime().toString());
+                dateAndTime.setText(itemsInCart.getDateAndTime());
                 CashierUI.displaySelectedItems(itemsInCart.getItemList());
             }
         });
@@ -58,7 +58,7 @@ public class CashierController {
                     subtotal.setText(itemsInCart.getSubtotal().toString());
                     tax.setText(itemsInCart.getTax().toString());
                     total.setText(itemsInCart.getTotalWithTax().toString());
-                    dateAndTime.setText(itemsInCart.getDateAndTime().toString());
+                    dateAndTime.setText(itemsInCart.getDateAndTime());
                     CashierUI.displaySelectedItems(itemsInCart.getItemList());
                 }
             });
@@ -92,5 +92,9 @@ public class CashierController {
         });
     }
 
+
+    public static void addItemsInCartToDisplay() {
+
+    }
 
 }
