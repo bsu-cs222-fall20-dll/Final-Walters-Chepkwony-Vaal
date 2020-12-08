@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 public class CashierUI{
     private static final Label titleLabel = new Label("Cashier Panel");
     private static final Label errorLabel = new Label("");

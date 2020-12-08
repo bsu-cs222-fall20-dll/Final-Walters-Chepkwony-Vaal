@@ -1,7 +1,5 @@
 package edu.bsu.cs222.pos;
 
-import javafx.application.Application;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

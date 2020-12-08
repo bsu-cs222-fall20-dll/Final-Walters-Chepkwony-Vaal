@@ -1,20 +1,20 @@
 package edu.bsu.cs222.pos;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 //Class is not fully implemented into the cashier UI yet
 public class Order {
-    public Long dateAndTime;
+    public String dateAndTime;
     private final ArrayList<Item> itemList = new ArrayList<>();
     private BigDecimal subtotal;
     private BigDecimal totalWithTax;
     private BigDecimal taxRate = BigDecimal.valueOf(.07);
     private BigDecimal tax;
 
-    public Order(){//find ways to display date and time
-        Date date = new Date();
-        this.dateAndTime = date.getTime();
+    public Order(){
+        convertToDateAndTime();
         this.subtotal = BigDecimal.valueOf(0.00);
         this.totalWithTax = BigDecimal.valueOf(0.00);
     }
@@ -53,11 +53,18 @@ public class Order {
         calculateTotalWithTax();
     }
 
-    public Long getDateAndTime(){
+    public String getDateAndTime(){
         return dateAndTime;
     }
 
-    public BigDecimal getSubtotal() { return subtotal;
+    public void convertToDateAndTime(){
+        DateTimeFormatter dateAndTime = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        this.dateAndTime = dateAndTime.format(now);
+    }
+
+    public BigDecimal getSubtotal() {
+        return subtotal;
     }
 
     public BigDecimal getTotalWithTax() {

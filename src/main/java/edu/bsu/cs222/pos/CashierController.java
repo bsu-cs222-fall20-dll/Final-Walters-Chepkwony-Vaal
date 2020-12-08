@@ -88,9 +88,7 @@ public class CashierController {
         checkoutButton.setOnMouseClicked(event -> {
             checkoutButton.setDisable(true);
                 Stage receipt = ReceiptUI.popUp();
-                receipt.getScene().getWindow().setOnCloseRequest(closedEvent ->{
-                    checkoutButton.setDisable(false);
-            });
+                receipt.getScene().getWindow().setOnCloseRequest(closedEvent -> checkoutButton.setDisable(false));
         });
     }
 
