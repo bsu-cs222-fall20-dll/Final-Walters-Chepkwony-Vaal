@@ -41,8 +41,6 @@ public class CashierUI{
     private static final TextField taxInput = new TextField();
     private static final Label totalLabel = new Label("Total");
     private static final TextField totalInput = new TextField();
-    private static final Label dateAndTimeLabel = new Label("Date and Time:");
-    private static final TextField dateAndTimeInput = new TextField();
     private static final TableView <Item> barcodeAndItems = new TableView<>();
     private static final TableView<Item> receiptItemList = new TableView<>();
     private static final HBox searchHBox = new HBox(searchField,searchButton);
@@ -73,9 +71,6 @@ public class CashierUI{
     private static final HBox totalField = new HBox(
             totalLabel,
             totalInput);
-    private static final HBox dateAndTimeField = new HBox(
-            dateAndTimeLabel,
-            dateAndTimeInput);
     private static final HBox anotherButtonField = new HBox(
             checkoutButton
     );
@@ -83,7 +78,6 @@ public class CashierUI{
             subtotalField,
             taxField,
             totalField,
-            dateAndTimeField,
             anotherButtonField
     );
     private static final HBox codeField = new HBox(
@@ -103,12 +97,12 @@ public class CashierUI{
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Cashier Access");
         primaryStage.setWidth(1010);
-        primaryStage.setHeight(690);
+        primaryStage.setHeight(680);
         CashierController.addSellableItemsToDisplay();
         CashierController.itemSearchByBarcodeOrName(searchSelection,searchField,searchButton,selectedItemInput,priceInput);
-        CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput,dateAndTimeInput);
-        CashierController.deleteSelectedItem(receiptItemList, subtotalInput, taxInput, totalInput,dateAndTimeInput);
-        CashierController.reset(resetButton,receiptItemList,searchField,selectedItemInput,priceInput,subtotalInput,taxInput,totalInput,dateAndTimeInput);
+        CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput);
+        CashierController.deleteSelectedItem(receiptItemList, subtotalInput, taxInput, totalInput);
+        CashierController.reset(resetButton,receiptItemList,searchField,selectedItemInput,priceInput,subtotalInput,taxInput,totalInput);
         CashierController.checkout(checkoutButton);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
@@ -155,7 +149,6 @@ public class CashierUI{
         subtotalLabel.setFont(Font.font("Arial", 15));
         taxLabel.setFont(Font.font("Arial", 15));
         totalLabel.setFont(Font.font("Arial", 15));
-        dateAndTimeLabel.setFont(Font.font("Arial", 15));
         errorLabel.setFont(Font.font("Arial", FontPosture.ITALIC, 20));
         titleLabel.setFont(Font.font("Arial", 25));
         titleLabel.setTranslateY(5);
@@ -178,8 +171,6 @@ public class CashierUI{
         HBox.setMargin(taxInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(totalLabel, new Insets(1, 5, 1, 770));
         HBox.setMargin(totalInput, new Insets(1, 5, 1, 2));
-        HBox.setMargin(dateAndTimeLabel, new Insets(1, 5, 1, 702));
-        HBox.setMargin(dateAndTimeInput, new Insets(1, 5, 1, 2));
         HBox.setMargin(checkoutButton, new Insets(10, 5, 1, 892));
         barcodeAndItems.setPlaceholder(new Label("No items"));
         receiptItemList.setPlaceholder(new Label("No items"));
@@ -207,13 +198,11 @@ public class CashierUI{
         subtotalInput.setDisable(true);
         taxInput.setDisable(true);
         totalInput.setDisable(true);
-        dateAndTimeInput.setDisable(true);
         selectedItemInput.setStyle("-fx-opacity: .75;");
         priceInput.setStyle("-fx-opacity: .75;");
         subtotalInput.setStyle("-fx-opacity: .75;");
         taxInput.setStyle("-fx-opacity: .75;");
         totalInput.setStyle("-fx-opacity: .75;");
-        dateAndTimeInput.setStyle("-fx-opacity: .75;");
         searchButton.setGraphic(searchView);
         searchButton.setMaxHeight(20);
         searchButton.setMaxWidth(20);

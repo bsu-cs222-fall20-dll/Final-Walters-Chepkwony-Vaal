@@ -35,20 +35,19 @@ public class CashierController {
         });
     }
 
-    public static void addItemToCart(Button addItem, TextField subtotal, TextField tax, TextField total,TextField dateAndTime){
+    public static void addItemToCart(Button addItem, TextField subtotal, TextField tax, TextField total){
         addItem.setOnMouseClicked(event -> {
             if(!(selectedItem == null)) {
                 itemsInCart.addItem(selectedItem);
                 subtotal.setText(itemsInCart.getSubtotal().toString());
                 tax.setText(itemsInCart.getTax().toString());
                 total.setText(itemsInCart.getTotalWithTax().toString());
-                dateAndTime.setText(itemsInCart.getDateAndTime());
                 CashierUI.displaySelectedItems(itemsInCart.getItemList());
             }
         });
     }
 
-    public static void deleteSelectedItem(TableView<Item> itemList, TextField subtotal, TextField tax, TextField total,TextField dateAndTime){
+    public static void deleteSelectedItem(TableView<Item> itemList, TextField subtotal, TextField tax, TextField total){
         itemList.setRowFactory( tv -> {
             TableRow<Item> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -58,7 +57,6 @@ public class CashierController {
                     subtotal.setText(itemsInCart.getSubtotal().toString());
                     tax.setText(itemsInCart.getTax().toString());
                     total.setText(itemsInCart.getTotalWithTax().toString());
-                    dateAndTime.setText(itemsInCart.getDateAndTime());
                     CashierUI.displaySelectedItems(itemsInCart.getItemList());
                 }
             });
@@ -69,7 +67,7 @@ public class CashierController {
     public static void reset(Button anotherOrderButton,
                              javafx.scene.control.TableView<Item> receiptItemList,TextField searchField,
                              TextField itemInput, TextField priceInput,
-                             TextField subtotal, TextField tax, TextField total,TextField dateAndTime) {
+                             TextField subtotal, TextField tax, TextField total) {
         anotherOrderButton.setOnMouseClicked(event -> {
             for ( int i = 0; i < receiptItemList.getItems().size(); i++) {
                 receiptItemList.getItems().clear();
@@ -80,7 +78,6 @@ public class CashierController {
             subtotal.clear();
             tax.clear();
             total.clear();
-            dateAndTime.clear();
         });
     }
 
@@ -92,9 +89,13 @@ public class CashierController {
         });
     }
 
-
-    public static void addItemsInCartToDisplay() {
-
+//Not finished yet, still need to display repetitive item, price and quantity
+    public static void addItemsInCartToDisplay(TextField subtotal,TextField tax,TextField total,TextField dateAndTime) {
+            subtotal.setText(itemsInCart.getSubtotal().toString());
+            tax.setText(itemsInCart.getTax().toString());
+            total.setText(itemsInCart.getTotalWithTax().toString());
+            dateAndTime.setText(itemsInCart.getDateAndTime());
+            ReceiptUI.displayItemsInCart(itemsInCart.getItemList());
     }
 
 }
