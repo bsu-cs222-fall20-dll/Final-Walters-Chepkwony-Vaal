@@ -1,12 +1,7 @@
 package edu.bsu.cs222.pos;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,24 +16,23 @@ public class CashierController {
         CashierUI.displaySellableItems(inventoryArrayList);
     }
 
-    public static void itemSearchByBarcode(TextField barcodeSearch, Button searchButton, TextField itemInput, TextField priceInput){
+    public static void itemSearchByBarcodeOrName(ComboBox<String> searchSelection, TextField searchField,Button searchButton,
+                                                 TextField selectedItemInput, TextField priceInput) {
         searchButton.setOnMouseClicked(event -> {
-            String barcode = barcodeSearch.getText();
-            selectedItem = company.getItemByID(barcode);
-            if (selectedItem != null) {
-                itemInput.setText(selectedItem.name);
+            if(searchSelection.getValue().equals("Barcode search")){
+                String barcode = searchField.getText();
+                selectedItem = company.getItemByID(barcode);
+                if (selectedItem != null) {
+                    selectedItemInput.setText(selectedItem.name);
+                    priceInput.setText(selectedItem.price.toString());
+                }
+            }else if (searchSelection.getValue().equals("Name search")){
+                String itemName = searchField.getText();
+                selectedItem = company.getItemByName(itemName);
+                selectedItemInput.setText(selectedItem.name);
                 priceInput.setText(selectedItem.price.toString());
             }
         });
-    }
-    public static void itemSearchByName(TextField itemNameSearchField, Button itemSearchByNameButton,TextField itemInput, TextField priceInput ){
-        itemSearchByNameButton.setOnMouseClicked(event -> {
-            String itemName = itemNameSearchField.getText();
-            selectedItem = company.getItemByName(itemName);
-            itemInput.setText(selectedItem.name);
-            priceInput.setText(selectedItem.price.toString());
-        });
-
     }
 
     public static void addItemToCart(Button addItem, TextField subtotal, TextField tax, TextField total,TextField dateAndTime){
@@ -73,14 +67,14 @@ public class CashierController {
     }
 
     public static void reset(Button anotherOrderButton,
-                                        javafx.scene.control.TableView<Item> receiptItemList,
-                                        TextField barcodeSearch,TextField itemInput, TextField priceInput,
-                                        TextField subtotal, TextField tax, TextField total,TextField dateAndTime) {
+                             javafx.scene.control.TableView<Item> receiptItemList,TextField searchField,
+                             TextField itemInput, TextField priceInput,
+                             TextField subtotal, TextField tax, TextField total,TextField dateAndTime) {
         anotherOrderButton.setOnMouseClicked(event -> {
             for ( int i = 0; i < receiptItemList.getItems().size(); i++) {
                 receiptItemList.getItems().clear();
             }
-            barcodeSearch.clear();
+            searchField.clear();
             itemInput.clear();
             priceInput.clear();
             subtotal.clear();
@@ -99,4 +93,6 @@ public class CashierController {
             });
         });
     }
+
+
 }

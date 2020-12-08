@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,14 +22,12 @@ import java.util.ArrayList;
 
 public class CashierUI{
     private static final Label titleLabel = new Label("Cashier Panel");
-    private  static final Label errorLabel = new Label("");
+    private static final Label errorLabel = new Label("");
     private static final Label barcodeAndItemsLabel = new Label("Items");
-    private static final Label barcodeSearchLabel = new Label("Barcode Search");
-    private static final TextField barcodeSearchField = new TextField();
-    private static final Button barcodeSearchButton = new Button();
-    private static final Label itemNameSearchLabel = new Label("Item Name Search");
-    private static final TextField itemNameSearchField = new TextField();
-    private static final Button itemNameSearchButton = new Button();
+    private static final Label searchLabel = new Label("Barcode Search or ame search:");
+    private static final ComboBox<String> searchSelection=new ComboBox<>();
+    private static final TextField searchField = new TextField();
+    private static final Button searchButton = new Button();
     private static final Label selectedItemLabel = new Label("Selected Item");
     private static final TextField selectedItemInput = new TextField();
     private static final Label priceLabel = new Label("Selected Item Price");
@@ -49,16 +46,13 @@ public class CashierUI{
     private static final TextField dateAndTimeInput = new TextField();
     private static final TableView <Item> barcodeAndItems = new TableView<>();
     private static final TableView<Item> receiptItemList = new TableView<>();
-    private static final HBox barcodeHBox = new HBox(barcodeSearchField,barcodeSearchButton);
+    private static final HBox searchHBox = new HBox(searchField,searchButton);
     private static final Image img = new Image("search_icon.png",20,10,true,true);
     public static final ImageView searchView = new ImageView(img);
-    public static final ImageView searchView2 = new ImageView(img);
-    private static final HBox itemNameSearchHBox = new HBox(itemNameSearchField,itemNameSearchButton);
     private static final VBox codeForTheMiddleLabel = new VBox(
-            barcodeSearchLabel,
-            barcodeHBox,
-            itemNameSearchLabel,
-            itemNameSearchHBox,
+            searchLabel,
+            searchSelection,
+            searchHBox,
             selectedItemLabel,
             selectedItemInput,
             priceLabel,
@@ -112,17 +106,15 @@ public class CashierUI{
         primaryStage.setWidth(1010);
         primaryStage.setHeight(690);
         CashierController.addSellableItemsToDisplay();
-        CashierController.itemSearchByBarcode(barcodeSearchField, barcodeSearchButton, selectedItemInput, priceInput);
-        CashierController.itemSearchByName(itemNameSearchField,itemNameSearchButton,selectedItemInput,priceInput);
+        CashierController.itemSearchByBarcodeOrName(searchSelection,searchField,searchButton,selectedItemInput,priceInput);
         CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput,dateAndTimeInput);
         CashierController.deleteSelectedItem(receiptItemList, subtotalInput, taxInput, totalInput,dateAndTimeInput);
-        CashierController.reset(resetButton,receiptItemList,
-                barcodeSearchField,selectedItemInput,priceInput,
-                subtotalInput,taxInput,totalInput,dateAndTimeInput);
+        CashierController.reset(resetButton,receiptItemList,searchField,selectedItemInput,priceInput,subtotalInput,taxInput,totalInput,dateAndTimeInput);
         CashierController.checkout(checkoutButton);
         formatDisplay();
         primaryStage.setScene(new Scene(createRoot()));
         primaryStage.show();
+        configureComboBox();
         return primaryStage;
     }
 
@@ -223,12 +215,9 @@ public class CashierUI{
         taxInput.setStyle("-fx-opacity: .75;");
         totalInput.setStyle("-fx-opacity: .75;");
         dateAndTimeInput.setStyle("-fx-opacity: .75;");
-        barcodeSearchButton.setGraphic(searchView);
-        barcodeSearchButton.setMaxHeight(20);
-        barcodeSearchButton.setMaxWidth(20);
-        itemNameSearchButton.setGraphic(searchView2);
-        itemNameSearchButton.setMaxHeight(20);
-        itemNameSearchButton.setMaxWidth(20);
+        searchButton.setGraphic(searchView);
+        searchButton.setMaxHeight(20);
+        searchButton.setMaxWidth(20);
     }
 
     public static void displaySellableItems(ArrayList<Item> data){
@@ -241,6 +230,10 @@ public class CashierUI{
         ObservableList<Item> observableData = FXCollections.observableList(data);
         receiptItemList.setItems(observableData);
         receiptItemList.refresh();
+    }
+
+    private static void configureComboBox(){
+        searchSelection.getItems().addAll("Barcode search", "Name search");
     }
 
 }
