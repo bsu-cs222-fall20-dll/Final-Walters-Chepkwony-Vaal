@@ -2,6 +2,7 @@ package edu.bsu.cs222.pos;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReceiptUI {
     private static final Label titleLabel = new Label("Receipt");
@@ -82,7 +85,7 @@ public class ReceiptUI {
         receiptPriceColumn.setMinWidth(135);
         thankYouLabel.setAlignment(Pos.CENTER);
         titleLabel.setAlignment(Pos.CENTER);
-        receiptItemListScrollPane.setMinHeight(600);
+        receiptItemListScrollPane.setMinHeight(390);
         thankYouLabel.setFont(Font.font("Arial", 15));
         titleLabel.setFont(Font.font("Arial", 15));
         HBox.setMargin(subtotalInput, new Insets(1, 5, 1, 35));
@@ -90,7 +93,7 @@ public class ReceiptUI {
         HBox.setMargin(totalInput, new Insets(1, 5, 1, 55));
         receiptNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         receiptPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        receiptPriceColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         receiptItemList.getColumns().clear();
         receiptItemList.setPlaceholder(new Label("No items"));
         receiptItemList.getColumns().addAll(receiptNameColumn, receiptPriceColumn,quantityColumn);

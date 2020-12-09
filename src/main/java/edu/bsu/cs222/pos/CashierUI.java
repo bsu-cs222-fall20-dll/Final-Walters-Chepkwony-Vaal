@@ -101,6 +101,7 @@ public class CashierUI{
         CashierController.addSellableItemsToDisplay();
         CashierController.itemSearchByBarcodeOrName(searchSelection,searchField,searchButton,selectedItemInput,priceInput);
         CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput);
+        CashierController.doubleClickAddToCart(barcodeAndItems, subtotalInput, taxInput, totalInput);
         CashierController.deleteSelectedItem(receiptItemList, subtotalInput, taxInput, totalInput);
         CashierController.reset(resetButton,receiptItemList,searchField,selectedItemInput,priceInput,subtotalInput,taxInput,totalInput);
         CashierController.checkout(checkoutButton);
