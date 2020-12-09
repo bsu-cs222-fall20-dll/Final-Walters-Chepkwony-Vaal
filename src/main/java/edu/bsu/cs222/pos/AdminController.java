@@ -4,13 +4,24 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Border;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+
+import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.MatteBorder;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+
+import static java.awt.Color.*;
 
 public class AdminController {
     private static Company company;
@@ -160,7 +171,7 @@ public class AdminController {
     }
     public static void doneAddItem(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
         doneButton.setOnMouseClicked(event -> {
-
+            try{
             Item item = new Item(nameInput.getText(),BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
             company.addItem(company.generateBarcode(), item);
             //            Item item = company.searchByItemName(nameInput.getText());
@@ -179,7 +190,9 @@ public class AdminController {
                             WindowEvent.WINDOW_CLOSE_REQUEST
                     )
             );
-            addItemsToDisplay();
+            addItemsToDisplay();}
+            catch (Exception e){
+            }
         });
     }
 

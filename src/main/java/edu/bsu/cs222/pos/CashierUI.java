@@ -100,7 +100,8 @@ public class CashierUI{
         primaryStage.setHeight(680);
         CashierController.addSellableItemsToDisplay();
         CashierController.itemSearchByBarcodeOrName(searchSelection,searchField,searchButton,selectedItemInput,priceInput);
-        CashierController.addItemToCart(addItemButton, subtotalInput, taxInput, totalInput);
+        CashierController.addItemToByAddButton(addItemButton, subtotalInput, taxInput, totalInput);
+        CashierController.addItemByDoubleClick(barcodeAndItems,subtotalInput,taxInput,totalInput);
         CashierController.deleteSelectedItem(receiptItemList, subtotalInput, taxInput, totalInput);
         CashierController.reset(resetButton,receiptItemList,searchField,selectedItemInput,priceInput,subtotalInput,taxInput,totalInput);
         CashierController.checkout(checkoutButton);

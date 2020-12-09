@@ -64,6 +64,16 @@ public class TestInventory {
         Assertions.assertEquals(sampleItem.getName(),searchedItem.getName());
         company.emptyDatabase();
     }
+
+    @Test
+    public void testItemSearchByName(){
+        Company company = new Company("sampleCompany",true);
+        Item sampleItem = new Item("soup",BigDecimal.valueOf(5.25));
+        company.addItem("12345678901",sampleItem);
+        Item searchedItem = company.getItemByName("soup");
+        Assertions.assertEquals(sampleItem.getName(),searchedItem.getName());
+        company.emptyDatabase();
+    }
     @Test
     public void testDeleteInventory(){
         Company company = new Company("SampleCompany",true);

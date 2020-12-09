@@ -35,16 +35,15 @@ public class CashierController {
         });
     }
 
-    public static void addItemToCart(Button addItem, TextField subtotal, TextField tax, TextField total){
+    public static void addItemToByAddButton(Button addItem, TextField subtotal, TextField tax, TextField total){
         addItem.setOnMouseClicked(event -> {
             if(!(selectedItem == null)) {
-                itemsInCart.addItem(selectedItem);
-                subtotal.setText(itemsInCart.getSubtotal().toString());
-                tax.setText(itemsInCart.getTax().toString());
-                total.setText(itemsInCart.getTotalWithTax().toString());
-                CashierUI.displaySelectedItems(itemsInCart.getItemList());
+                addItemToCart(selectedItem,subtotal,tax,total);
             }
         });
+
+
+
     }
 
     public static void deleteSelectedItem(TableView<Item> itemList, TextField subtotal, TextField tax, TextField total){
@@ -63,6 +62,31 @@ public class CashierController {
             return row ;
         });
     }
+
+    public static void addItemByDoubleClick(TableView<Item> itemRow,TextField subtotal,TextField tax, TextField total) {
+        itemRow.setRowFactory(tv -> {
+            TableRow<Item> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Item selectedItem = row.getItem();
+                    if (!(selectedItem == null)) {
+                        addItemToCart(selectedItem,subtotal,tax,total);
+
+                    }
+                }
+            });
+            return row;
+        });
+    }
+
+    private static void addItemToCart(Item selectedItem, TextField subtotal, TextField tax, TextField total) {
+        itemsInCart.addItem(selectedItem);
+        subtotal.setText(itemsInCart.getSubtotal().toString());
+        tax.setText(itemsInCart.getTax().toString());
+        total.setText(itemsInCart.getTotalWithTax().toString());
+        CashierUI.displaySelectedItems(itemsInCart.getItemList());
+    }
+
 
     public static void reset(Button anotherOrderButton,
                              javafx.scene.control.TableView<Item> receiptItemList,TextField searchField,
