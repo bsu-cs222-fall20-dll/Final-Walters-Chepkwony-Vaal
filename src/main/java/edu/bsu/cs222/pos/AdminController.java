@@ -135,7 +135,7 @@ public class AdminController {
         doneButton.setOnMouseClicked(event -> {
             String name = nameInput.getText();
             String price = priceInput.getText();
-            if(name.matches("[a-zA-Z]+") && price.matches("[+-]?(\\d*\\.)?\\d+$")){
+            if(name.matches("[a-zA-Z]+") && price.matches("\\d*\\.?\\d+$")){
                 company.updateItemName(item.getBarcode(), name);
                 company.updateItemCost(item.getBarcode(), new BigDecimal(price));
                 stage.fireEvent(
@@ -166,7 +166,7 @@ public class AdminController {
         doneButton.setOnMouseClicked(event -> {
             String name = nameInput.getText();
             String price = priceInput.getText();
-            if(name.matches("[a-zA-Z]+") && price.matches("[+-]?(\\d*\\.)?\\d+$")) {
+            if(name.matches("[a-zA-Z]+") && price.matches("\\d*\\.?\\d+$")) {
                 Item item = new Item(name, BigDecimal.valueOf(Float.parseFloat(price)));
                 company.addItem(company.generateBarcode(), item);
                 stage.fireEvent(
