@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 //Class is not fully implemented into the cashier UI yet
 public class Order {
     public String dateAndTime;
@@ -85,5 +88,15 @@ public class Order {
 
     public BigDecimal getTax() {
         return tax;
+    }
+
+    public int getQuantity(Item targetItem) {
+        int quantity = 0;
+        for(Item item: itemList){
+            if (item == targetItem){
+               quantity += 1;
+            }
+        }
+        return quantity;
     }
 }

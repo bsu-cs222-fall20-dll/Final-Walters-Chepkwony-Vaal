@@ -46,6 +46,23 @@ public class CashierController {
 
     }
 
+    public static void doubleClickAddToCart(TableView<Item> itemList, TextField subtotal, TextField tax, TextField total){
+        itemList.setRowFactory( tv -> {
+            TableRow<Item> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Item rowData = row.getItem();
+                    itemsInCart.addItem(rowData);
+                    subtotal.setText(itemsInCart.getSubtotal().toString());
+                    tax.setText(itemsInCart.getTax().toString());
+                    total.setText(itemsInCart.getTotalWithTax().toString());
+                    CashierUI.displaySelectedItems(itemsInCart.getItemList());
+                }
+            });
+            return row ;
+        });
+    }
+
     public static void deleteSelectedItem(TableView<Item> itemList, TextField subtotal, TextField tax, TextField total){
         itemList.setRowFactory( tv -> {
             TableRow<Item> row = new TableRow<>();
@@ -113,13 +130,20 @@ public class CashierController {
         });
     }
 
-//Not finished yet, still need to display repetitive item, price and quantity
     public static void addItemsInCartToDisplay(TextField subtotal,TextField tax,TextField total,TextField dateAndTime) {
             subtotal.setText(itemsInCart.getSubtotal().toString());
             tax.setText(itemsInCart.getTax().toString());
             total.setText(itemsInCart.getTotalWithTax().toString());
             dateAndTime.setText(itemsInCart.getDateAndTime());
-            ReceiptUI.displayItemsInCart(itemsInCart.getItemList());
+            ArrayList<Item> uniqueItemList = new ArrayList<>();
+            itemsInCart.getItemList().stream().distinct().forEach(
+                    item -> {
+                        int quantity = itemsInCart.getQuantity(item);
+                        item.setQuantity(quantity);
+                        uniqueItemList.add(item);
+                    }
+            );
+            ReceiptUI.displayItemsInCart(uniqueItemList);
     }
 
 }
