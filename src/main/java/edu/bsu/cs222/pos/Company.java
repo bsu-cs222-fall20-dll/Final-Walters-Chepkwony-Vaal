@@ -34,6 +34,10 @@ public class Company {
             if (!rs.next()) {
                 statement.execute(Item.createTable);
             }
+            ResultSet discountRS = dbMd.getTables(null, null, "DISCOUNTS", null);
+            if (!discountRS.next()) {
+                statement.execute(Discount.createTable);
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -90,7 +94,6 @@ public class Company {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     public HashMap<String, Item> getAvailableInventoryList() {
@@ -168,6 +171,67 @@ public class Company {
             System.out.println("remove failed");
         }
 
+    }
+    public void addDiscount(String couponCode, Discount discount)  {
+        try {
+            PreparedStatement statement = db.prepareStatement("INSERT INTO DISCOUNTS (ID, Amount, Name, isPercentage) values (?, ?, ?, ?)");
+            statement.setString(1, couponCode);
+            statement.setBigDecimal(2, discount.amount);
+            statement.setString(3, discount.name);
+            statement.setBoolean(4, discount.isPercentage);
+            statement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void updateDiscountName(String couponCode, String newName) {
+        try {
+            PreparedStatement statement = db.prepareStatement("UPDATE DISCOUNTS SET NAME = ? WHERE ID = ?");
+            statement.setString(1, newName);
+            statement.setString(2, couponCode);
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+    public void updateDiscountAmount(String couponCode, BigDecimal newAmount, boolean isPercentage)  {
+        try {
+            PreparedStatement statement = db.prepareStatement("UPDATE DISCOUNTS SET AMOUNT = ?, ISPERCENTAGE = ? WHERE ID = ?");
+            statement.setBigDecimal(1, newAmount);
+            statement.setBoolean(2, isPercentage);
+            statement.setString(3, couponCode);
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public Discount getDiscountByID(String id)  {
+        Discount result = null;
+        try {
+
+            PreparedStatement statement = db.prepareStatement("SELECT * from DISCOUNTS where ID = ?");
+            statement.setString(1, id);
+            statement.execute();
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                result = new Discount(id,resultSet.getString("Name"),resultSet.getBigDecimal("Amount"),resultSet.getBoolean("isPercentage"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+    public String generateCouponCode() {
+        String newCodeInProgress = "";
+        do {
+            for (int i = 0; i < 12; i++) {
+                int digit = (int) ((Math.random() * (10)) + 0);
+                newCodeInProgress = newCodeInProgress.concat(String.valueOf(digit));
+            }
+        } while (getDiscountByID(newCodeInProgress) !=null);
+        return newCodeInProgress;
     }
 
     public String getCompanyName() {
