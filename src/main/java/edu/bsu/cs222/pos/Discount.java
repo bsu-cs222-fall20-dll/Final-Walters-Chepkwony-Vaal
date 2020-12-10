@@ -4,34 +4,41 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Discount {
-    private String barcode;
-    private String name;
-    private BigDecimal discount;
-    private Boolean percentage;
-    public Discount(String barcode, String name, BigDecimal discount, Boolean percentage) {
-        this.barcode = barcode;
+    private String couponCode;
+    public String name;
+    public BigDecimal amount;
+    public Boolean isPercentage;
+    public Discount(String couponCode, String name, BigDecimal amount, Boolean isPercentage) {
+        this.couponCode = couponCode;
         this.name = name;
-        this.discount = discount;
-        this.percentage = percentage;
+        this.amount = amount;
+        this.isPercentage = isPercentage;
+    }
+
+
+    public Discount(String name, BigDecimal amount, Boolean isPercentage) {
+        this.name = name;
+        this.amount = amount;
+        this.isPercentage = isPercentage;
     }
 
     public BigDecimal applyDiscount(ArrayList<Item> sampleItemList) {
         BigDecimal result = BigDecimal.valueOf(0.00);
-        if (!percentage) {
+        if (!isPercentage) {
             /*
                I've intentionally not returned at this stage.
                We might do more validation once we have the subtotal.
              */
-            result = discount;
+            result = amount;
         }
         for (Item item:sampleItemList) {
-            if (percentage){
-                result = result.add(item.price.multiply(discount));
+            if (isPercentage){
+                result = result.add(item.price.multiply(amount));
             }
         }
         return result;
     }
 
-    public static String createTable = "CREATE TABLE DISCOUNTS (ID varchar(40) NOT NULL,Discount decimal(18,2) NOT NULL,Name varchar(32672) NOT NULL,Percentage bool NOT NULL,PRIMARY KEY (ID))";
+    public static String createTable = "CREATE TABLE DISCOUNTS (ID varchar(40) NOT NULL,Amount decimal(18,2) NOT NULL,Name varchar(32672) NOT NULL,isPercentage boolean NOT NULL,PRIMARY KEY (ID))";
 
 }
