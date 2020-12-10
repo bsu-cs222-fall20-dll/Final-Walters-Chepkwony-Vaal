@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 public class NavigationUI extends Application{
     private final Label titleLabel = new Label("POS System");
+    private static final Label errorLabel = new Label("");
     private final Button adminButton = new Button("Administrative Access");
     private final Button cashierButton = new Button("Cashier Access");
     private final HBox options = new HBox(adminButton, cashierButton);
@@ -34,6 +35,7 @@ public class NavigationUI extends Application{
         VBox root = new VBox();
         root.getChildren().addAll(
                 titleLabel,
+                errorLabel,
                 options);
         return root;
     }

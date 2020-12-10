@@ -117,9 +117,6 @@ public class AdminController {
         });
     }
 
-
-
-
     public static void addItem(Button addItem, TableView<Item> itemList){
         addItem.setOnMouseClicked(event -> {
             addItem.setDisable(true);
@@ -134,18 +131,24 @@ public class AdminController {
         });
     }
 
-    public static void doneEdit(Button doneButton, Button deleteButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
+    public static void doneEdit(Button doneButton, Label errorLabel, Button deleteButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
         doneButton.setOnMouseClicked(event -> {
-            company.updateItemName(item.getBarcode(), nameInput.getText());
-//            item.setPrice(BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
-            company.updateItemCost(item.getBarcode(), new BigDecimal(priceInput.getText()));
-            stage.fireEvent(
-                    new WindowEvent(
-                            stage,
-                            WindowEvent.WINDOW_CLOSE_REQUEST
-                    )
-            );
-            addItemsToDisplay();
+            String name = nameInput.getText();
+            String price = priceInput.getText();
+            if(name.matches("[a-zA-Z]+") && price.matches("[+-]?(\\d*\\.)?\\d+$")){
+                company.updateItemName(item.getBarcode(), name);
+                company.updateItemCost(item.getBarcode(), new BigDecimal(price));
+                stage.fireEvent(
+                        new WindowEvent(
+                                stage,
+                                WindowEvent.WINDOW_CLOSE_REQUEST
+                        )
+                );
+                addItemsToDisplay();
+            }
+            else {
+                errorLabel.setText("Enter a valid name and price");
+            }
         });
         deleteButton.setOnMouseClicked(event -> {
             company.removeItem(item.getBarcode());
@@ -158,28 +161,25 @@ public class AdminController {
             addItemsToDisplay();
         });
     }
-    public static void doneAddItem(Button doneButton, Stage stage, Label titleLabel, TextField nameInput, TextField priceInput){
-        doneButton.setOnMouseClicked(event -> {
 
-            Item item = new Item(nameInput.getText(),BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
-            company.addItem(company.generateBarcode(), item);
-            //            Item item = company.searchByItemName(nameInput.getText());
-            if (titleLabel.getText().equals("Add Item")){
-                System.out.println("add");
-            }
-            else if(titleLabel.getText().equals("Edit Item")){
-                System.out.println("edit");
+    public static void doneAddItem(Button doneButton, Stage stage, Label errorLabel, TextField nameInput, TextField priceInput){
+        doneButton.setOnMouseClicked(event -> {
+            String name = nameInput.getText();
+            String price = priceInput.getText();
+            if(name.matches("[a-zA-Z]+") && price.matches("[+-]?(\\d*\\.)?\\d+$")) {
+                Item item = new Item(name, BigDecimal.valueOf(Float.parseFloat(price)));
+                company.addItem(company.generateBarcode(), item);
+                stage.fireEvent(
+                        new WindowEvent(
+                                stage,
+                                WindowEvent.WINDOW_CLOSE_REQUEST
+                        )
+                );
+                addItemsToDisplay();
             }
             else{
-                System.out.println("error");
+                errorLabel.setText("Enter a valid name and price");
             }
-            stage.fireEvent(
-                    new WindowEvent(
-                            stage,
-                            WindowEvent.WINDOW_CLOSE_REQUEST
-                    )
-            );
-            addItemsToDisplay();
         });
     }
 
