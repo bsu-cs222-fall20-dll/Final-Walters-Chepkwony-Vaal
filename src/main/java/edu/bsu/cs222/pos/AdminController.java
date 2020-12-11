@@ -132,7 +132,6 @@ public class AdminController {
     public static void doneEdit(Button doneButton, Button deleteButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
         doneButton.setOnMouseClicked(event -> {
             company.updateItemName(item.getBarcode(), nameInput.getText());
-//            item.setPrice(BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
             company.updateItemCost(item.getBarcode(), new BigDecimal(priceInput.getText()));
             stage.fireEvent(
                     new WindowEvent(
@@ -158,7 +157,6 @@ public class AdminController {
             try{
             Item item = new Item(nameInput.getText(),BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
             company.addItem(company.generateBarcode(), item);
-            //            Item item = company.searchByItemName(nameInput.getText());
             if (titleLabel.getText().equals("Add Item")){
                 System.out.println("add");
             }
