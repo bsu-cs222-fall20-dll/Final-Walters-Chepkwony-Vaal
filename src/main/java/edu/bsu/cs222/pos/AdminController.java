@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -130,7 +129,7 @@ public class AdminController {
         });
     }
 
-    public static void doneEdit(Button doneButton, Label errorLabel, Button deleteButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
+    public static void doneEdit(Button doneButton, Button deleteButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
         doneButton.setOnMouseClicked(event -> {
             company.updateItemName(item.getBarcode(), nameInput.getText());
 //            item.setPrice(BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
@@ -177,6 +176,7 @@ public class AdminController {
             );
             addItemsToDisplay();}
             catch (Exception e){
+                System.out.println("not a number");
             }
         });
     }

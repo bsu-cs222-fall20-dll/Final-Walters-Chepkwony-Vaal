@@ -2,7 +2,6 @@ package edu.bsu.cs222.pos;
 
 import java.math.BigDecimal;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Company {
@@ -169,6 +168,7 @@ public class Company {
         }
 
     }
+    //Discounts have not been implemented into the GUI yet.
     public void addDiscount(String couponCode, Discount discount)  {
         try {
             PreparedStatement statement = db.prepareStatement("INSERT INTO DISCOUNTS (ID, Amount, Name, isPercentage) values (?, ?, ?, ?)");

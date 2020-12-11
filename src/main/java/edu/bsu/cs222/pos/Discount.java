@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Discount {
+    //CouponCode is not used until the discounts are fully implemented
     private String couponCode;
     public String name;
     public BigDecimal amount;

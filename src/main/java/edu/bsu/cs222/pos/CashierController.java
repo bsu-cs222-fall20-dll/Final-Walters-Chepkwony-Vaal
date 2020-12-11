@@ -48,23 +48,6 @@ public class CashierController {
 
     }
 
-    public static void doubleClickAddToCart(TableView<Item> itemList, TextField subtotal, TextField tax, TextField total){
-        itemList.setRowFactory( tv -> {
-            TableRow<Item> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    Item rowData = row.getItem();
-                    itemsInCart.addItem(rowData);
-                    subtotal.setText(itemsInCart.getSubtotal().toString());
-                    tax.setText(itemsInCart.getTax().toString());
-                    total.setText(itemsInCart.getTotalWithTax().toString());
-                    CashierUI.displaySelectedItems(itemsInCart.getItemList());
-                }
-            });
-            return row ;
-        });
-    }
-
     public static void deleteSelectedItem(TableView<Item> itemList, TextField subtotal, TextField tax, TextField total){
         itemList.setRowFactory( tv -> {
             TableRow<Item> row = new TableRow<>();
@@ -139,11 +122,7 @@ public class CashierController {
             dateAndTime.setText(itemsInCart.getDateAndTime());
             ArrayList<Item> uniqueItemList = new ArrayList<>();
             itemsInCart.getItemList().stream().distinct().forEach(
-                    item -> {
-                        int quantity = itemsInCart.getQuantity(item);
-                        item.setQuantity(quantity);
-                        uniqueItemList.add(item);
-                    }
+                    uniqueItemList::add
             );
             ReceiptUI.displayItemsInCart(uniqueItemList);
     }

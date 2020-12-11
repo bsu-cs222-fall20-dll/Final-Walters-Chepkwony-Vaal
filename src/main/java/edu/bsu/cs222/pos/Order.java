@@ -4,10 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
-//Class is not fully implemented into the cashier UI yet
+
 public class Order {
     public String dateAndTime;
     private final ArrayList<Item> itemList = new ArrayList<>();
@@ -16,7 +14,7 @@ public class Order {
     private BigDecimal taxRate = BigDecimal.valueOf(.07);
     private BigDecimal tax;
 
-    public Order(){
+    public Order() {
         convertToDateAndTime();
         this.subtotal = BigDecimal.valueOf(0.00);
         this.totalWithTax = BigDecimal.valueOf(0.00);
@@ -31,13 +29,13 @@ public class Order {
     private void calculateTotalWithTax() {
         calculateSubtotal();
         tax = subtotal.multiply(taxRate);
-        totalWithTax =subtotal.add(tax);
+        totalWithTax = subtotal.add(tax);
 
     }
 
     private void calculateSubtotal() {
         subtotal = BigDecimal.valueOf(0.00);
-        for(Item item: itemList){
+        for (Item item : itemList) {
             subtotal = subtotal.add(item.getPrice());
         }
     }
@@ -56,11 +54,11 @@ public class Order {
         calculateTotalWithTax();
     }
 
-    public String getDateAndTime(){
+    public String getDateAndTime() {
         return dateAndTime;
     }
 
-    public void convertToDateAndTime(){
+    public void convertToDateAndTime() {
         DateTimeFormatter dateAndTime = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         this.dateAndTime = dateAndTime.format(now);
@@ -88,15 +86,5 @@ public class Order {
 
     public BigDecimal getTax() {
         return tax;
-    }
-
-    public int getQuantity(Item targetItem) {
-        int quantity = 0;
-        for(Item item: itemList){
-            if (item == targetItem){
-               quantity += 1;
-            }
-        }
-        return quantity;
     }
 }
