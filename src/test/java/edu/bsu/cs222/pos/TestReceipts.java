@@ -11,7 +11,7 @@ public class TestReceipts {
     public void testEmptyOrder() {
         Order order = new Order();
         ArrayList<Item> itemList = order.getItemList();
-        Assertions.assertNull(itemList);
+        Assertions.assertEquals(new ArrayList<>() , itemList);
     }
     @Test
     public void testOrderWithAddition(){

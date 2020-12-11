@@ -50,15 +50,11 @@ public class AdminController {
         cashierButton.setOnMouseClicked(event -> {
             cashierButton.setDisable(true);
             adminButton.setDisable(true);
-            try {
-                Stage cashierPanel = CashierUI.popUp();
-                cashierPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
-                    cashierButton.setDisable(false);
-                    adminButton.setDisable(false);
-                });
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            Stage cashierPanel = CashierUI.popUp();
+            cashierPanel.getScene().getWindow().setOnCloseRequest(closedEvent -> {
+                cashierButton.setDisable(false);
+                adminButton.setDisable(false);
+            });
         });
     }
 
@@ -134,7 +130,7 @@ public class AdminController {
         });
     }
 
-    public static void doneEdit(Button doneButton, Button deleteButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
+    public static void doneEdit(Button doneButton, Label errorLabel, Button deleteButton, Stage stage, TextField nameInput, TextField priceInput, Item item){
         doneButton.setOnMouseClicked(event -> {
             company.updateItemName(item.getBarcode(), nameInput.getText());
 //            item.setPrice(BigDecimal.valueOf(Float.parseFloat(priceInput.getText())));
