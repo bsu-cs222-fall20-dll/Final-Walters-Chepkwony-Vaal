@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TestDiscount {
     @Test
@@ -34,6 +35,15 @@ public class TestDiscount {
         Discount discount = new Discount("123","Sample Discount", BigDecimal.valueOf(1.00), false);
         company.addDiscount("123", discount);
         Assertions.assertNotNull(company.getDiscountByID("123"));
+        company.emptyDatabase();
+    }
+    @Test
+    public void testListDiscounts() {
+        Company company = new Company("SampleDiscountCompany",true);
+        Discount discount = new Discount("123","Sample Discount", BigDecimal.valueOf(1.00), false);
+        company.addDiscount("123", discount);
+        HashMap<String, Discount> empty = new HashMap<>();
+        Assertions.assertNotEquals(empty,company.getActiveCoupons());
         company.emptyDatabase();
     }
     @Test

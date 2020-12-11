@@ -2,6 +2,7 @@ package edu.bsu.cs222.pos;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Company {
@@ -28,37 +29,33 @@ public class Company {
         }
         try {
             db = DriverManager.getConnection("jdbc:derby:"+dbName+";create=true");
-            Statement statement = db.createStatement();
-            DatabaseMetaData dbMd = db.getMetaData();
-            ResultSet rs = dbMd.getTables(null, null, "ITEMS", null);
-            if (!rs.next()) {
-                statement.execute(Item.createTable);
-            }
-            ResultSet discountRS = dbMd.getTables(null, null, "DISCOUNTS", null);
-            if (!discountRS.next()) {
-                statement.execute(Discount.createTable);
-            }
+            createTableIfNotExists("ITEMS", Item.createTable);
+            createTableIfNotExists("DISCOUNTS", Discount.createTable);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
     }
-//    mostly needed for tests, but the tests all work without this method
-//    public void close(){
-//        try {
-//            db.close();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
+    private void createTableIfNotExists(String tableName, String creationSQL) throws SQLException {
+        //MySQL has a great thing called "CREATE IF NOT EXISTS"
+        //but Derby doesn't. So we have to write it ourselves.
+        Statement statement = db.createStatement();
+        DatabaseMetaData dbMd = db.getMetaData();
+        ResultSet rs = dbMd.getTables(null, null, tableName, null);
+        if (!rs.next()) {
+            statement.execute(creationSQL);
+        }
+    }
     public void emptyDatabase(){
         try {
             Statement statement = db.createStatement();
             statement.executeUpdate("DROP TABLE ITEMS");
+            statement.executeUpdate("DROP TABLE DISCOUNTS");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
+
     public void addItem(String barcodeNumber, Item item)  {
         try {
             PreparedStatement statement = db.prepareStatement("INSERT INTO Items (ID, Price, Name) values (?, ?, ?)");
@@ -216,7 +213,29 @@ public class Company {
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                result = new Discount(id,resultSet.getString("Name"),resultSet.getBigDecimal("Amount"),resultSet.getBoolean("isPercentage"));
+                result = new Discount(id,
+                        resultSet.getString("Name"),
+                        resultSet.getBigDecimal("Amount"),
+                        resultSet.getBoolean("isPercentage"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+    public HashMap<String, Discount> getActiveCoupons() {
+        HashMap<String, Discount> result= new HashMap<>();
+        try {
+            Statement statement = db.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from Discounts");
+            while(resultSet.next()){
+                result.put(resultSet.getString("ID"),
+                        new Discount(
+                                resultSet.getString("ID"),
+                                resultSet.getString("Name"),
+                                resultSet.getBigDecimal("Amount"),
+                                resultSet.getBoolean("isPercentage")
+                        ));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
