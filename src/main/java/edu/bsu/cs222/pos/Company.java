@@ -46,14 +46,6 @@ public class Company {
             statement.execute(creationSQL);
         }
     }
-//    mostly needed for tests, but the tests all work without this method
-//    public void close(){
-//        try {
-//            db.close();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
     public void emptyDatabase(){
         try {
             Statement statement = db.createStatement();
@@ -62,6 +54,7 @@ public class Company {
             throwables.printStackTrace();
         }
     }
+
     public void addItem(String barcodeNumber, Item item)  {
         try {
             PreparedStatement statement = db.prepareStatement("INSERT INTO Items (ID, Price, Name) values (?, ?, ?)");
