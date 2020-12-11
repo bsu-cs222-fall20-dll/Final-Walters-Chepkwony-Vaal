@@ -29,8 +29,10 @@ public class CashierController {
             }else if (searchSelection.getValue().equals("Name search")){
                 String itemName = searchField.getText();
                 selectedItem = company.getItemByName(itemName);
-                selectedItemInput.setText(selectedItem.name);
-                priceInput.setText(selectedItem.price.toString());
+                if (selectedItem != null) {
+                    selectedItemInput.setText(selectedItem.name);
+                    priceInput.setText(selectedItem.price.toString());
+                }
             }
         });
     }

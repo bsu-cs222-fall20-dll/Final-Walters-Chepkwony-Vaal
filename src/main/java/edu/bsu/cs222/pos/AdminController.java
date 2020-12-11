@@ -4,24 +4,13 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Border;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-
-import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.MatteBorder;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
-
-import static java.awt.Color.*;
 
 public class AdminController {
     private static Company company;

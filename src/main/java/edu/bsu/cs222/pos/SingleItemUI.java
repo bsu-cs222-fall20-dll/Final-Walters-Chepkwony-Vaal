@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 public class SingleItemUI{
     public static Label titleLabel = new Label("Add Item");
+    private static final Label errorLabel = new Label("");
     private static final Label nameLabel = new Label("Name:");
     public static TextField nameInput = new TextField("");
     private static final HBox nameField = new HBox(
@@ -26,7 +27,7 @@ public class SingleItemUI{
         secondaryStage.setWidth(300);
         secondaryStage.setHeight(250);
         formatDisplay();
-        AdminController.doneAddItem(doneButton, secondaryStage, titleLabel, nameInput, priceInput);
+        AdminController.doneAddItem(doneButton, secondaryStage, errorLabel, nameInput, priceInput);
         secondaryStage.setScene(new Scene(createRoot()));
         secondaryStage.show();
         return secondaryStage;
@@ -36,6 +37,7 @@ public class SingleItemUI{
         VBox root = new VBox();
         root.getChildren().addAll(
                 titleLabel,
+                errorLabel,
                 nameField,
                 priceField,
                 doneButton);
@@ -43,7 +45,7 @@ public class SingleItemUI{
     }
 
     public static void formatDisplay(){
-        ModifyItemUI.formatTitle(titleLabel, nameField, priceField, nameLabel, nameInput, priceLabel, priceInput, doneButton);
+        ModifyItemUI.formatTitle(titleLabel, errorLabel, nameField, priceField, nameLabel, nameInput, priceLabel, priceInput, doneButton);
     }
 
     public static void changeTitleLabel(String title){
