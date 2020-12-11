@@ -25,10 +25,6 @@ public class Discount {
     public BigDecimal applyDiscount(ArrayList<Item> sampleItemList) {
         BigDecimal result = BigDecimal.valueOf(0.00);
         if (!isPercentage) {
-            /*
-               I've intentionally not returned at this stage.
-               We might do more validation once we have the subtotal.
-             */
             result = amount;
         }
         for (Item item:sampleItemList) {

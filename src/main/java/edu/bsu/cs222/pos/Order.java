@@ -4,10 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
-//Class is not fully implemented into the cashier UI yet
 public class Order {
     public String dateAndTime;
     private final ArrayList<Item> itemList = new ArrayList<>();
@@ -74,17 +71,9 @@ public class Order {
         return totalWithTax;
     }
 
-//    public void setTotalWithTax(BigDecimal totalWithTax) {
-//        this.totalWithTax = totalWithTax;
-//    }
-
     public void setTaxRate(BigDecimal taxRate) {
         this.taxRate = taxRate;
     }
-
-//    public BigDecimal getTaxRate() {
-//        return taxRate;
-//    }
 
     public BigDecimal getTax() {
         return tax;

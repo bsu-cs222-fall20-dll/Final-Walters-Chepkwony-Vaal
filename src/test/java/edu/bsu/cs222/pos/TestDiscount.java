@@ -1,6 +1,5 @@
 package edu.bsu.cs222.pos;
 
-import jdk.jfr.Percentage;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
