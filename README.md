@@ -15,7 +15,13 @@ With IntelliJ and gradle installed and configured, run the Main class to build t
 
 ## Suppressions
 
-There are no suppressions.
+In AdminPanelUI.java on line 105, itemList.getColumns().addAll(nameColumn, priceColumn);
+is suppressed because of an "unchecked generics array creation for varargs parameter."
+Checking for the argument types is unnecessary when we are sure of the types that will be passed in.
+
+In CashierUI on line 185 and 186, the function is suppressed for the same reason.
+
+In ReceiptUI on line 91, the function is suppressed for the same reason.
 
 ## Authors
 

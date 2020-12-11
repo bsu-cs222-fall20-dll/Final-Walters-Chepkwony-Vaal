@@ -68,7 +68,7 @@ public class AdminPanelUI{
             return root;
         }
 
-
+    @SuppressWarnings("unchecked")
     private static void formatDisplay(){
         titleLabel.setMinWidth(1000);
         titleLabel.setMinHeight(20);

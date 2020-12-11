@@ -70,6 +70,7 @@ public class ReceiptUI {
         return root;
     }
 
+    @SuppressWarnings("unchecked")
     private static void formatDisplay(){
         thankYouLabel.setMinWidth(400);
         thankYouLabel.setMinHeight(50);
