@@ -50,6 +50,7 @@ public class Company {
         try {
             Statement statement = db.createStatement();
             statement.executeUpdate("DROP TABLE ITEMS");
+            statement.executeUpdate("DROP TABLE DISCOUNTS");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
